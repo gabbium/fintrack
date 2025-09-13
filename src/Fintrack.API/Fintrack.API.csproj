@@ -24,8 +24,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Fintrack.Identity\Fintrack.Identity.Infrastructure\Fintrack.Identity.Infrastructure.csproj" />
-    <ProjectReference Include="..\Fintrack.Ledger\Fintrack.Ledger.Infrastructure\Fintrack.Ledger.Infrastructure.csproj" />
+    <ProjectReference Include="..\Identity\Fintrack.Identity.Infrastructure\Fintrack.Identity.Infrastructure.csproj" />
+    <ProjectReference Include="..\Ledger\Fintrack.Ledger.Infrastructure\Fintrack.Ledger.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
