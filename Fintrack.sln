@@ -9,19 +9,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{10FE260B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{DCBE846A-AFEF-424F-90CA-67D4AD52C67A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Identity.Domain", "src\Identity\Fintrack.Identity.Domain\Fintrack.Identity.Domain.csproj", "{B0C53E34-F5BB-45A1-802E-F2CA827DD7E0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Identity.Domain", "src\Fintrack.Identity\Fintrack.Identity.Domain\Fintrack.Identity.Domain.csproj", "{B0C53E34-F5BB-45A1-802E-F2CA827DD7E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Identity.Application", "src\Identity\Fintrack.Identity.Application\Fintrack.Identity.Application.csproj", "{15D94B87-BC75-4F6C-97B1-616E8F5D5EFC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Identity.Application", "src\Fintrack.Identity\Fintrack.Identity.Application\Fintrack.Identity.Application.csproj", "{15D94B87-BC75-4F6C-97B1-616E8F5D5EFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Identity.Infrastructure", "src\Identity\Fintrack.Identity.Infrastructure\Fintrack.Identity.Infrastructure.csproj", "{36EDF62B-D67D-4B3A-B803-CC31DA43680C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Identity.Infrastructure", "src\Fintrack.Identity\Fintrack.Identity.Infrastructure\Fintrack.Identity.Infrastructure.csproj", "{36EDF62B-D67D-4B3A-B803-CC31DA43680C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ledger", "Ledger", "{EC70FB42-F5DE-45D9-A2DC-63B4E65319CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Ledger.Domain", "src\Ledger\Fintrack.Ledger.Domain\Fintrack.Ledger.Domain.csproj", "{FA1D81CE-CD5C-4498-8645-3B35F4FCCF44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Ledger.Domain", "src\Fintrack.Ledger\Fintrack.Ledger.Domain\Fintrack.Ledger.Domain.csproj", "{FA1D81CE-CD5C-4498-8645-3B35F4FCCF44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Ledger.Application", "src\Ledger\Fintrack.Ledger.Application\Fintrack.Ledger.Application.csproj", "{96492124-2931-4A6D-8D10-546B039EC4A9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Ledger.Application", "src\Fintrack.Ledger\Fintrack.Ledger.Application\Fintrack.Ledger.Application.csproj", "{96492124-2931-4A6D-8D10-546B039EC4A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Ledger.Infrastructure", "src\Ledger\Fintrack.Ledger.Infrastructure\Fintrack.Ledger.Infrastructure.csproj", "{70AF784E-5FC6-4D6E-924C-6C69BF0F2742}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.Ledger.Infrastructure", "src\Fintrack.Ledger\Fintrack.Ledger.Infrastructure\Fintrack.Ledger.Infrastructure.csproj", "{70AF784E-5FC6-4D6E-924C-6C69BF0F2742}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fintrack.API", "src\Fintrack.API\Fintrack.API.csproj", "{F4C53D82-EEF3-0071-1F85-53EA347F212B}"
 EndProject

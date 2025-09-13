@@ -9,6 +9,8 @@ builder.AddDefaultAuthentication();
 builder.AddDefaultApiVersioning();
 builder.AddDefaultOpenApi();
 
+builder.AddIdentityServices();
+builder.AddLedgerServices();
 builder.AddWebServices();
 
 var app = builder.Build();

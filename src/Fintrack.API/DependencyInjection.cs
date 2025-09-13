@@ -10,6 +10,16 @@ public static class DependencyInjection
 
         builder.Services.AddProblemDetails();
 
+        builder.Services.AddScoped<IMediator, Mediator>();
+
+        builder.Services.TryDecorate(typeof(ICommandHandler<>), typeof(ValidationBehavior.CommandHandler<>));
+        builder.Services.TryDecorate(typeof(ICommandHandler<,>), typeof(ValidationBehavior.CommandHandler<,>));
+        builder.Services.TryDecorate(typeof(IQueryHandler<,>), typeof(ValidationBehavior.QueryHandler<,>));
+
+        builder.Services.TryDecorate(typeof(ICommandHandler<>), typeof(LoggingBehavior.CommandHandler<>));
+        builder.Services.TryDecorate(typeof(ICommandHandler<,>), typeof(LoggingBehavior.CommandHandler<,>));
+        builder.Services.TryDecorate(typeof(IQueryHandler<,>), typeof(LoggingBehavior.QueryHandler<,>));
+
         return builder;
     }
 
