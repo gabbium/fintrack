@@ -10,12 +10,12 @@ Assistente financeiro modular em .NET, inspirado em **DDD + Clean Architecture**
 
 **Técnico**
 
--   [ ] Arquitetura monólito modular (Identity, Ledger)
--   [ ] Configuração de DI para os módulos
--   [ ] API inicial com HealthChecks e Swagger
--   [ ] Observabilidade: Serilog estruturado + correlação
--   [ ] Testes unitários e integração mínimos
--   [ ] CI/CD: build + testes + migrations automáticas
+-   [x] Arquitetura monólito modular (Identity, Ledger)
+-   [x] Configuração de DI para os módulos
+-   [x] API inicial com HealthChecks e Swagger
+-   [x] Observabilidade: Serilog estruturado + correlação
+-   [x] Testes unitários e integração mínimos
+-   [x] CI/CD: build + testes + semver
 
 ---
 
