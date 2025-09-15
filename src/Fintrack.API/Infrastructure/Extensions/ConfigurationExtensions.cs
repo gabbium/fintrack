@@ -6,8 +6,15 @@ public static class ConfigurationExtensions
     {
         var value = configuration[name];
 
-        return value is null
-            ? throw new InvalidOperationException($"Configuration missing value for: {(configuration is IConfigurationSection s ? s.Path + ":" + name : name)}")
-            : value;
+        if (value is not null)
+        {
+            return value;
+        }
+
+        var key = configuration is IConfigurationSection section
+            ? $"{section.Path}:{name}"
+            : name;
+
+        throw new InvalidOperationException($"Configuration missing value for: {key}");
     }
 }
