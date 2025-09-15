@@ -8,6 +8,19 @@ Assistente financeiro modular em .NET, inspirado em **DDD + Clean Architecture**
 
 ### ✅ v1.0
 
+**Técnico**
+
+-   [ ] Arquitetura monólito modular (Identity, Ledger)
+-   [ ] Configuração de DI para os módulos
+-   [ ] API inicial com HealthChecks e Swagger
+-   [ ] Observabilidade: Serilog estruturado + correlação
+-   [ ] Testes unitários e integração mínimos
+-   [ ] CI/CD: build + testes + migrations automáticas
+
+---
+
+### ⏳ v1.1
+
 **Features**
 
 -   [ ] Registro e login (`/api/users/register`, `/api/users/login`)
@@ -15,16 +28,12 @@ Assistente financeiro modular em .NET, inspirado em **DDD + Clean Architecture**
 
 **Técnico**
 
--   [ ] Arquitetura monólito modular (Identity, Ledger)
 -   [ ] Auth: JWT simples (sem refresh)
--   [ ] Observabilidade: Serilog estruturado + correlação
--   [ ] Testes unitários e integração mínimos
--   [ ] CI/CD: build + testes + migrations automáticas
--   [ ] Bot (API já pronta para consumo)
+-   [ ] Adição das primeiras entidades em Identity e Ledger
 
 ---
 
-### ⏳ v1.1
+### ⏳ v1.2
 
 **Features**
 
@@ -41,7 +50,7 @@ Assistente financeiro modular em .NET, inspirado em **DDD + Clean Architecture**
 
 ---
 
-### ⏳ v1.2
+### ⏳ v1.3
 
 **Features**
 
@@ -57,7 +66,7 @@ Assistente financeiro modular em .NET, inspirado em **DDD + Clean Architecture**
 
 ---
 
-### ⏳ v1.3 — Bot Telegram (básico)
+### ⏳ v1.4 — Bot Telegram (básico)
 
 **Features**
 
@@ -75,7 +84,7 @@ Assistente financeiro modular em .NET, inspirado em **DDD + Clean Architecture**
 
 ---
 
-### ⏳ v1.4 — Bot produção-ready (opcional)
+### ⏳ v1.5 — Bot produção-ready (opcional)
 
 **Técnico**
 
