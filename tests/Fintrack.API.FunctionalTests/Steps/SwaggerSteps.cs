@@ -6,6 +6,6 @@ public class SwaggerSteps(TestFixture fx)
 {
     public async Task<HttpResponseMessage> When_AttemptToGetV1()
     {
-        return await fx.Client.GetAsync("/scalar/v1");
+        return await fx.Client.GetAsync("/openapi/v1.json");
     }
 }
