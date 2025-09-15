@@ -12,12 +12,12 @@ public static class HealthCheckExtensions
 
     public static WebApplication MapHealthEndpoints(this WebApplication app)
     {
-        app.MapHealthChecks("/health", new HealthCheckOptions
+        app.MapHealthChecks("/health/ready", new HealthCheckOptions
         {
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
         });
 
-        app.MapHealthChecks("/alive", new HealthCheckOptions
+        app.MapHealthChecks("/health/alive", new HealthCheckOptions
         {
             Predicate = r => r.Tags.Contains("live"),
             ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
