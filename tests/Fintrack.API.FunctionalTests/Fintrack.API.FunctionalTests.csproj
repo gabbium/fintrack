@@ -30,6 +30,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Fintrack.API\Fintrack.API.csproj" />
+    <ProjectReference Include="..\Identity\Fintrack.Identity.Application.UnitTests\Fintrack.Identity.Application.UnitTests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

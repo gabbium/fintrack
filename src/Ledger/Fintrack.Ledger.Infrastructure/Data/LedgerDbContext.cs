@@ -1,6 +1,6 @@
-﻿namespace Fintrack.Ledger.Infrastructure;
+﻿namespace Fintrack.Ledger.Infrastructure.Data;
 
-public class LedgerContext(DbContextOptions<LedgerContext> options) : DbContext(options), IUnitOfWork
+public class LedgerDbContext(DbContextOptions<LedgerDbContext> options) : DbContext(options), IUnitOfWork
 {
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

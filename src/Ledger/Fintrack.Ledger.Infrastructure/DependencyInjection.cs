@@ -1,20 +1,22 @@
-﻿namespace Fintrack.Ledger.Infrastructure;
+﻿using Fintrack.Ledger.Infrastructure.Data;
+
+namespace Fintrack.Ledger.Infrastructure;
 
 public static class DependencyInjection
 {
     public static IHostApplicationBuilder AddInfrastructureServices(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddDbContext<LedgerContext>(options =>
+        builder.Services.AddDbContext<LedgerDbContext>(options =>
         {
             options.UseSnakeCaseNamingConvention();
             options.UseNpgsql(builder.Configuration.GetConnectionString("postgres"));
         });
 
-        builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<LedgerContext>());
+        builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<LedgerDbContext>());
 
         builder.Services
             .AddHealthChecks()
-            .AddDbContextCheck<LedgerContext>(name: "ledgerdb", tags: ["ready"]);
+            .AddDbContextCheck<LedgerDbContext>(name: "ledgerdb", tags: ["ready"]);
 
         return builder;
     }

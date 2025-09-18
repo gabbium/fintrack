@@ -1,6 +1,6 @@
 ﻿#nullable disable
 
-namespace Fintrack.Ledger.Infrastructure.Migrations
+namespace Fintrack.Ledger.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration

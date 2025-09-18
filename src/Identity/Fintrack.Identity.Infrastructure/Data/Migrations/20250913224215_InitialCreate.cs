@@ -1,6 +1,6 @@
 ﻿#nullable disable
 
-namespace Fintrack.Identity.Infrastructure.Migrations
+namespace Fintrack.Identity.Infrastructure.Data.Migrations
 {
     /// <inheritdoc />
     public partial class InitialCreate : Migration
