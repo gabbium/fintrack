@@ -1,4 +1,5 @@
-﻿using Fintrack.Ledger.Infrastructure.Data;
+﻿using Fintrack.Ledger.Application.Interfaces;
+using Fintrack.Ledger.Infrastructure.Data;
 
 namespace Fintrack.Ledger.Infrastructure;
 
@@ -9,10 +10,12 @@ public static class DependencyInjection
         builder.Services.AddDbContext<LedgerDbContext>(options =>
         {
             options.UseSnakeCaseNamingConvention();
-            options.UseNpgsql(builder.Configuration.GetConnectionString("postgres"));
+            options.UseNpgsql(
+                builder.Configuration.GetConnectionString("postgres"),
+                npgsqlOptions => npgsqlOptions.MigrationsHistoryTable("__efmigrations_history", "identity"));
         });
 
-        builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<LedgerDbContext>());
+        builder.Services.AddScoped<ILedgerUnitOfWork>(sp => sp.GetRequiredService<LedgerDbContext>());
 
         builder.Services
             .AddHealthChecks()

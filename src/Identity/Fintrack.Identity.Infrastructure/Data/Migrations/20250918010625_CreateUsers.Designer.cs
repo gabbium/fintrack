@@ -4,7 +4,7 @@
 namespace Fintrack.Identity.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20250918000139_CreateUsers")]
+    [Migration("20250918010625_CreateUsers")]
     partial class CreateUsers
     {
         /// <inheritdoc />

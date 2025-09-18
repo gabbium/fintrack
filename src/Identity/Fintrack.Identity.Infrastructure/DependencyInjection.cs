@@ -13,10 +13,12 @@ public static class DependencyInjection
         builder.Services.AddDbContext<IdentityDbContext>(options =>
         {
             options.UseSnakeCaseNamingConvention();
-            options.UseNpgsql(builder.Configuration.GetConnectionString("postgres"));
+            options.UseNpgsql(
+                builder.Configuration.GetConnectionString("postgres"),
+                npgsqlOptions => npgsqlOptions.MigrationsHistoryTable("__efmigrations_history", "identity"));
         });
 
-        builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<IdentityDbContext>());
+        builder.Services.AddScoped<IIdentityUnitOfWork>(sp => sp.GetRequiredService<IdentityDbContext>());
 
         builder.Services
             .AddHealthChecks()

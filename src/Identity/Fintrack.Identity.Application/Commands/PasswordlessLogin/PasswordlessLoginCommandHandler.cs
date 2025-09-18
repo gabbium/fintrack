@@ -7,7 +7,7 @@ namespace Fintrack.Identity.Application.Commands.PasswordlessLogin;
 
 internal sealed class PasswordlessLoginCommandHandler(
     IUserRepository userRepository,
-    IUnitOfWork unitOfWork,
+    IIdentityUnitOfWork unitOfWork,
     IJwtService jwtService)
     : ICommandHandler<PasswordlessLoginCommand, AuthDto>
 {

@@ -1,10 +1,11 @@
-﻿using Fintrack.Identity.Domain.Entities;
+﻿using Fintrack.Identity.Application.Interfaces;
+using Fintrack.Identity.Domain.Entities;
 
 namespace Fintrack.Identity.Infrastructure.Data;
 
 internal sealed class IdentityDbContext(
     DbContextOptions<IdentityDbContext> options)
-    : DbContext(options), IUnitOfWork
+    : DbContext(options), IIdentityUnitOfWork
 {
     public DbSet<User> Users => Set<User>();
 

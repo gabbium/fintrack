@@ -1,25 +1,23 @@
-﻿using CleanArch;
-using Fintrack.Identity.Application.Commands.PasswordlessLogin;
+﻿using Fintrack.Identity.Application.Commands.PasswordlessLogin;
 using Fintrack.Identity.Application.Interfaces;
 using Fintrack.Identity.Application.UnitTests.TestHelpers.Builders;
 using Fintrack.Identity.Domain.Entities;
 using Fintrack.Identity.Domain.Interfaces;
 using Fintrack.Identity.Domain.UnitTests.TestHelpers.Builders;
-using Moq;
 
 namespace Fintrack.Identity.Application.UnitTests.Commands.PasswordlessLogin;
 
 public class PasswordlessLoginCommandHandlerTests
 {
     private readonly Mock<IUserRepository> _userRepositoryMock;
-    private readonly Mock<IUnitOfWork> _unitOfWorkMock;
+    private readonly Mock<IIdentityUnitOfWork> _unitOfWorkMock;
     private readonly Mock<IJwtService> _jwtServiceMock;
     private readonly PasswordlessLoginCommandHandler _handler;
 
     public PasswordlessLoginCommandHandlerTests()
     {
         _userRepositoryMock = new Mock<IUserRepository>();
-        _unitOfWorkMock = new Mock<IUnitOfWork>();
+        _unitOfWorkMock = new Mock<IIdentityUnitOfWork>();
         _jwtServiceMock = new Mock<IJwtService>();
 
         _handler = new PasswordlessLoginCommandHandler(
