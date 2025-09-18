@@ -12,7 +12,7 @@ public static class DependencyInjection
             options.UseSnakeCaseNamingConvention();
             options.UseNpgsql(
                 builder.Configuration.GetConnectionString("postgres"),
-                npgsqlOptions => npgsqlOptions.MigrationsHistoryTable("__efmigrations_history", "identity"));
+                npgsqlOptions => npgsqlOptions.MigrationsHistoryTable("__efmigrations_history", "ledger"));
         });
 
         builder.Services.AddScoped<ILedgerUnitOfWork>(sp => sp.GetRequiredService<LedgerDbContext>());
