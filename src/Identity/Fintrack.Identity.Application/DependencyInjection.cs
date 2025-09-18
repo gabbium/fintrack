@@ -6,18 +6,17 @@ public static class DependencyInjection
     {
         var assembly = Assembly.GetExecutingAssembly();
 
-        builder.Services.Scan(s => s.FromAssemblies(assembly)
-            .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<>)), publicOnly: false)
+        builder.Services.Scan(source => source.FromAssemblies(assembly)
+            .AddClasses(filter => filter.AssignableTo(typeof(ICommandHandler<>)), publicOnly: false)
                 .AsImplementedInterfaces().WithScopedLifetime()
-            .AddClasses(c => c.AssignableTo(typeof(ICommandHandler<,>)), publicOnly: false)
+            .AddClasses(filter => filter.AssignableTo(typeof(ICommandHandler<,>)), publicOnly: false)
                 .AsImplementedInterfaces().WithScopedLifetime()
-            .AddClasses(c => c.AssignableTo(typeof(IQueryHandler<,>)), publicOnly: false)
+            .AddClasses(filter => filter.AssignableTo(typeof(IQueryHandler<,>)), publicOnly: false)
                 .AsImplementedInterfaces().WithScopedLifetime()
-            .AddClasses(c => c.AssignableTo(typeof(IDomainEventHandler<>)), publicOnly: false)
-                .AsImplementedInterfaces().WithScopedLifetime()
-        );
+            .AddClasses(filter => filter.AssignableTo(typeof(IDomainEventHandler<>)), publicOnly: false)
+                .AsImplementedInterfaces().WithScopedLifetime());
 
-        builder.Services.AddValidatorsFromAssembly(assembly);
+        builder.Services.AddValidatorsFromAssembly(assembly, includeInternalTypes: true);
 
         return builder;
     }

@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Fintrack.Ledger.Application\Fintrack.Ledger.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Fintrack.API.FunctionalTests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
 </Project>

@@ -2,7 +2,7 @@
 
 namespace Fintrack.API.FunctionalTests.Steps;
 
-public class HealthSteps(TestFixture fx)
+public class SmokeSteps(TestFixture fx)
 {
     public async Task<HttpResponseMessage> When_AttemptToGetAlive()
     {
@@ -12,5 +12,10 @@ public class HealthSteps(TestFixture fx)
     public async Task<HttpResponseMessage> When_AttemptToGetReady()
     {
         return await fx.Client.GetAsync("/health/ready");
+    }
+
+    public async Task<HttpResponseMessage> When_AttemptToGetSwaggerV1()
+    {
+        return await fx.Client.GetAsync("/openapi/v1.json");
     }
 }

@@ -72,7 +72,7 @@ public static class HttpResponseMessageAssertions
     {
         response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
         response.Headers.WwwAuthenticate.ShouldContain(
-            h => string.Equals(h.Scheme, "Bearer", StringComparison.OrdinalIgnoreCase));
+            header => string.Equals(header.Scheme, "Bearer", StringComparison.OrdinalIgnoreCase));
     }
 
     public static async Task ShouldBeUnauthorizedWithProblem(this HttpResponseMessage response)
