@@ -11,7 +11,6 @@ public class UsersApiV1 : IApi
             .WithTags("Users");
 
         api.MapPost("/passwordless-login", PasswordlessLogin).AllowAnonymous();
-        api.MapGet("/me", Me).RequireAuthorization();
     }
 
     public async Task<IResult> PasswordlessLogin(
@@ -24,13 +23,6 @@ public class UsersApiV1 : IApi
         return result.IsSuccess
             ? Results.Ok(result.Value)
             : CustomResults.Problem(result);
-    }
-
-    public IResult Me(HttpContext context)
-    {
-        var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var email = context.User.FindFirst(ClaimTypes.Email)?.Value;
-        return Results.Ok(new { userId, email });
     }
 }
 
