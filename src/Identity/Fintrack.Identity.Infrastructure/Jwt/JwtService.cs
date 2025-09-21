@@ -3,17 +3,14 @@ using Fintrack.Identity.Domain.Entities;
 
 namespace Fintrack.Identity.Infrastructure.Jwt;
 
-internal sealed class JwtService(IConfiguration configuration) : IJwtService
+internal sealed class JwtService(IOptions<JwtOptions> jwtOptions) : IJwtService
 {
+    private readonly JwtOptions _jwtOptions = jwtOptions.Value;
+
     public string CreateAccessToken(User user)
     {
-        var identity = configuration.GetRequiredSection("Identity");
-        var secret = identity["Secret"];
-        var issuer = identity["Issuer"];
-        var audience = identity["Audience"];
-
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secret!));
-        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var secret = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Secret));
+        var credentials = new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
 
         var claims = new List<Claim>
         {
@@ -22,10 +19,10 @@ internal sealed class JwtService(IConfiguration configuration) : IJwtService
         };
 
         var token = new JwtSecurityToken(
-            issuer: issuer,
-            audience: audience,
+            issuer: _jwtOptions.Issuer,
+            audience: _jwtOptions.Audience,
             claims: claims,
-            expires: DateTime.UtcNow.AddHours(1),
+            expires: DateTime.UtcNow.AddMinutes(_jwtOptions.ExpirationMinutes),
             signingCredentials: credentials
         );
 
