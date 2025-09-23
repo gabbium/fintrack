@@ -24,11 +24,6 @@ public static class DependencyInjection
             .AddHealthChecks()
             .AddDbContextCheck<IdentityDbContext>(name: "identitydb", tags: ["ready"]);
 
-        builder.Services.AddOptions<JwtOptions>()
-            .Bind(builder.Configuration.GetSection("Jwt"))
-            .ValidateDataAnnotations()
-            .ValidateOnStart();
-
         builder.Services.AddSingleton<IJwtService, JwtService>();
 
         builder.Services.AddScoped<IUserRepository, UserRepository>();

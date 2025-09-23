@@ -5,7 +5,7 @@ internal sealed class PasswordlessLoginCommandValidator
 {
     public PasswordlessLoginCommandValidator()
     {
-        RuleFor(command => command.Email)
+        RuleFor(c => c.Email)
             .NotEmpty()
             .EmailAddress()
             .MaximumLength(256);

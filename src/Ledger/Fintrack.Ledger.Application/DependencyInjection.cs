@@ -16,7 +16,7 @@ public static class DependencyInjection
             .AddClasses(filter => filter.AssignableTo(typeof(IDomainEventHandler<>)), publicOnly: false)
                 .AsImplementedInterfaces().WithScopedLifetime());
 
-        builder.Services.AddValidatorsFromAssembly(assembly);
+        builder.Services.AddValidatorsFromAssembly(assembly, includeInternalTypes: true);
 
         return builder;
     }

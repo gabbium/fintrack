@@ -1,4 +1,6 @@
-﻿using Fintrack.Identity.Infrastructure.Data;
+﻿using Fintrack.API.FunctionalTests.TestHelpers.Services;
+using Fintrack.Identity.Infrastructure.Data;
+using Fintrack.Ledger.Domain.Enums;
 using Fintrack.Ledger.Infrastructure.Data;
 
 namespace Fintrack.API.FunctionalTests.TestHelpers.Infrastructure.Containers;
@@ -23,18 +25,25 @@ public class PostgresContainer
 
         var identityOptions = new DbContextOptionsBuilder<IdentityDbContext>()
             .UseSnakeCaseNamingConvention()
-            .UseNpgsql(_container.GetConnectionString())
+            .UseNpgsql(_container.GetConnectionString(), npgsqlOptions =>
+            {
+                npgsqlOptions.MigrationsHistoryTable("__efmigrations_history", "identity");
+            })
             .Options;
 
         var ledgerOptions = new DbContextOptionsBuilder<LedgerDbContext>()
             .UseSnakeCaseNamingConvention()
-            .UseNpgsql(_container.GetConnectionString())
+            .UseNpgsql(_container.GetConnectionString(), npgsqlOptions =>
+            {
+                npgsqlOptions.MigrationsHistoryTable("__efmigrations_history", "ledger");
+                npgsqlOptions.MapEnum<MovementKind>(schemaName: "ledger");
+            })
             .Options;
 
         using var identityContext = new IdentityDbContext(identityOptions);
         await identityContext.Database.MigrateAsync();
 
-        using var ledgerContext = new LedgerDbContext(ledgerOptions);
+        using var ledgerContext = new LedgerDbContext(ledgerOptions, new EmptyUser());
         await ledgerContext.Database.MigrateAsync();
 
         await InitRespawnerAsync();
@@ -51,8 +60,8 @@ public class PostgresContainer
             DbAdapter = DbAdapter.Postgres,
             SchemasToInclude = ["identity", "ledger"],
             TablesToIgnore = [
-                new Table("identity", "__EFMigrationsHistory"),
-                new Table("ledger", "__EFMigrationsHistory")]
+                new Table("identity", "__efmigrations_history"),
+                new Table("ledger", "__efmigrations_history")]
         });
     }
 

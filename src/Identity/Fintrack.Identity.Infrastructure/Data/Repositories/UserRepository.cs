@@ -9,7 +9,7 @@ internal sealed class UserRepository(IdentityDbContext context) : IUserRepositor
     {
         return await context.Users
             .AsNoTracking()
-            .FirstOrDefaultAsync(user => user.Email == email, cancellationToken);
+            .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
     }
 
     public async Task AddAsync(User user, CancellationToken cancellationToken = default)

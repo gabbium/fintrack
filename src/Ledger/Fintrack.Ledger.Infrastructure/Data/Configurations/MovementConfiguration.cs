@@ -1,0 +1,33 @@
+﻿using Fintrack.Ledger.Domain.Entities;
+
+namespace Fintrack.Ledger.Infrastructure.Data.Configurations;
+
+internal sealed class MovementConfiguration : IEntityTypeConfiguration<Movement>
+{
+    public void Configure(EntityTypeBuilder<Movement> builder)
+    {
+        builder.ToTable(t =>
+        {
+            t.HasCheckConstraint("ck_movement_amount_positive", "amount > 0");
+        });
+
+        builder.HasKey(m => m.Id);
+
+        builder.HasIndex(m => m.UserId);
+
+        builder.Property(m => m.UserId);
+
+        builder.Property(m => m.Kind)
+            .HasColumnType("ledger.movement_kind");
+
+        builder.Property(m => m.Amount)
+            .HasPrecision(18, 2);
+
+        builder.Property(m => m.Description)
+            .HasMaxLength(128);
+
+        builder.Property(m => m.OccurredOn);
+
+        builder.Ignore(m => m.DomainEvents);
+    }
+}

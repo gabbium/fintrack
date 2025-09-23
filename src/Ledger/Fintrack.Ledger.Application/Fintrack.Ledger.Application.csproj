@@ -16,4 +16,10 @@
     <ProjectReference Include="..\Fintrack.Ledger.Domain\Fintrack.Ledger.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+      <_Parameter1>Fintrack.Ledger.Application.UnitTests</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
+
 </Project>
