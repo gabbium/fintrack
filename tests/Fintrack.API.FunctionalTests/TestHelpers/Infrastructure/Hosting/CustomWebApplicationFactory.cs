@@ -5,7 +5,7 @@ public class CustomWebApplicationFactory(string connectionString) : WebApplicati
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseSetting("ConnectionStrings:Postgres", connectionString);
-        builder.UseSetting("Identity:Secret", Guid.NewGuid().ToString());
+        builder.UseSetting("Jwt:Secret", Guid.NewGuid().ToString());
     }
 }
 

@@ -1,4 +1,6 @@
 ﻿using Fintrack.API.Infrastructure;
+using Fintrack.API.Services;
+using Fintrack.Ledger.Application.Interfaces;
 
 namespace Fintrack.API;
 
@@ -6,6 +8,10 @@ public static class DependencyInjection
 {
     public static IHostApplicationBuilder AddWebServices(this IHostApplicationBuilder builder)
     {
+        builder.Services.AddHttpContextAccessor();
+
+        builder.Services.AddScoped<IUser, CurrentUser>();
+
         builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
         builder.Services.AddProblemDetails();
