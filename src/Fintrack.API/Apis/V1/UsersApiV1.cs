@@ -13,7 +13,7 @@ public class UsersApiV1 : IApi
         api.MapPost("/passwordless-login", PasswordlessLogin).AllowAnonymous();
     }
 
-    public async Task<IResult> PasswordlessLogin(
+    public static async Task<IResult> PasswordlessLogin(
         PasswordlessLoginCommand command,
         IMediator mediator,
         CancellationToken cancellationToken)

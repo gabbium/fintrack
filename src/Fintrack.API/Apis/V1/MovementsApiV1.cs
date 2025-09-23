@@ -31,7 +31,7 @@ public class MovementsApiV1 : IApi
            .WithName(nameof(DeleteMovement));
     }
 
-    public async Task<IResult> ListMovements(
+    public static async Task<IResult> ListMovements(
         [AsParameters] ListMovementsQuery query,
         IMediator mediator,
         CancellationToken cancellationToken)
@@ -43,7 +43,7 @@ public class MovementsApiV1 : IApi
             : CustomResults.Problem(result);
     }
 
-    public async Task<IResult> GetMovementById(
+    public static async Task<IResult> GetMovementById(
         Guid id,
         IMediator mediator,
         CancellationToken cancellationToken)
@@ -57,7 +57,7 @@ public class MovementsApiV1 : IApi
             : CustomResults.Problem(result);
     }
 
-    public async Task<IResult> CreateMovement(
+    public static async Task<IResult> CreateMovement(
         CreateMovementCommand command,
         IMediator mediator,
         CancellationToken cancellationToken)
@@ -72,7 +72,7 @@ public class MovementsApiV1 : IApi
             : CustomResults.Problem(result);
     }
 
-    public async Task<IResult> UpdateMovement(
+    public static async Task<IResult> UpdateMovement(
         UpdateMovementCommand command,
         Guid id,
         IMediator mediator,
@@ -93,7 +93,7 @@ public class MovementsApiV1 : IApi
             : CustomResults.Problem(result);
     }
 
-    public async Task<IResult> DeleteMovement(
+    public static async Task<IResult> DeleteMovement(
         Guid id,
         IMediator mediator,
         CancellationToken cancellationToken)
