@@ -1,3 +1,9 @@
+## [1.1.0](https://github.com/gabbium/fintrack/compare/v1.0.0...v1.1.0) (2025-09-23)
+
+### Features
+
+* users and movements ([#2](https://github.com/gabbium/fintrack/issues/2)) ([869210d](https://github.com/gabbium/fintrack/commit/869210d488947ec3f58f04ac87e84341eb5a6129))
+
 ## 1.0.0 (2025-09-15)
 
 ### Features
