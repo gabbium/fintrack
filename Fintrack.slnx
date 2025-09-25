@@ -1,0 +1,13 @@
+<Solution>
+  <Folder Name="/aspire/">
+    <Project Path="aspire\Fintrack.AppHost\Fintrack.AppHost.csproj" />
+    <Project Path="aspire\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/workloads/" />
+  <Folder Name="/workloads/Ledger/">
+    <Project Path="workloads\Ledger\Fintrack.Ledger.API\Fintrack.Ledger.API.csproj" />
+  </Folder>
+  <Folder Name="/workloads/Users/">
+    <Project Path="workloads\Users\Fintrack.Users.API\Fintrack.Users.API.csproj" />
+  </Folder>
+</Solution>
