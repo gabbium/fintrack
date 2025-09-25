@@ -7,11 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\aspire\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
+    <PackageReference Include="Gabbium.CleanArch.AspNetCore" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8" />
+    <ProjectReference Include="..\..\..\aspire\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>
