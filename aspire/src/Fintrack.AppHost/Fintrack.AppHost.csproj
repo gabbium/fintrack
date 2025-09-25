@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\workloads\Ledger\Fintrack.Ledger.API\Fintrack.Ledger.API.csproj" />
-    <ProjectReference Include="..\..\workloads\Users\Fintrack.Users.API\Fintrack.Users.API.csproj" />
+    <ProjectReference Include="..\..\..\workloads\Ledger\src\Fintrack.Ledger.API\Fintrack.Ledger.API.csproj" />
+    <ProjectReference Include="..\..\..\workloads\Users\src\Fintrack.Users.API\Fintrack.Users.API.csproj" />
   </ItemGroup>
 
   <ItemGroup>

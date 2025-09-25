@@ -5,7 +5,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\aspire\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\..\..\aspire\src\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>
