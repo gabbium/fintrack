@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\aspire\src\Fintrack.AppHost\Fintrack.AppHost.csproj" />
+    <ProjectReference Include="..\..\src\Fintrack.Ledger.API\Fintrack.Ledger.API.csproj" />
   </ItemGroup>
 
   <ItemGroup>

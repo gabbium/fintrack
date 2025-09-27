@@ -17,7 +17,7 @@ public static class OpenApiExtensions
         return builder;
     }
 
-    public static IApplicationBuilder MapOpenApiEndpoints(this WebApplication app)
+    public static WebApplication MapOpenApiEndpoints(this WebApplication app)
     {
         app.MapOpenApi();
 

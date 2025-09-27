@@ -1,6 +1,4 @@
-﻿using Serilog.Sinks.OpenTelemetry;
-
-namespace Fintrack.ServiceDefaults;
+﻿namespace Fintrack.ServiceDefaults;
 
 public static class LoggingExtensions
 {

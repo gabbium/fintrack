@@ -19,12 +19,12 @@ public class TestFixture : IAsyncLifetime
         await App.StartAsync(TestContext.Current.CancellationToken)
             .WaitAsync(s_startStopTimeout, TestContext.Current.CancellationToken);
 
-        Client = App.CreateHttpClient("ledger-api");
+        Client = App.CreateHttpClient("ledgerapi");
     }
 
     public Task ResetStateAsync()
     {
-        Client = App.CreateHttpClient("ledger-api");
+        Client = App.CreateHttpClient("ledgerapi");
         return Task.CompletedTask;
     }
 

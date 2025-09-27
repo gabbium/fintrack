@@ -1,21 +1,22 @@
-using Fintrack.ServiceDefaults;
 using Fintrack.Ledger.API;
+using Fintrack.Ledger.Application;
+using Fintrack.Ledger.Infrastructure;
+using Fintrack.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddServiceDefaults();
+builder.AddServiceDefaults()
+    .AddApiVersioningDefaults()
+    .AddOpenApiDefaults();
 
-builder.AddApiVersioningDefaults();
-
-builder.AddOpenApiDefaults();
-
-builder.AddWebServices();
+builder.AddApplicationServices()
+    .AddInfrastructureServices()
+    .AddWebServices();
 
 var app = builder.Build();
 
-app.MapOpenApiEndpoints();
-
-app.MapHealthCheckEndpoints();
+app.MapOpenApiEndpoints()
+    .MapHealthCheckEndpoints();
 
 app.UseWebApp();
 

@@ -1,7 +1,7 @@
 using Fintrack.Ledger.API.FunctionalTests.TestHelpers.Assertions;
 using Fintrack.Ledger.API.FunctionalTests.TestHelpers.Infrastructure;
 
-namespace Fintrack.Ledger.API.FunctionalTests.Scenarios;
+namespace Fintrack.Ledger.API.FunctionalTests.Smokes;
 
 public class SwaggerTests(TestFixture fx) : TestBase(fx)
 {
