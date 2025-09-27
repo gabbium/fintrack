@@ -7,9 +7,6 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
-env:
-  CI: true
-
 jobs:
   quality-checks:
     name: Code Quality & Testing
