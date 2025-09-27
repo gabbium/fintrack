@@ -8,8 +8,8 @@
 
 ## 📌 About
 
-**Fintrack** is a modular monolith built with **.NET 9** to help users track expenses and incomes.  
-It follows clean architecture principles with a clear separation of concerns and a pragmatic developer experience.
+**Fintrack** is a **microservices-based system** built with **.NET 9** to help users manage personal finances,  
+including expense tracking, income management, and reporting.
 
 ---
 

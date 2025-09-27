@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <Sdk Name="Aspire.AppHost.Sdk" Version="9.3.1" />
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <UserSecretsId>3564cb37-6f1b-4c5a-871b-bd5348290164</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\workloads\Ledger\src\Fintrack.Ledger.API\Fintrack.Ledger.API.csproj" />
+    <ProjectReference Include="..\..\..\workloads\Users\src\Fintrack.Users.API\Fintrack.Users.API.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.AppHost" />
+  </ItemGroup>
+
+</Project>
