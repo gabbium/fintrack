@@ -2,31 +2,35 @@ namespace Fintrack.Users.API.FunctionalTests.TestHelpers.Infrastructure;
 
 public class TestFixture : IAsyncLifetime
 {
+    private static readonly TimeSpan s_buildStopTimeout = TimeSpan.FromSeconds(60);
+    private static readonly TimeSpan s_startStopTimeout = TimeSpan.FromSeconds(120);
+
     public DistributedApplication App { get; private set; } = null!;
-    public HttpClient UsersApiClient { get; private set; } = null!;
+    public HttpClient Client { get; private set; } = null!;
 
     public async ValueTask InitializeAsync()
     {
         var builder = await DistributedApplicationTestingBuilder
-            .CreateAsync<Projects.Fintrack_Users_API>();
+            .CreateAsync<Projects.Fintrack_Ledger_API>(TestContext.Current.CancellationToken);
 
-        App = await builder.BuildAsync();
+        App = await builder.BuildAsync(TestContext.Current.CancellationToken)
+            .WaitAsync(s_buildStopTimeout, TestContext.Current.CancellationToken);
 
-        await App.StartAsync(TestContext.Current.CancellationToken);
-        await App.ResourceNotifications.WaitForResourceHealthyAsync("users-api", TestContext.Current.CancellationToken);
+        await App.StartAsync(TestContext.Current.CancellationToken)
+            .WaitAsync(s_startStopTimeout, TestContext.Current.CancellationToken);
 
-        UsersApiClient = App.CreateHttpClient("users-api");
+        Client = App.CreateHttpClient("users-api");
     }
 
     public Task ResetStateAsync()
     {
-        UsersApiClient = App.CreateHttpClient("users-api");
+        Client = App.CreateHttpClient("users-api");
         return Task.CompletedTask;
     }
 
     public async ValueTask DisposeAsync()
     {
-        UsersApiClient.Dispose();
+        Client.Dispose();
         await App.DisposeAsync();
     }
 }

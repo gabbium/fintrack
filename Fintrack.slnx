@@ -17,5 +17,7 @@
   <Folder Name="/workloads/Users/src/">
     <Project Path="workloads/Users/src/Fintrack.Users.API/Fintrack.Users.API.csproj" />
   </Folder>
-  <Folder Name="/workloads/Users/tests/" />
+  <Folder Name="/workloads/Users/tests/">
+    <Project Path="workloads/Users/tests/Fintrack.Users.API.FunctionalTests/Fintrack.Users.API.FunctionalTests.csproj" />
+  </Folder>
 </Solution>
