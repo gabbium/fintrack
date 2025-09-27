@@ -7,6 +7,9 @@ on:
   pull_request:
     types: [opened, synchronize, reopened]
 
+env:
+  CI: true
+
 jobs:
   quality-checks:
     name: Code Quality & Testing
@@ -15,10 +18,6 @@ jobs:
 
     permissions:
       pull-requests: write
-
-    env:
-      DOTNET_CLI_TELEMETRY_OPTOUT: "1"
-      DOTNET_NOLOGO: "true"
 
     steps:
       - name: Checkout code
@@ -40,9 +39,9 @@ jobs:
       - name: Install SonarScanner
         run: |
           dotnet tool install --global dotnet-sonarscanner
-          echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+          export PATH="$PATH:/home/runner/.dotnet/tools"
 
-      - name: Sonar begin
+      - name: Run SonarCloud Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
@@ -54,25 +53,6 @@ jobs:
             /d:sonar.token="$SONAR_TOKEN" \
             /d:sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml \
             /d:sonar.exclusions=**/Migrations/**
-
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
-
-      - name: Test (with hang protection & diagnostics)
-        timeout-minutes: 5
-        run: |
-          mkdir -p TestResults
-          dotnet test \
-            --configuration Release \
-            --no-build \
-            --logger "console;verbosity=detailed" \
-            --logger "trx;LogFileName=test-results.trx" \
-            --results-directory TestResults \
-            --blame-hang --blame-hang-timeout 5m \
-            --blame-hang-dump-type mini
-
-      - name: Sonar end
-        if: always()
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
+          dotnet build --configuration Release
+          dotnet test --configuration Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+          dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
