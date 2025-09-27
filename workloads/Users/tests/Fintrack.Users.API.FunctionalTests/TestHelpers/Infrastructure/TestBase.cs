@@ -12,7 +12,6 @@ public abstract class TestBase(TestFixture fx) : IAsyncLifetime
 
     public ValueTask DisposeAsync()
     {
-        GC.SuppressFinalize(this);
         return ValueTask.CompletedTask;
     }
 }

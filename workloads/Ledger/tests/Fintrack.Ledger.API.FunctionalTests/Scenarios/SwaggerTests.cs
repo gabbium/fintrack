@@ -8,7 +8,7 @@ public class SwaggerTests(TestFixture fx) : TestBase(fx)
     [Fact]
     public async Task GivenApplicationStarted_WhenGettingSwaggerV1_Then200()
     {
-        var response = await _fx.LedgerApiClient.GetAsync("/openapi/v1.json", TestContext.Current.CancellationToken);
+        var response = await _fx.Client.GetAsync("/openapi/v1.json", TestContext.Current.CancellationToken);
         response.ShouldBeOk();
     }
 }

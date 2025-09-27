@@ -28,6 +28,5 @@ public class TestFixture : IAsyncLifetime
     {
         UsersApiClient.Dispose();
         await App.DisposeAsync();
-        GC.SuppressFinalize(this);
     }
 }
