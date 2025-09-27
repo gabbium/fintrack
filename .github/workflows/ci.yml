@@ -58,15 +58,24 @@ jobs:
           dotnet build --configuration Release
           dotnet-coverage collect \
             --settings coverage.runsettings \
-            --output coverage.xml \
-            --output-format cobertura \
+            --output "coverage.xml,coverage.cobertura.xml" \
+            --output-format "xml,cobertura" \
             dotnet test --configuration Release --no-build --no-restore
           dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
 
-      - name: ReportGenerator (HTML)
+      - name: Run ReportGenerator
         if: always()
         run: |
           reportgenerator \
-            "-reports:coverage.xml" \
+            "-reports:coverage.cobertura.xml" \
             "-targetdir:CoverageReport" \
             -reporttypes:Html
+
+      - name: Upload coverage HTML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: CoverageReport/**
+          if-no-files-found: error
+          retention-days: 14
