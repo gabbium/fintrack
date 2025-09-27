@@ -10,10 +10,14 @@
   <Folder Name="/workloads/Ledger/src/">
     <Project Path="workloads/Ledger/src/Fintrack.Ledger.API/Fintrack.Ledger.API.csproj" />
   </Folder>
-  <Folder Name="/workloads/Ledger/tests/" />
+  <Folder Name="/workloads/Ledger/tests/">
+    <Project Path="workloads/Ledger/tests/Fintrack.Ledger.API.FunctionalTests/Fintrack.Ledger.API.FunctionalTests.csproj" Id="8f644f92-e413-4205-ace6-bab3391b8cdb" />
+  </Folder>
   <Folder Name="/workloads/Users/" />
   <Folder Name="/workloads/Users/src/">
     <Project Path="workloads/Users/src/Fintrack.Users.API/Fintrack.Users.API.csproj" />
   </Folder>
-  <Folder Name="/workloads/Users/tests/" />
+  <Folder Name="/workloads/Users/tests/">
+    <Project Path="workloads/Users/tests/Fintrack.Users.API.FunctionalTests/Fintrack.Users.API.FunctionalTests.csproj" Id="0efdb637-94c4-4e1b-864c-91768f789375" />
+  </Folder>
 </Solution>
