@@ -39,7 +39,9 @@ jobs:
       - name: Install SonarScanner
         run: |
           dotnet tool install --global dotnet-sonarscanner
-          export PATH="$PATH:/home/runner/.dotnet/tools"
+          dotnet tool install --global dotnet-coverage
+          dotnet tool install --global dotnet-reportgenerator-globaltool
+          echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
       - name: Run SonarCloud Scan
         env:
@@ -51,8 +53,20 @@ jobs:
             /o:"gabbium" \
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.token="$SONAR_TOKEN" \
-            /d:sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml \
+            /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml \
             /d:sonar.exclusions=**/Migrations/**
           dotnet build --configuration Release
-          dotnet test --configuration Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+          dotnet-coverage collect \
+            --settings coverage.runsettings \
+            --output coverage.xml \
+            --output-format cobertura \
+            dotnet test --configuration Release --no-build --no-restore
           dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
+
+      - name: ReportGenerator (HTML)
+        if: always()
+        run: |
+          reportgenerator \
+            "-reports:coverage.xml" \
+            "-targetdir:CoverageReport" \
+            -reporttypes:Html
