@@ -17,13 +17,16 @@ public class TestFixture : IAsyncLifetime
 
         LedgerApiClient = App.CreateHttpClient("ledger-api");
     }
+
     public Task ResetStateAsync()
     {
+        LedgerApiClient = App.CreateHttpClient("ledger-api");
         return Task.CompletedTask;
     }
 
     public async ValueTask DisposeAsync()
     {
+        LedgerApiClient.Dispose();
         await App.DisposeAsync();
         GC.SuppressFinalize(this);
     }

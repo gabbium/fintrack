@@ -1,11 +1,13 @@
 namespace Fintrack.Users.API.FunctionalTests.TestHelpers.Infrastructure;
 
 [Collection(TestsCollection.Name)]
-public abstract class TestBase : IAsyncLifetime
+public abstract class TestBase(TestFixture fx) : IAsyncLifetime
 {
-    public ValueTask InitializeAsync()
+    protected readonly TestFixture _fx = fx;
+
+    public async ValueTask InitializeAsync()
     {
-        return ValueTask.CompletedTask;
+        await _fx.ResetStateAsync();
     }
 
     public ValueTask DisposeAsync()

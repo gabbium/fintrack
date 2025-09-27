@@ -17,13 +17,16 @@ public class TestFixture : IAsyncLifetime
 
         UsersApiClient = App.CreateHttpClient("users-api");
     }
+
     public Task ResetStateAsync()
     {
+        UsersApiClient = App.CreateHttpClient("users-api");
         return Task.CompletedTask;
     }
 
     public async ValueTask DisposeAsync()
     {
+        UsersApiClient.Dispose();
         await App.DisposeAsync();
         GC.SuppressFinalize(this);
     }
