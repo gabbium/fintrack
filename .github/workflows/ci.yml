@@ -53,29 +53,12 @@ jobs:
             /o:"gabbium" \
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.token="$SONAR_TOKEN" \
-            /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml \
+            /d:sonar.cs.vscoveragexml.reportsPaths="coverage.xml" \
             /d:sonar.exclusions=**/Migrations/**
           dotnet build --configuration Release
           dotnet-coverage collect \
             --settings coverage.runsettings \
-            --output "coverage.xml,coverage.cobertura.xml" \
-            --output-format "xml,cobertura" \
+            --output-format xml \
+            --output coverage.xml \
             dotnet test --configuration Release --no-build --no-restore
           dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
-
-      - name: Run ReportGenerator
-        if: always()
-        run: |
-          reportgenerator \
-            "-reports:coverage.cobertura.xml" \
-            "-targetdir:CoverageReport" \
-            -reporttypes:Html
-
-      - name: Upload coverage HTML
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-report
-          path: CoverageReport/**
-          if-no-files-found: error
-          retention-days: 14
