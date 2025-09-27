@@ -17,7 +17,5 @@
   <Folder Name="/workloads/Users/src/">
     <Project Path="workloads/Users/src/Fintrack.Users.API/Fintrack.Users.API.csproj" />
   </Folder>
-  <Folder Name="/workloads/Users/tests/">
-    <Project Path="workloads/Users/tests/Fintrack.Users.API.FunctionalTests/Fintrack.Users.API.FunctionalTests.csproj" Id="0efdb637-94c4-4e1b-864c-91768f789375" />
-  </Folder>
+  <Folder Name="/workloads/Users/tests/" />
 </Solution>
