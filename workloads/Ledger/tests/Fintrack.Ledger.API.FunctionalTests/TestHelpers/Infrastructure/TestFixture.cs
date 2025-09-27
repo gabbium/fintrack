@@ -11,12 +11,12 @@ public class TestFixture : IAsyncLifetime
     public async ValueTask InitializeAsync()
     {
         var builder = await DistributedApplicationTestingBuilder
-            .CreateAsync<Projects.Fintrack_Ledger_API>();
+            .CreateAsync<Projects.Fintrack_Ledger_API>(TestContext.Current.CancellationToken);
 
-        App = await builder.BuildAsync()
+        App = await builder.BuildAsync(TestContext.Current.CancellationToken)
             .WaitAsync(s_buildStopTimeout, TestContext.Current.CancellationToken);
 
-        await App.StartAsync()
+        await App.StartAsync(TestContext.Current.CancellationToken)
             .WaitAsync(s_startStopTimeout, TestContext.Current.CancellationToken);
 
         await App.ResourceNotifications.WaitForResourceHealthyAsync("ledger-api", TestContext.Current.CancellationToken)
