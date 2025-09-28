@@ -1,8 +1,11 @@
-﻿using Fintrack.Ledger.Domain.MovementAggregate;
+﻿using Fintrack.Ledger.Application.Interfaces;
+using Fintrack.Ledger.Application.Models;
+using Fintrack.Ledger.Domain.Movements;
 
-namespace Fintrack.Ledger.Application.MovementAggregate.CreateMovement;
+namespace Fintrack.Ledger.Application.UseCases.Movements.CreateMovement;
 
 internal sealed class CreateMovementCommandHandler(
+    IUser user,
     IMovementRepository movementRepository,
     IUnitOfWork unitOfWork)
     : ICommandHandler<CreateMovementCommand, MovementDto>
@@ -12,7 +15,7 @@ internal sealed class CreateMovementCommandHandler(
         CancellationToken cancellationToken = default)
     {
         var movement = new Movement(
-            Guid.NewGuid(),
+            user.UserId,
             command.Kind,
             command.Amount,
             command.Description,

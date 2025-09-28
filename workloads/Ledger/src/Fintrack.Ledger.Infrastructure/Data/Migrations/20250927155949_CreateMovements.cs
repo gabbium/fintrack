@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Domain.MovementAggregate;
+﻿using Fintrack.Ledger.Domain.Movements;
 
 #nullable disable
 

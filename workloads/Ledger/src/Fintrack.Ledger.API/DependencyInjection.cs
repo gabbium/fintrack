@@ -1,4 +1,6 @@
 ﻿using Fintrack.Ledger.API.Infrastructure;
+using Fintrack.Ledger.API.Services;
+using Fintrack.Ledger.Application.Interfaces;
 
 namespace Fintrack.Ledger.API;
 
@@ -9,6 +11,15 @@ public static class DependencyInjection
         builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
         builder.Services.AddProblemDetails();
+
+        builder.Services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
+
+        builder.Services.AddHttpContextAccessor();
+
+        builder.Services.AddScoped<IUser, CurrentUser>();
 
         return builder;
     }

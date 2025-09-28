@@ -1,4 +1,4 @@
-﻿namespace Fintrack.Ledger.Domain.MovementAggregate;
+﻿namespace Fintrack.Ledger.Domain.Movements;
 
 public enum MovementKind
 {

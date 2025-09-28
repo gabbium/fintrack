@@ -21,4 +21,47 @@ internal static class OpenApiOptionsExtensions
 
         return options;
     }
+
+    public static OpenApiOptions ApplyOAuth2Keycloak(this OpenApiOptions options, IConfiguration configuration)
+    {
+        options.AddDocumentTransformer((doc, ctx, ct) =>
+        {
+            var openApiSection = configuration.GetRequiredSection("OpenApi");
+            var oAuthUrl = openApiSection.GetRequiredValue("OAuth:Url");
+
+            doc.Components ??= new OpenApiComponents();
+
+            doc.Components.SecuritySchemes["oauth2"] = new OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.OAuth2,
+                Flows = new OpenApiOAuthFlows
+                {
+                    AuthorizationCode = new OpenApiOAuthFlow
+                    {
+                        AuthorizationUrl = new Uri($"{oAuthUrl}/protocol/openid-connect/auth"),
+                        TokenUrl = new Uri($"{oAuthUrl}/protocol/openid-connect/token"),
+                    }
+                }
+            };
+
+            doc.SecurityRequirements.Add(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "oauth2"
+                        }
+                    },
+                    Array.Empty<string>()
+                }
+            });
+
+            return Task.CompletedTask;
+        });
+
+        return options;
+    }
 }

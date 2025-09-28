@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Domain.MovementAggregate;
+﻿using Fintrack.Ledger.Domain.Movements;
 using Fintrack.Ledger.Infrastructure.Data;
 using Fintrack.Ledger.Infrastructure.Data.Repositories;
 

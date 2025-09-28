@@ -1,9 +1,9 @@
-using Fintrack.Ledger.Domain.MovementAggregate;
+using Fintrack.Ledger.Domain.Movements;
 using Fintrack.Ledger.Infrastructure.Data;
 
-namespace Fintrack.Ledger.MigrationService;
+namespace Fintrack.Ledger.MigrationService.Workers;
 
-public class Worker(
+public class MigrationWorker(
     IServiceProvider serviceProvider,
     IHostApplicationLifetime hostApplicationLifetime) : BackgroundService
 {

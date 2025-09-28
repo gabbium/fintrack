@@ -1,7 +1,7 @@
 ﻿using Fintrack.Ledger.API.FunctionalTests.Steps;
 using Fintrack.Ledger.API.FunctionalTests.TestHelpers.Assertions;
 using Fintrack.Ledger.API.FunctionalTests.TestHelpers.Infrastructure;
-using Fintrack.Ledger.Application.MovementAggregate;
+using Fintrack.Ledger.Application.Models;
 
 namespace Fintrack.Ledger.API.FunctionalTests.Scenarios.Movements;
 
@@ -23,5 +23,13 @@ public class CreateMovementTests(TestFixture fx) : TestBase(fx)
         var command = _movement.Given_InvalidCreateCommand_TooLongDescription();
         var response = await _movement.When_AttemptToCreate(command);
         await response.ShouldBeBadRequestWithValidation();
+    }
+
+    [Fact]
+    public async Task GivenAnonymousUser_WhenCreating_Then401WithBearerChallenge()
+    {
+        var command = _movement.Given_ValidCreateCommand();
+        var response = await _movement.When_AttemptToCreate(command);
+        response.ShouldBeUnauthorizedWithBearerChallenge();
     }
 }

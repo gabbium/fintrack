@@ -1,5 +1,5 @@
-﻿using Fintrack.Ledger.Application.MovementAggregate.CreateMovement;
-using Fintrack.Ledger.Domain.MovementAggregate;
+﻿using Fintrack.Ledger.Application.UseCases.Movements.CreateMovement;
+using Fintrack.Ledger.Domain.Movements;
 
 namespace Fintrack.Ledger.API.FunctionalTests.TestHelpers.Builders;
 

@@ -1,18 +1,21 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var postgres = builder.AddPostgres("postgres");
+var postgres = builder.AddPostgres("postgres")
+    .WithDataVolume()
+    .WithHostPort(5432);
 
-var postgresdb = postgres.AddDatabase("postgresdb");
+var postgresDb = postgres.AddDatabase("postgresdb");
 
-var ledgerMigrations = builder.AddProject<Projects.Fintrack_Ledger_MigrationService>("ledgermigrations")
-    .WithReference(postgresdb).WaitFor(postgresdb);
+var keycloak = builder.AddKeycloak("keycloak", 8080)
+    .WithDataVolume();
 
-builder.AddProject<Projects.Fintrack_Ledger_API>("ledgerapi")
-    .WithReference(postgresdb).WaitFor(postgresdb)
-    .WithReference(ledgerMigrations).WaitForCompletion(ledgerMigrations)
-    .WithHttpHealthCheck("/health/ready");
+var ledgerMigrator = builder.AddProject<Projects.Fintrack_Ledger_MigrationService>("ledger-migrator")
+    .WithReference(postgresDb).WaitFor(postgresDb);
 
-builder.AddProject<Projects.Fintrack_Users_API>("usersapi")
+var ledgerApi = builder.AddProject<Projects.Fintrack_Ledger_API>("ledger-api")
+    .WithReference(postgresDb).WaitFor(postgresDb)
+    .WithReference(keycloak).WaitFor(keycloak)
+    .WithReference(ledgerMigrator).WaitForCompletion(ledgerMigrator)
     .WithHttpHealthCheck("/health/ready");
 
 var app = builder.Build();

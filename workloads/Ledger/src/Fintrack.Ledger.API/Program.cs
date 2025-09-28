@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults()
     .AddApiVersioningDefaults()
+    .AddAuthenticationDefaults()
     .AddOpenApiDefaults();
 
 builder.AddApplicationServices()

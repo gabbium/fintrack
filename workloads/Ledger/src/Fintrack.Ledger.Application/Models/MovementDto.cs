@@ -1,6 +1,6 @@
-﻿using Fintrack.Ledger.Domain.MovementAggregate;
+﻿using Fintrack.Ledger.Domain.Movements;
 
-namespace Fintrack.Ledger.Application.MovementAggregate;
+namespace Fintrack.Ledger.Application.Models;
 
 public sealed record MovementDto
 {

@@ -1,6 +1,7 @@
-﻿using Fintrack.Ledger.Domain.MovementAggregate;
+﻿using Fintrack.Ledger.Application.Models;
+using Fintrack.Ledger.Domain.Movements;
 
-namespace Fintrack.Ledger.Application.MovementAggregate.CreateMovement;
+namespace Fintrack.Ledger.Application.UseCases.Movements.CreateMovement;
 
 public sealed record CreateMovementCommand(
     MovementKind Kind,

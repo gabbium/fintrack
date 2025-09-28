@@ -1,4 +1,4 @@
-﻿namespace Fintrack.Ledger.Application.MovementAggregate.CreateMovement;
+﻿namespace Fintrack.Ledger.Application.UseCases.Movements.CreateMovement;
 
 internal sealed class CreateMovementCommandValidator
     : AbstractValidator<CreateMovementCommand>

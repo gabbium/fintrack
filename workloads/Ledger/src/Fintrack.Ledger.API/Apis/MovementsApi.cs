@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Application.MovementAggregate.CreateMovement;
+﻿using Fintrack.Ledger.Application.UseCases.Movements.CreateMovement;
 
 namespace Fintrack.Ledger.API.Apis;
 
@@ -8,7 +8,8 @@ public class MovementsApi : IApi
     {
         var api = builder.MapGroup("movements")
             .HasApiVersion(1.0)
-            .WithTags("Movements");
+            .WithTags("Movements")
+            .RequireAuthorization();
 
         api.MapPost(string.Empty, CreateMovement)
            .WithName(nameof(CreateMovement));
