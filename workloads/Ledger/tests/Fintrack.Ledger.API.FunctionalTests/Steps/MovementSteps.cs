@@ -1,10 +1,8 @@
-﻿using Fintrack.Ledger.API.FunctionalTests.TestHelpers;
+﻿using Fintrack.Ledger.API.Apis;
+using Fintrack.Ledger.API.FunctionalTests.TestHelpers;
 using Fintrack.Ledger.API.FunctionalTests.TestHelpers.Builders;
 using Fintrack.Ledger.API.FunctionalTests.TestHelpers.Infrastructure.Support;
-using Fintrack.Ledger.Application.Commands.CreateMovement;
-using Fintrack.Ledger.Application.Commands.UpdateMovement;
 using Fintrack.Ledger.Application.Models;
-using Fintrack.Ledger.Application.Queries.ListMovements;
 
 namespace Fintrack.Ledger.API.FunctionalTests.Steps;
 
@@ -12,51 +10,48 @@ public class MovementSteps(TestFixture fx)
 {
     private readonly HttpClient _httpClient = fx.Factory.CreateDefaultClient();
 
-    public CreateMovementCommand Given_ValidCreateCommand()
+    public CreateMovementRequest Given_ValidCreateRequest()
     {
-        return new CreateMovementCommandBuilder().Build();
+        return new CreateMovementRequestBuilder().Build();
     }
 
-    public CreateMovementCommand Given_InvalidCreateCommand_TooLongDescription()
+    public CreateMovementRequest Given_InvalidCreateRequest_TooLongDescription()
     {
-        return new CreateMovementCommandBuilder()
+        return new CreateMovementRequestBuilder()
                 .WithDescription(new string('a', 129))
                 .Build();
     }
 
-    public UpdateMovementCommand Given_ValidUpdateCommand(Guid id)
+    public UpdateMovementRequest Given_ValidUpdateRequest()
     {
-        return new UpdateMovementCommandBuilder()
-                .WithId(id)
-                .Build();
+        return new UpdateMovementRequestBuilder().Build();
     }
 
-    public UpdateMovementCommand Given_InvalidUpdateCommand_TooLongDescription(Guid id)
+    public UpdateMovementRequest Given_InvalidUpdateRequest_TooLongDescription()
     {
-        return new UpdateMovementCommandBuilder()
-                .WithId(id)
+        return new UpdateMovementRequestBuilder()
                 .WithDescription(new string('a', 129))
                 .Build();
     }
 
-    public ListMovementsQuery Given_ValidListQuery()
+    public ListMovementsRequest Given_ValidListRequest()
     {
-        return new ListMovementsQueryBuilder()
+        return new ListMovementsRequestBuilder()
             .Build();
     }
 
-    public ListMovementsQuery Given_InvalidValidListQuery_PageNumberNegative()
+    public ListMovementsRequest Given_InvalidValidListRequest_PageNumberNegative()
     {
-        return new ListMovementsQueryBuilder()
+        return new ListMovementsRequestBuilder()
             .WithPageNumber(-1)
             .Build();
     }
 
     public async Task<MovementDto> Given_ExistingMovement()
     {
-        var command = new CreateMovementCommandBuilder().Build();
+        var request = new CreateMovementRequestBuilder().Build();
 
-        var response = await _httpClient.PostAsJsonAsync("/api/v1/movements", command);
+        var response = await _httpClient.PostAsJsonAsync("/api/v1/movements", request);
         response.EnsureSuccessStatusCode();
 
         var body = await response.Content.ReadFromJsonAsync<MovementDto>(TestConstants.Json);
@@ -65,12 +60,12 @@ public class MovementSteps(TestFixture fx)
         return body;
     }
 
-    public async Task<HttpResponseMessage> When_AttemptToList(ListMovementsQuery query)
+    public async Task<HttpResponseMessage> When_AttemptToList(ListMovementsRequest request)
     {
         var queryParams = QueryString.Create(new Dictionary<string, string?>
         {
-            ["pageNumber"] = query.PageNumber.ToString(),
-            ["pageSize"] = query.PageSize.ToString()
+            ["pageNumber"] = request.PageNumber.ToString(),
+            ["pageSize"] = request.PageSize.ToString()
         });
 
         return await _httpClient.GetAsync("/api/v1/movements" + queryParams);
@@ -80,14 +75,14 @@ public class MovementSteps(TestFixture fx)
     {
         return await _httpClient.GetAsync("/api/v1/movements/" + id);
     }
-    public async Task<HttpResponseMessage> When_AttemptToCreate(CreateMovementCommand command)
+    public async Task<HttpResponseMessage> When_AttemptToCreate(CreateMovementRequest request)
     {
-        return await _httpClient.PostAsJsonAsync("/api/v1/movements", command);
+        return await _httpClient.PostAsJsonAsync("/api/v1/movements", request);
     }
 
-    public async Task<HttpResponseMessage> When_AttemptToUpdate(Guid id, UpdateMovementCommand command)
+    public async Task<HttpResponseMessage> When_AttemptToUpdate(Guid id, UpdateMovementRequest request)
     {
-        return await _httpClient.PutAsJsonAsync("/api/v1/movements/" + id, command);
+        return await _httpClient.PutAsJsonAsync("/api/v1/movements/" + id, request);
     }
 
     public async Task<HttpResponseMessage> When_AttemptToDelete(Guid id)

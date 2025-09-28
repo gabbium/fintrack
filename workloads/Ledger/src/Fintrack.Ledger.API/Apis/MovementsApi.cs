@@ -31,10 +31,14 @@ public sealed class MovementsApi : IApi
     }
 
     public static async Task<IResult> ListMovements(
-        [AsParameters] ListMovementsQuery query,
+        [AsParameters] ListMovementsRequest request,
         IMediator mediator,
         CancellationToken cancellationToken)
     {
+        var query = new ListMovementsQuery(
+            request.PageNumber,
+            request.PageSize);
+
         var result = await mediator.SendAsync(query, cancellationToken);
 
         return result.IsSuccess
@@ -57,10 +61,16 @@ public sealed class MovementsApi : IApi
     }
 
     public static async Task<IResult> CreateMovement(
-        CreateMovementCommand command,
+        CreateMovementRequest request,
         IMediator mediator,
         CancellationToken cancellationToken)
     {
+        var command = new CreateMovementCommand(
+            request.Kind,
+            request.Amount,
+            request.Description,
+            request.OccurredOn);
+
         var result = await mediator.SendAsync(command, cancellationToken);
 
         return result.IsSuccess
@@ -72,18 +82,17 @@ public sealed class MovementsApi : IApi
     }
 
     public static async Task<IResult> UpdateMovement(
-        UpdateMovementCommand command,
+        UpdateMovementRequest request,
         Guid id,
         IMediator mediator,
         CancellationToken cancellationToken)
     {
-        if (id != command.Id)
-        {
-            return Results.ValidationProblem(new Dictionary<string, string[]>
-            {
-                ["id"] = ["Route id must match body id."]
-            });
-        }
+        var command = new UpdateMovementCommand(
+            id,
+            request.Kind,
+            request.Amount,
+            request.Description,
+            request.OccurredOn);
 
         var result = await mediator.SendAsync(command, cancellationToken);
 

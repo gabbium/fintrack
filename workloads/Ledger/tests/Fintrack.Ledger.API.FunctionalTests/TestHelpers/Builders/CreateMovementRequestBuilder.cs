@@ -1,41 +1,47 @@
-﻿using Fintrack.Ledger.Application.Commands.CreateMovement;
+﻿using Fintrack.Ledger.API.Apis;
 using Fintrack.Ledger.Domain.AggregatesModel.MovementAggregate;
 
 namespace Fintrack.Ledger.API.FunctionalTests.TestHelpers.Builders;
 
-public class CreateMovementCommandBuilder
+public class CreateMovementRequestBuilder
 {
     private MovementKind _kind = MovementKind.Income;
     private decimal _amount = 100m;
     private string? _description = "Test movement";
     private DateTimeOffset _occurredOn = DateTimeOffset.UtcNow;
 
-    public CreateMovementCommandBuilder WithKind(MovementKind kind)
+    public CreateMovementRequestBuilder WithKind(MovementKind kind)
     {
         _kind = kind;
         return this;
     }
 
-    public CreateMovementCommandBuilder WithAmount(decimal amount)
+    public CreateMovementRequestBuilder WithAmount(decimal amount)
     {
         _amount = amount;
         return this;
     }
 
-    public CreateMovementCommandBuilder WithDescription(string? description)
+    public CreateMovementRequestBuilder WithDescription(string? description)
     {
         _description = description;
         return this;
     }
 
-    public CreateMovementCommandBuilder WithOccurredOn(DateTimeOffset occurredOn)
+    public CreateMovementRequestBuilder WithOccurredOn(DateTimeOffset occurredOn)
     {
         _occurredOn = occurredOn;
         return this;
     }
 
-    public CreateMovementCommand Build()
+    public CreateMovementRequest Build()
     {
-        return new(_kind, _amount, _description, _occurredOn);
+        return new()
+        {
+            Kind = _kind,
+            Amount = _amount,
+            Description = _description,
+            OccurredOn = _occurredOn
+        };
     }
 }

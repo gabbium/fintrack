@@ -15,8 +15,8 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
     public async Task GivenLoggedInUser_WhenListing_ThenOkWithBody()
     {
         _auth.Given_LoggedInUser();
-        var query = _movement.Given_ValidListQuery();
-        var response = await _movement.When_AttemptToList(query);
+        var request = _movement.Given_ValidListRequest();
+        var response = await _movement.When_AttemptToList(request);
         await response.ShouldBeOkWithBody<PaginatedList<MovementDto>>();
     }
 
@@ -24,8 +24,8 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
     public async Task GivenLoggedInUser_WhenListing_ThenBadRequestWithValidation()
     {
         _auth.Given_LoggedInUser();
-        var query = _movement.Given_InvalidValidListQuery_PageNumberNegative();
-        var response = await _movement.When_AttemptToList(query);
+        var request = _movement.Given_InvalidValidListRequest_PageNumberNegative();
+        var response = await _movement.When_AttemptToList(request);
         await response.ShouldBeBadRequestWithValidation();
     }
 
@@ -33,8 +33,8 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
     public async Task GivenAnonymousUser_WhenListing_ThenUnauthorizedWithBearerChallenge()
     {
         _auth.Given_AnonymousUser();
-        var query = _movement.Given_ValidListQuery();
-        var response = await _movement.When_AttemptToList(query);
+        var request = _movement.Given_ValidListRequest();
+        var response = await _movement.When_AttemptToList(request);
         response.ShouldBeUnauthorizedWithBearerChallenge();
     }
 }

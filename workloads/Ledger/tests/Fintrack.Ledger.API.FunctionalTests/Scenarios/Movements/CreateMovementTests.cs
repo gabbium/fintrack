@@ -14,8 +14,8 @@ public class CreateMovementTests(TestFixture fx) : TestBase(fx)
     public async Task GivenLoggedInUser_WhenCreatingWithValidData_ThenCreatedWithBodyAndLocation()
     {
         _auth.Given_LoggedInUser();
-        var command = _movement.Given_ValidCreateCommand();
-        var response = await _movement.When_AttemptToCreate(command);
+        var request = _movement.Given_ValidCreateRequest();
+        var response = await _movement.When_AttemptToCreate(request);
         await response.ShouldBeCreatedWithBodyAndLocation<MovementDto>(
             body => $"/api/v1/movements/{body.Id}");
     }
@@ -24,8 +24,8 @@ public class CreateMovementTests(TestFixture fx) : TestBase(fx)
     public async Task GivenLoggedInUser_WhenCreatingWithInvalidData_ThenBadRequestWithValidation()
     {
         _auth.Given_LoggedInUser();
-        var command = _movement.Given_InvalidCreateCommand_TooLongDescription();
-        var response = await _movement.When_AttemptToCreate(command);
+        var request = _movement.Given_InvalidCreateRequest_TooLongDescription();
+        var response = await _movement.When_AttemptToCreate(request);
         await response.ShouldBeBadRequestWithValidation();
     }
 
@@ -33,8 +33,8 @@ public class CreateMovementTests(TestFixture fx) : TestBase(fx)
     public async Task GivenAnonymousUser_WhenCreating_ThenUnauthorizedWithBearerChallenge()
     {
         _auth.Given_AnonymousUser();
-        var command = _movement.Given_ValidCreateCommand();
-        var response = await _movement.When_AttemptToCreate(command);
+        var request = _movement.Given_ValidCreateRequest();
+        var response = await _movement.When_AttemptToCreate(request);
         response.ShouldBeUnauthorizedWithBearerChallenge();
     }
 }

@@ -15,8 +15,8 @@ public class UpdateMovementTests(TestFixture fx) : TestBase(fx)
     {
         _auth.Given_LoggedInUser();
         var movement = await _movement.Given_ExistingMovement();
-        var command = _movement.Given_ValidUpdateCommand(movement.Id);
-        var response = await _movement.When_AttemptToUpdate(movement.Id, command);
+        var request = _movement.Given_ValidUpdateRequest();
+        var response = await _movement.When_AttemptToUpdate(movement.Id, request);
         var body = await response.ShouldBeOkWithBody<MovementDto>();
         body.Id.ShouldBe(movement.Id);
     }
@@ -26,8 +26,8 @@ public class UpdateMovementTests(TestFixture fx) : TestBase(fx)
     {
         _auth.Given_LoggedInUser();
         var nonExistentMovementId = Guid.NewGuid();
-        var command = _movement.Given_ValidUpdateCommand(nonExistentMovementId);
-        var response = await _movement.When_AttemptToUpdate(nonExistentMovementId, command);
+        var request = _movement.Given_ValidUpdateRequest();
+        var response = await _movement.When_AttemptToUpdate(nonExistentMovementId, request);
         await response.ShouldBeNotFoundWithProblem();
     }
 
@@ -36,8 +36,8 @@ public class UpdateMovementTests(TestFixture fx) : TestBase(fx)
     {
         _auth.Given_LoggedInUser();
         var movementId = Guid.NewGuid();
-        var command = _movement.Given_InvalidUpdateCommand_TooLongDescription(movementId);
-        var response = await _movement.When_AttemptToUpdate(movementId, command);
+        var request = _movement.Given_InvalidUpdateRequest_TooLongDescription();
+        var response = await _movement.When_AttemptToUpdate(movementId, request);
         await response.ShouldBeBadRequestWithValidation();
     }
 
@@ -46,8 +46,8 @@ public class UpdateMovementTests(TestFixture fx) : TestBase(fx)
     {
         _auth.Given_AnonymousUser();
         var movementId = Guid.NewGuid();
-        var command = _movement.Given_ValidUpdateCommand(movementId);
-        var response = await _movement.When_AttemptToUpdate(movementId, command);
+        var request = _movement.Given_ValidUpdateRequest();
+        var response = await _movement.When_AttemptToUpdate(movementId, request);
         response.ShouldBeUnauthorizedWithBearerChallenge();
     }
 }
