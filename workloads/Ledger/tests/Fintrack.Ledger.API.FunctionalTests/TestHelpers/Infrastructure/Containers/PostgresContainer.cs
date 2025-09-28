@@ -40,8 +40,7 @@ public class PostgresContainer
         {
             DbAdapter = DbAdapter.Postgres,
             SchemasToInclude = ["ledger"],
-            TablesToIgnore = [
-                new Table("ledger", "__efmigrations_history")]
+            WithReseed = true
         });
     }
 
