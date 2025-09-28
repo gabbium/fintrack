@@ -16,5 +16,3 @@ including expense tracking, income management, and reporting.
 ## 🪪 License
 
 This project is licensed under the MIT License – see [LICENSE](LICENSE) for details.
-
-teste
