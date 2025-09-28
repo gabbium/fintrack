@@ -13,7 +13,7 @@ public static class DependencyInjection
         builder.Services.AddOpenTelemetry()
             .WithTracing(tracing => tracing.AddSource(MigrationWorker.ActivitySourceName));
 
-        builder.Services.AddScoped<IUser, CurrentUser>();
+        builder.Services.AddTransient<IIdentityService, IdentityService>();
 
         return builder;
     }

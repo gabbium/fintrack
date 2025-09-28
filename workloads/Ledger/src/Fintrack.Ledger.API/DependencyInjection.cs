@@ -19,7 +19,7 @@ public static class DependencyInjection
 
         builder.Services.AddHttpContextAccessor();
 
-        builder.Services.AddScoped<IUser, CurrentUser>();
+        builder.Services.AddTransient<IIdentityService, IdentityService>();
 
         return builder;
     }

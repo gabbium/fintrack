@@ -2,7 +2,7 @@
 
 public static class OpenApiExtensions
 {
-    public static IHostApplicationBuilder AddOpenApiDefaults(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddDefaultOpenApi(this IHostApplicationBuilder builder)
     {
         var openApiSection = builder.Configuration.GetRequiredSection("OpenApi");
         var title = openApiSection.GetRequiredValue("Document:Title");

@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Application.UseCases.Movements.CreateMovement;
+﻿using Fintrack.Ledger.Application.Commands.CreateMovement;
 
 namespace Fintrack.Ledger.API.Apis;
 
@@ -7,7 +7,6 @@ public class MovementsApi : IApi
     public void Map(IEndpointRouteBuilder builder)
     {
         var api = builder.MapGroup("movements")
-            .HasApiVersion(1.0)
             .WithTags("Movements")
             .RequireAuthorization();
 

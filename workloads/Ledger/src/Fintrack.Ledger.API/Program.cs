@@ -6,9 +6,9 @@ using Fintrack.ServiceDefaults;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults()
-    .AddApiVersioningDefaults()
-    .AddAuthenticationDefaults()
-    .AddOpenApiDefaults();
+    .AddDefaultApiVersioning()
+    .AddDefaultAuthentication()
+    .AddDefaultOpenApi();
 
 builder.AddApplicationServices()
     .AddInfrastructureServices()

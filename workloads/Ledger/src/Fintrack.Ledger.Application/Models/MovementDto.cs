@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Domain.Movements;
+﻿using Fintrack.Ledger.Domain.AggregatesModel.MovementAggregate;
 
 namespace Fintrack.Ledger.Application.Models;
 

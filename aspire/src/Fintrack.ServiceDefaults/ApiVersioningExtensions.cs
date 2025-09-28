@@ -2,7 +2,7 @@
 
 public static class ApiVersioningExtensions
 {
-    public static IHostApplicationBuilder AddApiVersioningDefaults(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddDefaultApiVersioning(this IHostApplicationBuilder builder)
     {
         builder.Services
             .AddApiVersioning(options =>

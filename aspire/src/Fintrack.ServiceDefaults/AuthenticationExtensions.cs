@@ -2,7 +2,7 @@
 
 public static class AuthenticationExtensions
 {
-    public static IHostApplicationBuilder AddAuthenticationDefaults(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddDefaultAuthentication(this IHostApplicationBuilder builder)
     {
         var identitySection = builder.Configuration.GetRequiredSection("Identity");
         var realm = identitySection.GetRequiredValue("Realm");

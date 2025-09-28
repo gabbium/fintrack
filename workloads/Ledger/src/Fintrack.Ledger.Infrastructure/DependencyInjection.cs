@@ -1,6 +1,5 @@
-﻿using Fintrack.Ledger.Domain.Movements;
-using Fintrack.Ledger.Infrastructure.Data;
-using Fintrack.Ledger.Infrastructure.Data.Repositories;
+﻿using Fintrack.Ledger.Domain.AggregatesModel.MovementAggregate;
+using Fintrack.Ledger.Infrastructure.Repositories;
 
 namespace Fintrack.Ledger.Infrastructure;
 
@@ -10,19 +9,12 @@ public static class DependencyInjection
     {
         builder.Services.AddDbContext<LedgerDbContext>(options =>
         {
-            options.UseSnakeCaseNamingConvention();
-            options.UseNpgsql(builder.Configuration.GetConnectionString("postgresdb"), npgsqlOptions =>
-            {
-                npgsqlOptions.MigrationsHistoryTable("__efmigrations_history", "ledger");
-                npgsqlOptions.MapEnum<MovementKind>(schemaName: "ledger");
-            });
+            options.UseNpgsql(builder.Configuration.GetConnectionString("ledgerdb"));
         });
 
-        builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<LedgerDbContext>());
+        builder.EnrichNpgsqlDbContext<LedgerDbContext>();
 
-        builder.Services
-            .AddHealthChecks()
-            .AddDbContextCheck<LedgerDbContext>(name: "ledgerdb", tags: ["ready"]);
+        builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<LedgerDbContext>());
 
         builder.Services.AddScoped<IMovementRepository, MovementRepository>();
 

@@ -10,7 +10,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\workloads\Ledger\src\Fintrack.Ledger.API\Fintrack.Ledger.API.csproj" />
     <ProjectReference Include="..\..\..\workloads\Ledger\src\Fintrack.Ledger.MigrationService\Fintrack.Ledger.MigrationService.csproj" />
-    <ProjectReference Include="..\..\..\workloads\Users\src\Fintrack.Users.API\Fintrack.Users.API.csproj" />
   </ItemGroup>
 
   <ItemGroup>
