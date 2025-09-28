@@ -1,0 +1,214 @@
+C:\Development\fintrack
+├── .editorconfig
+├── .github/
+│   └── workflows/
+│       ├── cd.yml
+│       └── ci.yml
+├── .gitignore
+├── .releaserc.json
+├── CHANGELOG.md
+├── Directory.Build.props
+├── Directory.Packages.props
+├── Fintrack.slnx
+├── LICENSE
+├── README.md
+├── TestResults/
+├── aspire/
+│   └── src/
+│       ├── Fintrack.AppHost/
+│       │   ├── AppHost.cs
+│       │   ├── Fintrack.AppHost.csproj
+│       │   ├── Properties/
+│       │   │   └── launchSettings.json
+│       │   ├── appsettings.Development.json
+│       │   └── appsettings.json
+│       └── Fintrack.ServiceDefaults/
+│           ├── ApiVersioningExtensions.cs
+│           ├── AuthenticationExtensions.cs
+│           ├── ConfigurationExtensions.cs
+│           ├── Extensions.cs
+│           ├── Fintrack.ServiceDefaults.csproj
+│           ├── GlobalUsings.cs
+│           ├── HealthCheckExtensions.cs
+│           ├── LoggingExtensions.cs
+│           ├── OpenApiExtensions.cs
+│           └── OpenApiOptionsExtensions.cs
+├── tree.txt
+└── workloads/
+    └── Ledger/
+        ├── src/
+        │   ├── Fintrack.Ledger.API/
+        │   │   ├── Apis/
+        │   │   │   ├── MovementsApi.CreateMovementRequest.cs
+        │   │   │   ├── MovementsApi.ListMovementsRequest.cs
+        │   │   │   ├── MovementsApi.UpdateMovementRequest.cs
+        │   │   │   └── MovementsApi.cs
+        │   │   ├── DependencyInjection.cs
+        │   │   ├── Fintrack.Ledger.API.csproj
+        │   │   ├── Fintrack.Ledger.API.csproj.user
+        │   │   ├── GlobalUsings.cs
+        │   │   ├── Infrastructure/
+        │   │   │   └── CustomExceptionHandler.cs
+        │   │   ├── Program.Testing.cs
+        │   │   ├── Program.cs
+        │   │   ├── Properties/
+        │   │   │   └── launchSettings.json
+        │   │   ├── Services/
+        │   │   │   └── IdentityService.cs
+        │   │   ├── appsettings.Development.json
+        │   │   └── appsettings.json
+        │   ├── Fintrack.Ledger.Application/
+        │   │   ├── Commands/
+        │   │   │   ├── CreateMovement/
+        │   │   │   │   ├── CreateMovementCommand.cs
+        │   │   │   │   ├── CreateMovementCommandHandler.cs
+        │   │   │   │   └── CreateMovementCommandValidator.cs
+        │   │   │   ├── DeleteMovement/
+        │   │   │   │   ├── DeleteMovementCommand.cs
+        │   │   │   │   ├── DeleteMovementCommandHandler.cs
+        │   │   │   │   └── DeleteMovementCommandValidator.cs
+        │   │   │   └── UpdateMovement/
+        │   │   │       ├── UpdateMovementCommand.cs
+        │   │   │       ├── UpdateMovementCommandHandler.cs
+        │   │   │       └── UpdateMovementCommandValidator.cs
+        │   │   ├── DependencyInjection.cs
+        │   │   ├── Fintrack.Ledger.Application.csproj
+        │   │   ├── GlobalUsings.cs
+        │   │   ├── Interfaces/
+        │   │   │   └── IIdentityService.cs
+        │   │   ├── Models/
+        │   │   │   └── MovementDto.cs
+        │   │   └── Queries/
+        │   │       ├── GetMovementById/
+        │   │       │   ├── GetMovementByIdQuery.cs
+        │   │       │   ├── GetMovementByIdQueryHandler.cs
+        │   │       │   └── GetMovementByIdQueryValidator.cs
+        │   │       └── ListMovements/
+        │   │           ├── IListMovementsQueryService.cs
+        │   │           ├── ListMovementsQuery.cs
+        │   │           ├── ListMovementsQueryHandler.cs
+        │   │           └── ListMovementsQueryValidator.cs
+        │   ├── Fintrack.Ledger.Domain/
+        │   │   ├── AggregatesModel/
+        │   │   │   └── MovementAggregate/
+        │   │   │       ├── IMovementRepository.cs
+        │   │   │       ├── Movement.cs
+        │   │   │       └── MovementKind.cs
+        │   │   ├── Fintrack.Ledger.Domain.csproj
+        │   │   └── GlobalUsings.cs
+        │   ├── Fintrack.Ledger.Infrastructure/
+        │   │   ├── Configurations/
+        │   │   │   └── MovementConfiguration.cs
+        │   │   ├── DependencyInjection.cs
+        │   │   ├── Fintrack.Ledger.Infrastructure.csproj
+        │   │   ├── GlobalUsings.cs
+        │   │   ├── LedgerDbContext.cs
+        │   │   ├── Migrations/
+        │   │   │   ├── 20250928045629_CreateMovements.Designer.cs
+        │   │   │   ├── 20250928045629_CreateMovements.cs
+        │   │   │   └── LedgerDbContextModelSnapshot.cs
+        │   │   ├── Queries/
+        │   │   │   └── ListMovementsQueryService.cs
+        │   │   └── Repositories/
+        │   │       └── MovementRepository.cs
+        │   └── Fintrack.Ledger.MigrationService/
+        │       ├── DependencyInjection.cs
+        │       ├── Fintrack.Ledger.MigrationService.csproj
+        │       ├── GlobalUsings.cs
+        │       ├── Program.cs
+        │       ├── Properties/
+        │       │   └── launchSettings.json
+        │       ├── Services/
+        │       │   └── IdentityService.cs
+        │       ├── Workers/
+        │       │   └── MigrationWorker.cs
+        │       ├── appsettings.Development.json
+        │       └── appsettings.json
+        └── tests/
+            ├── Fintrack.Ledger.API.FunctionalTests/
+            │   ├── Fintrack.Ledger.API.FunctionalTests.csproj
+            │   ├── GlobalUsings.cs
+            │   ├── Scenarios/
+            │   │   ├── HealthTests.cs
+            │   │   ├── Movements/
+            │   │   │   ├── CreateMovementTests.cs
+            │   │   │   ├── DeleteMovementTests.cs
+            │   │   │   ├── GetMovementByIdTests.cs
+            │   │   │   ├── ListMovementsTests.cs
+            │   │   │   └── UpdateMovementTests.cs
+            │   │   └── SwaggerTests.cs
+            │   ├── Steps/
+            │   │   ├── AuthSteps.cs
+            │   │   └── MovementSteps.cs
+            │   └── TestHelpers/
+            │       ├── Assertions/
+            │       │   └── HttpResponseMessageAssertions.cs
+            │       ├── Builders/
+            │       │   ├── CreateMovementRequestBuilder.cs
+            │       │   ├── ListMovementsRequestBuilder.cs
+            │       │   └── UpdateMovementRequestBuilder.cs
+            │       ├── Infrastructure/
+            │       │   ├── Authorize/
+            │       │   │   ├── AutoAuthorizeAccessor.cs
+            │       │   │   ├── AutoAuthorizeMiddleware.cs
+            │       │   │   ├── ClaimsPrincipalBuilder.cs
+            │       │   │   └── IAutoAuthorizeAccessor.cs
+            │       │   ├── Containers/
+            │       │   │   └── PostgresContainer.cs
+            │       │   ├── Hosting/
+            │       │   │   └── CustomWebApplicationFactory.cs
+            │       │   └── Support/
+            │       │       ├── TestBase.cs
+            │       │       ├── TestFixture.cs
+            │       │       └── TestsCollection.cs
+            │       └── TestConstants.cs
+            ├── Fintrack.Ledger.Application.UnitTests/
+            │   ├── Commands/
+            │   │   ├── CreateMovement/
+            │   │   │   ├── CreateMovementCommandHandlerTests.cs
+            │   │   │   └── CreateMovementCommandValidatorTests.cs
+            │   │   ├── DeleteMovement/
+            │   │   │   ├── DeleteMovementCommandHandlerTests.cs
+            │   │   │   └── DeleteMovementCommandValidatorTests.cs
+            │   │   └── UpdateMovement/
+            │   │       ├── UpdateMovementCommandHandlerTests.cs
+            │   │       └── UpdateMovementCommandValidatorTests.cs
+            │   ├── Fintrack.Ledger.Application.UnitTests.csproj
+            │   ├── GlobalUsings.cs
+            │   ├── Models/
+            │   │   └── MovementDtoTests.cs
+            │   ├── Queries/
+            │   │   ├── GetMovementById/
+            │   │   │   ├── GetMovementByIdQueryHandlerTests.cs
+            │   │   │   └── GetMovementByIdQueryValidatorTests.cs
+            │   │   └── ListMovements/
+            │   │       ├── ListMovementsQueryHandlerTests.cs
+            │   │       └── ListMovementsQueryValidatorTests.cs
+            │   └── TestHelpers/
+            │       └── Builders/
+            │           ├── CreateMovementCommandBuilder.cs
+            │           ├── DeleteMovementCommandBuilder.cs
+            │           ├── GetMovementByIdQueryBuilder.cs
+            │           ├── ListMovementsQueryBuilder.cs
+            │           ├── MovementBuilder.cs
+            │           └── UpdateMovementCommandBuilder.cs
+            ├── Fintrack.Ledger.Domain.UnitTests/
+            │   ├── AggregatesModel/
+            │   │   └── MovementAggregate/
+            │   │       └── MovementTests.cs
+            │   ├── Fintrack.Ledger.Domain.UnitTests.csproj
+            │   ├── GlobalUsings.cs
+            │   └── TestHelpers/
+            │       └── Builders/
+            │           └── MovementBuilder.cs
+            └── Fintrack.Ledger.MigrationService.IntegrationTests/
+                ├── Fintrack.Ledger.MigrationService.IntegrationTests.csproj
+                ├── GlobalUsings.cs
+                ├── Scenarios/
+                │   └── MigrationWorkerTests.cs
+                └── TestHelpers/
+                    └── Infrastructure/
+                        ├── Containers/
+                        │   └── PostgresContainer.cs
+                        └── Hosting/
+                            └── HostBuilderFactory.cs
