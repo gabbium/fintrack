@@ -12,7 +12,7 @@ var ledgerDb = postgres.AddDatabase("ledgerdb");
 var ledgerMigrator = builder.AddProject<Projects.Fintrack_Ledger_MigrationService>("ledger-migrator")
     .WithReference(ledgerDb).WaitFor(ledgerDb);
 
-var ledgerApi = builder.AddProject<Projects.Fintrack_Ledger_API>("ledger-api")
+builder.AddProject<Projects.Fintrack_Ledger_API>("ledger-api")
     .WithReference(keycloak).WaitFor(keycloak)
     .WithReference(ledgerDb).WaitFor(ledgerDb)
     .WithReference(ledgerMigrator).WaitForCompletion(ledgerMigrator)

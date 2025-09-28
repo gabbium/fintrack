@@ -30,5 +30,6 @@ public class TestFixture : IAsyncLifetime
     {
         await Factory.DisposeAsync();
         await Database.DisposeAsync();
+        GC.SuppressFinalize(this);
     }
 }
