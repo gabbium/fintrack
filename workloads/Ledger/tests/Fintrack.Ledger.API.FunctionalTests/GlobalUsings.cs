@@ -12,7 +12,6 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.DependencyInjection;
 global using Npgsql;
 global using Respawn;
-global using Respawn.Graph;
 global using Shouldly;
 global using Testcontainers.PostgreSql;
 global using Xunit;
