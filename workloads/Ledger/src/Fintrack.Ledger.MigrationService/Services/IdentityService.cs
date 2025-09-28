@@ -2,7 +2,7 @@
 
 namespace Fintrack.Ledger.MigrationService.Services;
 
-internal sealed class IdentityService : IIdentityService
+public sealed class IdentityService : IIdentityService
 {
     public Guid GetUserIdentity()
     {

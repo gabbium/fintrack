@@ -2,7 +2,7 @@
 
 namespace Fintrack.Ledger.API.Services;
 
-internal sealed class IdentityService(IHttpContextAccessor accessor) : IIdentityService
+public sealed class IdentityService(IHttpContextAccessor accessor) : IIdentityService
 {
     public Guid GetUserIdentity()
     {

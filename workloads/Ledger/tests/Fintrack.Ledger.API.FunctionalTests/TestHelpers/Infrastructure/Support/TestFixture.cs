@@ -12,7 +12,7 @@ public class TestFixture : IAsyncLifetime
     public async ValueTask InitializeAsync()
     {
         Database = new PostgresContainer();
-        await Database.StartAsync();
+        await Database.InitializeAsync();
 
         Factory = new CustomWebApplicationFactory(Database.ConnectionString);
     }

@@ -18,5 +18,6 @@
     <Project Path="workloads/Ledger/tests/Fintrack.Ledger.API.FunctionalTests/Fintrack.Ledger.API.FunctionalTests.csproj" Id="570aabd8-d8d9-4aab-950c-73445ca32bd8" />
     <Project Path="workloads/Ledger/tests/Fintrack.Ledger.Application.UnitTests/Fintrack.Ledger.Application.UnitTests.csproj" Id="63a512ea-b235-4517-8609-5353ecac58a8" />
     <Project Path="workloads/Ledger/tests/Fintrack.Ledger.Domain.UnitTests/Fintrack.Ledger.Domain.UnitTests.csproj" Id="3b317ff6-f77b-43ec-b921-c45b7ceb22a3" />
+    <Project Path="workloads/Ledger/tests/Fintrack.Ledger.MigrationService.IntegrationTests/Fintrack.Ledger.MigrationService.IntegrationTests.csproj" Id="f0897045-a5a7-4eaf-8033-5f2e93f3e643" />
   </Folder>
 </Solution>

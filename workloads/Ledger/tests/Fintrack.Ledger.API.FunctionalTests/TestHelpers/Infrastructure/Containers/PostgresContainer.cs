@@ -16,7 +16,7 @@ public class PostgresContainer
 
     public string ConnectionString => _container.GetConnectionString();
 
-    public async Task StartAsync()
+    public async ValueTask InitializeAsync()
     {
         await _container.StartAsync();
 
@@ -56,7 +56,7 @@ public class PostgresContainer
         await _respawner!.ResetAsync(conn);
     }
 
-    public async Task DisposeAsync()
+    public async ValueTask DisposeAsync()
     {
         await _container.DisposeAsync();
     }
