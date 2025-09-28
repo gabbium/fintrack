@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <ItemGroup>
+    <PackageReference Include="Aspire.Keycloak.Authentication" />
+    <PackageReference Include="Gabbium.CleanArch.AspNetCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\aspire\src\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Fintrack.Ledger.Infrastructure\Fintrack.Ledger.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
