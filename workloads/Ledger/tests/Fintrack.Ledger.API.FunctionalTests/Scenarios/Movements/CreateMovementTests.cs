@@ -11,12 +11,13 @@ public class CreateMovementTests(TestFixture fx) : TestBase(fx)
     private readonly MovementSteps _movement = new(fx);
 
     [Fact]
-    public async Task GivenLoggedInUser_WhenCreatingWithValidData_ThenOkWithBody()
+    public async Task GivenLoggedInUser_WhenCreatingWithValidData_ThenCreatedWithBodyAndLocation()
     {
         _auth.Given_LoggedInUser();
         var command = _movement.Given_ValidCreateCommand();
         var response = await _movement.When_AttemptToCreate(command);
-        await response.ShouldBeOkWithBody<MovementDto>();
+        await response.ShouldBeCreatedWithBodyAndLocation<MovementDto>(
+            body => $"/api/v1/movements/{body.Id}");
     }
 
     [Fact]

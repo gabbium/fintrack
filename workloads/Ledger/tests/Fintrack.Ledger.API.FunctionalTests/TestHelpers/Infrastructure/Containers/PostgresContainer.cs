@@ -1,4 +1,5 @@
-﻿using Fintrack.Ledger.Infrastructure;
+﻿using Fintrack.Ledger.Application.Interfaces;
+using Fintrack.Ledger.Infrastructure;
 
 namespace Fintrack.Ledger.API.FunctionalTests.TestHelpers.Infrastructure.Containers;
 
@@ -24,7 +25,8 @@ public class PostgresContainer
             .UseNpgsql(_container.GetConnectionString())
             .Options;
 
-        using var dbContext = new LedgerDbContext(dbOptions);
+        var identityService = new IdentityService();
+        using var dbContext = new LedgerDbContext(dbOptions, identityService);
         await dbContext.Database.MigrateAsync();
 
         await InitRespawnerAsync();
@@ -59,6 +61,14 @@ public class PostgresContainer
     public async ValueTask DisposeAsync()
     {
         await _container.DisposeAsync();
+    }
+
+    private class IdentityService : IIdentityService
+    {
+        public Guid GetUserIdentity()
+        {
+            return Guid.Empty;
+        }
     }
 }
 

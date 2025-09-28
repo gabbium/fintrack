@@ -2,7 +2,7 @@ using Fintrack.Ledger.Infrastructure;
 
 namespace Fintrack.Ledger.MigrationService.Workers;
 
-public class MigrationWorker(
+public sealed class MigrationWorker(
     IServiceProvider serviceProvider,
     IHostApplicationLifetime hostApplicationLifetime) : BackgroundService
 {

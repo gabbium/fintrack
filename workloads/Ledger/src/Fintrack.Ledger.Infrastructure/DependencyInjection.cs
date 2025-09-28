@@ -1,4 +1,6 @@
-﻿using Fintrack.Ledger.Domain.AggregatesModel.MovementAggregate;
+﻿using Fintrack.Ledger.Application.Queries.ListMovements;
+using Fintrack.Ledger.Domain.AggregatesModel.MovementAggregate;
+using Fintrack.Ledger.Infrastructure.Queries;
 using Fintrack.Ledger.Infrastructure.Repositories;
 
 namespace Fintrack.Ledger.Infrastructure;
@@ -17,6 +19,7 @@ public static class DependencyInjection
         builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<LedgerDbContext>());
 
         builder.Services.AddScoped<IMovementRepository, MovementRepository>();
+        builder.Services.AddScoped<IListMovementsQueryService, ListMovementsQueryService>();
 
         return builder;
     }

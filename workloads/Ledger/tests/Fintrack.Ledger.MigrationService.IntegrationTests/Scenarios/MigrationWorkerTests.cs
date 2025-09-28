@@ -1,6 +1,7 @@
 ﻿using Fintrack.Ledger.Infrastructure;
 using Fintrack.Ledger.MigrationService.IntegrationTests.TestHelpers.Infrastructure.Containers;
 using Fintrack.Ledger.MigrationService.IntegrationTests.TestHelpers.Infrastructure.Hosting;
+using Fintrack.Ledger.MigrationService.Services;
 
 namespace Fintrack.Ledger.MigrationService.IntegrationTests.Scenarios;
 
@@ -16,7 +17,7 @@ public class MigrationWorkerTests(PostgresContainer postgres) : IClassFixture<Po
             .UseNpgsql(postgres.ConnectionString)
             .Options;
 
-        using var dbContext = new LedgerDbContext(dbOptions);
+        using var dbContext = new LedgerDbContext(dbOptions, new IdentityService());
 
         var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync(TestContext.Current.CancellationToken);
         pendingMigrations.ShouldBeEmpty();
