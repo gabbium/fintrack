@@ -1,4 +1,4 @@
-﻿namespace Fintrack.Ledger.API.Apis;
+﻿namespace Fintrack.Ledger.API.Models;
 
 public sealed class ListMovementsRequest
 {

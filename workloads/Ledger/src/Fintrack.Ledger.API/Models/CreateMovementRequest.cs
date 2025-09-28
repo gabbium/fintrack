@@ -1,6 +1,6 @@
 ﻿using Fintrack.Ledger.Domain.AggregatesModel.MovementAggregate;
 
-namespace Fintrack.Ledger.API.Apis;
+namespace Fintrack.Ledger.API.Models;
 
 public sealed class CreateMovementRequest
 {

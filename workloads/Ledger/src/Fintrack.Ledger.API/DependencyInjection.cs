@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.API.Infrastructure;
+﻿using Fintrack.Ledger.API.Middlewares;
 using Fintrack.Ledger.API.Services;
 using Fintrack.Ledger.Application.Interfaces;
 

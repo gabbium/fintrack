@@ -1,4 +1,4 @@
-﻿namespace Fintrack.Ledger.API.Infrastructure;
+﻿namespace Fintrack.Ledger.API.Middlewares;
 
 public sealed class CustomExceptionHandler : IExceptionHandler
 {

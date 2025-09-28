@@ -1,4 +1,5 @@
-﻿using Fintrack.Ledger.Application.Commands.CreateMovement;
+﻿using Fintrack.Ledger.API.Models;
+using Fintrack.Ledger.Application.Commands.CreateMovement;
 using Fintrack.Ledger.Application.Commands.DeleteMovement;
 using Fintrack.Ledger.Application.Commands.UpdateMovement;
 using Fintrack.Ledger.Application.Queries.GetMovementById;

@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.API.Apis;
+﻿using Fintrack.Ledger.API.Models;
 
 namespace Fintrack.Ledger.API.FunctionalTests.TestHelpers.Builders;
 

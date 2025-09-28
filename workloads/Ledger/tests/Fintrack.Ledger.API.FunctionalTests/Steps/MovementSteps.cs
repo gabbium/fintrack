@@ -1,7 +1,7 @@
-﻿using Fintrack.Ledger.API.Apis;
-using Fintrack.Ledger.API.FunctionalTests.TestHelpers;
+﻿using Fintrack.Ledger.API.FunctionalTests.TestHelpers;
 using Fintrack.Ledger.API.FunctionalTests.TestHelpers.Builders;
 using Fintrack.Ledger.API.FunctionalTests.TestHelpers.Infrastructure.Support;
+using Fintrack.Ledger.API.Models;
 using Fintrack.Ledger.Application.Models;
 
 namespace Fintrack.Ledger.API.FunctionalTests.Steps;
