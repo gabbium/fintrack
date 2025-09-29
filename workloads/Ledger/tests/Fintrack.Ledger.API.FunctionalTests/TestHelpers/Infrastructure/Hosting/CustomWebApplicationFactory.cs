@@ -6,6 +6,7 @@ public class CustomWebApplicationFactory(string connectionString) : WebApplicati
 {
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
+        builder.UseSetting("Identity:Url", "localhost");
         builder.UseSetting("ConnectionStrings:LedgerDb", connectionString);
 
         builder.ConfigureServices(services =>
