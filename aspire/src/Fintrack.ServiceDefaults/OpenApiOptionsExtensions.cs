@@ -70,7 +70,7 @@ internal static class OpenApiOptionsExtensions
                 return Task.CompletedTask;
             }
 
-            var identityUrlExternal = identitySection.GetRequiredValue("Url");
+            var authority = identitySection.GetRequiredValue("Authority");
             var scopes = identitySection.GetSection("Scopes").GetChildren().ToDictionary(p => p.Key, p => p.Value);
 
             var securityScheme = new OpenApiSecurityScheme
@@ -80,8 +80,8 @@ internal static class OpenApiOptionsExtensions
                 {
                     AuthorizationCode = new OpenApiOAuthFlow()
                     {
-                        AuthorizationUrl = new Uri($"{identityUrlExternal}/protocol/openid-connect/auth"),
-                        TokenUrl = new Uri($"{identityUrlExternal}/protocol/openid-connect/token"),
+                        AuthorizationUrl = new Uri($"{authority}/protocol/openid-connect/auth"),
+                        TokenUrl = new Uri($"{authority}/protocol/openid-connect/token"),
                         Scopes = scopes,
                     }
                 }

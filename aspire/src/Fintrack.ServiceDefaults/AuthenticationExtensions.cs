@@ -11,14 +11,14 @@ public static class AuthenticationExtensions
         }
 
         var audience = identitySection.GetRequiredValue("Audience");
+        var authority = identitySection.GetRequiredValue("Authority");
 
         builder.Services.AddAuthentication()
-            .AddKeycloakJwtBearer(
-                serviceName: "keycloak",
-                realm: "fintrack",
+            .AddJwtBearer(
                 options =>
                 {
                     options.Audience = audience;
+                    options.Authority = authority;
 
                     if (builder.Environment.IsDevelopment())
                     {
