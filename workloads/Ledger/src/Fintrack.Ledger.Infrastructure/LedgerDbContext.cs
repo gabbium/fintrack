@@ -19,6 +19,6 @@ public sealed class LedgerDbContext(
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         modelBuilder.Entity<Movement>()
-            .HasQueryFilter(m => m.UserId == _userId);
+            .HasQueryFilter(movement => movement.UserId == _userId);
     }
 }

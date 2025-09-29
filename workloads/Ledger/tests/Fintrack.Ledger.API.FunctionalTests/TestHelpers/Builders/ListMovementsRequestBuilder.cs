@@ -1,4 +1,5 @@
 ﻿using Fintrack.Ledger.API.Models;
+using Fintrack.Ledger.Domain.AggregatesModel.MovementAggregate;
 
 namespace Fintrack.Ledger.API.FunctionalTests.TestHelpers.Builders;
 
@@ -6,6 +7,7 @@ public class ListMovementsRequestBuilder
 {
     private int _pageNumber = 1;
     private int _pageSize = 10;
+    private MovementKind[]? _kind = null;
 
     public ListMovementsRequestBuilder WithPageNumber(int pageNumber)
     {
@@ -19,12 +21,19 @@ public class ListMovementsRequestBuilder
         return this;
     }
 
+    public ListMovementsRequestBuilder WithKinds(MovementKind[] kinds)
+    {
+        _kind = kinds;
+        return this;
+    }
+
     public ListMovementsRequest Build()
     {
         return new()
         {
             PageNumber = _pageNumber,
-            PageSize = _pageSize
+            PageSize = _pageSize,
+            Kind = _kind
         };
     }
 }

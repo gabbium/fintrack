@@ -34,22 +34,9 @@ public class MovementSteps(TestFixture fx)
                 .Build();
     }
 
-    public ListMovementsRequest Given_ValidListRequest()
+    public async Task<MovementDto> Given_ExistingMovement(CreateMovementRequest? request = null)
     {
-        return new ListMovementsRequestBuilder()
-            .Build();
-    }
-
-    public ListMovementsRequest Given_InvalidValidListRequest_PageNumberNegative()
-    {
-        return new ListMovementsRequestBuilder()
-            .WithPageNumber(-1)
-            .Build();
-    }
-
-    public async Task<MovementDto> Given_ExistingMovement()
-    {
-        var request = new CreateMovementRequestBuilder().Build();
+        request ??= new CreateMovementRequestBuilder().Build();
 
         var response = await _httpClient.PostAsJsonAsync("/api/v1/movements", request);
         response.EnsureSuccessStatusCode();
@@ -62,13 +49,23 @@ public class MovementSteps(TestFixture fx)
 
     public async Task<HttpResponseMessage> When_AttemptToList(ListMovementsRequest request)
     {
-        var queryParams = QueryString.Create(new Dictionary<string, string?>
+        var queryParams = new Dictionary<string, string?>
         {
             ["pageNumber"] = request.PageNumber.ToString(),
             ["pageSize"] = request.PageSize.ToString()
-        });
+        };
 
-        return await _httpClient.GetAsync("/api/v1/movements" + queryParams);
+        if (request.Kind is { Length: > 0 })
+        {
+            foreach (var kind in request.Kind)
+            {
+                queryParams.Add("kind", kind.ToString());
+            }
+        }
+
+        var queryString = QueryString.Create(queryParams);
+
+        return await _httpClient.GetAsync("/api/v1/movements" + queryString);
     }
 
     public async Task<HttpResponseMessage> When_AttemptToGetById(Guid id)

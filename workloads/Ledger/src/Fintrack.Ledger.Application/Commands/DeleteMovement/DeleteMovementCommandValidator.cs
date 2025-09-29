@@ -5,7 +5,7 @@ internal sealed class DeleteMovementCommandValidator
 {
     public DeleteMovementCommandValidator()
     {
-        RuleFor(c => c.Id)
+        RuleFor(command => command.Id)
             .NotEmpty();
     }
 }

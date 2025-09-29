@@ -13,12 +13,17 @@ internal sealed class ListMovementsQueryService(LedgerDbContext context) : IList
             .AsNoTracking()
             .AsQueryable();
 
+        if (query.Kinds.Count > 0)
+        {
+            queryable = queryable.Where(movement => query.Kinds.Contains(movement.Kind));
+        }
+
         var totalItems = await queryable.CountAsync(cancellationToken);
 
         var movements = await queryable
             .Skip((query.PageNumber - 1) * query.PageSize)
             .Take(query.PageSize)
-            .Select(m => MovementDto.FromDomain(m))
+            .Select(movement => MovementDto.FromDomain(movement))
             .ToListAsync(cancellationToken);
 
         return new PaginatedList<MovementDto>(movements, totalItems, query.PageNumber, query.PageSize);

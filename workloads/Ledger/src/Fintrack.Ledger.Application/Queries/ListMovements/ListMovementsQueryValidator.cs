@@ -5,10 +5,10 @@ internal sealed class ListMovementsQueryValidator
 {
     public ListMovementsQueryValidator()
     {
-        RuleFor(q => q.PageNumber)
+        RuleFor(query => query.PageNumber)
             .GreaterThan(0);
 
-        RuleFor(q => q.PageSize)
+        RuleFor(query => query.PageSize)
             .GreaterThan(0)
             .LessThanOrEqualTo(100);
     }

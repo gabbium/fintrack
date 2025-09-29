@@ -5,14 +5,14 @@ internal sealed class UpdateMovementCommandValidator
 {
     public UpdateMovementCommandValidator()
     {
-        RuleFor(c => c.Id)
+        RuleFor(command => command.Id)
             .NotEmpty();
 
-        RuleFor(c => c.Amount)
+        RuleFor(command => command.Amount)
             .GreaterThan(0)
             .PrecisionScale(18, 2, true);
 
-        RuleFor(c => c.Description)
+        RuleFor(command => command.Description)
             .MaximumLength(128);
     }
 }

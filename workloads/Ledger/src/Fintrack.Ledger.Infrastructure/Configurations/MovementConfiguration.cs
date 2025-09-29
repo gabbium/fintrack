@@ -6,25 +6,25 @@ internal sealed class MovementConfiguration : IEntityTypeConfiguration<Movement>
 {
     public void Configure(EntityTypeBuilder<Movement> builder)
     {
-        builder.HasKey(m => m.Id);
+        builder.HasKey(movement => movement.Id);
 
-        builder.HasIndex(m => m.UserId);
+        builder.HasIndex(movement => movement.UserId);
 
-        builder.Property(m => m.UserId);
+        builder.Property(movement => movement.UserId);
 
-        builder.Property(m => m.Kind)
+        builder.Property(movement => movement.Kind)
             .HasConversion<string>()
             .HasMaxLength(30);
 
-        builder.Property(m => m.Amount)
+        builder.Property(movement => movement.Amount)
             .HasPrecision(18, 2);
 
-        builder.Property(m => m.Description)
+        builder.Property(movement => movement.Description)
             .HasMaxLength(128);
 
-        builder.Property(m => m.OccurredOn);
+        builder.Property(movement => movement.OccurredOn);
 
-        builder.Ignore(m => m.DomainEvents);
+        builder.Ignore(movement => movement.DomainEvents);
     }
 }
 
