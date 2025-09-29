@@ -2,6 +2,7 @@
 using Fintrack.Ledger.Application.Commands.CreateMovement;
 using Fintrack.Ledger.Application.Commands.DeleteMovement;
 using Fintrack.Ledger.Application.Commands.UpdateMovement;
+using Fintrack.Ledger.Application.Models;
 using Fintrack.Ledger.Application.Queries.GetMovementById;
 using Fintrack.Ledger.Application.Queries.ListMovements;
 
@@ -16,19 +17,31 @@ public sealed class MovementsApi : IApi
             .RequireAuthorization();
 
         api.MapGet(string.Empty, ListMovements)
-           .WithName(nameof(ListMovements));
+           .WithName(nameof(ListMovements))
+           .Produces<PaginatedList<MovementDto>>(StatusCodes.Status200OK)
+           .ProducesValidationProblem(StatusCodes.Status400BadRequest);
 
         api.MapGet("{id:guid}", GetMovementById)
-           .WithName(nameof(GetMovementById));
+           .WithName(nameof(GetMovementById))
+           .Produces<MovementDto>(StatusCodes.Status200OK)
+           .ProducesValidationProblem(StatusCodes.Status400BadRequest)
+           .ProducesProblem(StatusCodes.Status404NotFound);
 
         api.MapPost(string.Empty, CreateMovement)
-           .WithName(nameof(CreateMovement));
+           .WithName(nameof(CreateMovement))
+           .Produces<MovementDto>(StatusCodes.Status201Created)
+           .ProducesValidationProblem(StatusCodes.Status400BadRequest);
 
         api.MapPut("{id:guid}", UpdateMovement)
-           .WithName(nameof(UpdateMovement));
+           .WithName(nameof(UpdateMovement))
+           .Produces<MovementDto>(StatusCodes.Status200OK)
+           .ProducesValidationProblem(StatusCodes.Status400BadRequest)
+           .ProducesProblem(StatusCodes.Status404NotFound);
 
         api.MapDelete("{id:guid}", DeleteMovement)
-           .WithName(nameof(DeleteMovement));
+           .WithName(nameof(DeleteMovement))
+           .Produces(StatusCodes.Status204NoContent)
+           .ProducesValidationProblem(StatusCodes.Status400BadRequest);
     }
 
     public static async Task<IResult> ListMovements(

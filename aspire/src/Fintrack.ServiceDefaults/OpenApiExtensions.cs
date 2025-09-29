@@ -10,6 +10,7 @@ public static class OpenApiExtensions
 
         builder.Services.AddOpenApi("v1", options =>
         {
+            options.ApplyAuthorizationChecks();
             options.ApplyApiVersionInfo(title, description);
             options.ApplyOAuth2Keycloak(builder.Configuration);
         });
