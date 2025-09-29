@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/gabbium/fintrack/compare/v1.2.0...v1.3.0) (2025-09-29)
+
+### Features
+
+* enhance openapi + scalar docs ([#6](https://github.com/gabbium/fintrack/issues/6)) ([96c7c10](https://github.com/gabbium/fintrack/commit/96c7c1034b9458c9f1ada4c92c4fdbb3ab3cbd1d))
+
 ## [1.2.0](https://github.com/gabbium/fintrack/compare/v1.1.0...v1.2.0) (2025-09-28)
 
 ### Features
