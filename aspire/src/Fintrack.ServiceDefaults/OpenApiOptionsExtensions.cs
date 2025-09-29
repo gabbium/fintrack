@@ -2,7 +2,13 @@
 
 internal static class OpenApiOptionsExtensions
 {
-    public static OpenApiOptions ApplyAuthorizationChecks(this OpenApiOptions options)
+    public static OpenApiOptions ApplySecuritySchemeDefinitions(this OpenApiOptions options)
+    {
+        options.AddDocumentTransformer<SecuritySchemeDefinitionsTransformer>();
+        return options;
+    }
+
+    public static OpenApiOptions ApplyAuthorizationChecks(this OpenApiOptions options, string[] scopes)
     {
         options.AddOperationTransformer((operation, context, cancellationToken) =>
         {
@@ -13,18 +19,21 @@ internal static class OpenApiOptionsExtensions
                 return Task.CompletedTask;
             }
 
-            operation.Responses.TryAdd("401", new OpenApiResponse
+            operation.Responses.TryAdd("401", new OpenApiResponse { Description = "Unauthorized" });
+            operation.Responses.TryAdd("403", new OpenApiResponse { Description = "Forbidden" });
+
+            var oAuthScheme = new OpenApiSecurityScheme
             {
-                Description = "Unauthorized",
-                Headers = new Dictionary<string, OpenApiHeader>
+                Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "oauth2" }
+            };
+
+            operation.Security =
+            [
+                new()
                 {
-                    ["Www-Authenticate"] = new()
-                    {
-                        Description = "Bearer challenge",
-                        Schema = new OpenApiSchema { Type = "string" }
-                    }
+                    [oAuthScheme] = scopes
                 }
-            });
+            ];
 
             return Task.CompletedTask;
         });
@@ -51,46 +60,37 @@ internal static class OpenApiOptionsExtensions
         return options;
     }
 
-    public static OpenApiOptions ApplyOAuth2Keycloak(this OpenApiOptions options, IConfiguration configuration)
+    private class SecuritySchemeDefinitionsTransformer(IConfiguration configuration) : IOpenApiDocumentTransformer
     {
-        options.AddDocumentTransformer((doc, ctx, ct) =>
+        public Task TransformAsync(OpenApiDocument document, OpenApiDocumentTransformerContext context, CancellationToken cancellationToken)
         {
-            var openApiSection = configuration.GetRequiredSection("OpenApi");
-            var oAuthUrl = openApiSection.GetRequiredValue("OAuth:Url");
+            var identitySection = configuration.GetSection("Identity");
+            if (!identitySection.Exists())
+            {
+                return Task.CompletedTask;
+            }
 
-            doc.Components ??= new OpenApiComponents();
+            var identityUrlExternal = identitySection.GetRequiredValue("Url");
+            var scopes = identitySection.GetSection("Scopes").GetChildren().ToDictionary(p => p.Key, p => p.Value);
 
-            doc.Components.SecuritySchemes["oauth2"] = new OpenApiSecurityScheme
+            var securityScheme = new OpenApiSecurityScheme
             {
                 Type = SecuritySchemeType.OAuth2,
-                Flows = new OpenApiOAuthFlows
+                Flows = new OpenApiOAuthFlows()
                 {
-                    AuthorizationCode = new OpenApiOAuthFlow
+                    AuthorizationCode = new OpenApiOAuthFlow()
                     {
-                        AuthorizationUrl = new Uri($"{oAuthUrl}/protocol/openid-connect/auth"),
-                        TokenUrl = new Uri($"{oAuthUrl}/protocol/openid-connect/token"),
+                        AuthorizationUrl = new Uri($"{identityUrlExternal}/protocol/openid-connect/auth"),
+                        TokenUrl = new Uri($"{identityUrlExternal}/protocol/openid-connect/token"),
+                        Scopes = scopes,
                     }
                 }
             };
 
-            doc.SecurityRequirements.Add(new OpenApiSecurityRequirement
-            {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "oauth2"
-                        }
-                    },
-                    Array.Empty<string>()
-                }
-            });
+            document.Components ??= new();
+            document.Components.SecuritySchemes.Add("oauth2", securityScheme);
 
             return Task.CompletedTask;
-        });
-
-        return options;
+        }
     }
 }

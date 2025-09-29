@@ -4,15 +4,21 @@ public static class OpenApiExtensions
 {
     public static IHostApplicationBuilder AddDefaultOpenApi(this IHostApplicationBuilder builder)
     {
-        var openApiSection = builder.Configuration.GetRequiredSection("OpenApi");
-        var title = openApiSection.GetRequiredValue("Document:Title");
-        var description = openApiSection.GetRequiredValue("Document:Description");
+        var openApi = builder.Configuration.GetSection("OpenApi");
+        var identitySection = builder.Configuration.GetSection("Identity");
+
+        var scopes = identitySection.GetSection("Scopes").GetChildren().ToDictionary(p => p.Key, p => p.Value);
 
         builder.Services.AddOpenApi("v1", options =>
         {
-            options.ApplyAuthorizationChecks();
-            options.ApplyApiVersionInfo(title, description);
-            options.ApplyOAuth2Keycloak(builder.Configuration);
+            options.ApplyApiVersionInfo(openApi.GetRequiredValue("Document:Title"), openApi.GetRequiredValue("Document:Description"));
+            options.ApplyAuthorizationChecks([.. scopes.Keys]);
+            options.ApplySecuritySchemeDefinitions();
+            options.AddDocumentTransformer((document, context, cancellationToken) =>
+            {
+                document.Servers = [];
+                return Task.CompletedTask;
+            });
         });
 
         return builder;
@@ -20,16 +26,23 @@ public static class OpenApiExtensions
 
     public static WebApplication MapOpenApiEndpoints(this WebApplication app)
     {
+        var openApiSection = app.Configuration.GetSection("OpenApi");
+        if (!openApiSection.Exists())
+        {
+            return app;
+        }
+
         app.MapOpenApi();
 
         app.MapScalarApiReference(options =>
         {
-            options.DefaultFonts = false;
+            options.WithTheme(ScalarTheme.Mars);
+            options.WithDefaultFonts(false);
             options.AddPreferredSecuritySchemes("oauth2");
             options.AddAuthorizationCodeFlow("oauth2", flow =>
             {
-                flow.ClientId = "swagger";
-                flow.Pkce = Pkce.Sha256;
+                flow.WithClientId("scalar");
+                flow.WithPkce(Pkce.Sha256);
             });
         });
 
