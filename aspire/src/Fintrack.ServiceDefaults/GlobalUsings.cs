@@ -1,6 +1,7 @@
 ﻿global using Asp.Versioning;
 global using Asp.Versioning.ApiExplorer;
 global using HealthChecks.UI.Client;
+global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 global using Microsoft.AspNetCore.Http;

@@ -6,7 +6,7 @@ internal sealed class CreateMovementCommandValidator
     public CreateMovementCommandValidator()
     {
         RuleFor(c => c.Amount)
-            .GreaterThan(0m)
+            .GreaterThan(0)
             .PrecisionScale(18, 2, true);
 
         RuleFor(c => c.Description)

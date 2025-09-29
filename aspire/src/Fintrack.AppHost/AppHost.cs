@@ -17,6 +17,7 @@ builder.AddProject<Projects.Fintrack_Ledger_API>("ledger-api")
     .WithReference(keycloak).WaitFor(keycloak)
     .WithReference(ledgerDb).WaitFor(ledgerDb)
     .WithReference(ledgerMigrator).WaitForCompletion(ledgerMigrator)
+    .WithEnvironment("Identity__Url", "http://localhost:8080/realms/fintrack")
     .WithHttpHealthCheck("/health/ready");
 
 var app = builder.Build();

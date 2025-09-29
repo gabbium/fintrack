@@ -4,14 +4,18 @@ public static class AuthenticationExtensions
 {
     public static IHostApplicationBuilder AddDefaultAuthentication(this IHostApplicationBuilder builder)
     {
-        var identitySection = builder.Configuration.GetRequiredSection("Identity");
-        var realm = identitySection.GetRequiredValue("Realm");
+        var identitySection = builder.Configuration.GetSection("Identity");
+        if (!identitySection.Exists())
+        {
+            return builder;
+        }
+
         var audience = identitySection.GetRequiredValue("Audience");
 
         builder.Services.AddAuthentication()
             .AddKeycloakJwtBearer(
                 serviceName: "keycloak",
-                realm: realm,
+                realm: "fintrack",
                 options =>
                 {
                     options.Audience = audience;
