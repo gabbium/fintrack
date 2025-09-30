@@ -6,5 +6,7 @@ namespace Fintrack.Ledger.Application.Queries.ListMovements;
 public sealed record ListMovementsQuery(
     int PageNumber,
     int PageSize,
-    List<MovementKind> Kinds)
+    List<MovementKind> Kinds,
+    DateTimeOffset? MinOccurredOn,
+    DateTimeOffset? MaxOccurredOn)
     : IQuery<PaginatedList<MovementDto>>;

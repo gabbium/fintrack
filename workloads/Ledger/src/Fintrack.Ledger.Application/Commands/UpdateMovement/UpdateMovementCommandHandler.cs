@@ -15,7 +15,9 @@ internal sealed class UpdateMovementCommandHandler(
         var movement = await movementRepository.GetByIdAsync(command.Id, cancellationToken);
 
         if (movement is null)
+        {
             return Error.NotFound("Movement was not found.");
+        }
 
         movement.ChangeKind(command.Kind);
         movement.ChangeAmount(command.Amount);

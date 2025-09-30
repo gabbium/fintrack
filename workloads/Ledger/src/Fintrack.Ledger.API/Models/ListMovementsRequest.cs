@@ -18,4 +18,10 @@ public sealed class ListMovementsRequest
 
     [Description("Filter by movement kind.")]
     public MovementKind[]? Kind { get; init; }
+
+    [Description("Filter by minimum occurrence date (inclusive).")]
+    public DateTimeOffset? MinOccurredOn { get; init; }
+
+    [Description("Filter by maximum occurrence date (inclusive).")]
+    public DateTimeOffset? MaxOccurredOn { get; init; }
 }

@@ -8,6 +8,8 @@ public class ListMovementsQueryBuilder
     private int _pageNumber = 1;
     private int _pageSize = 10;
     private List<MovementKind> _kinds = [];
+    private DateTimeOffset? _minOccurredOn;
+    private DateTimeOffset? _maxOccurredOn;
 
     public ListMovementsQueryBuilder WithPageNumber(int pageNumber)
     {
@@ -27,8 +29,26 @@ public class ListMovementsQueryBuilder
         return this;
     }
 
+    public ListMovementsQueryBuilder WithMinOccurredOn(DateTimeOffset minOccurredOn)
+    {
+        _minOccurredOn = minOccurredOn;
+        return this;
+    }
+
+    public ListMovementsQueryBuilder WithMaxOccurredOn(DateTimeOffset maxOccurredOn)
+    {
+        _maxOccurredOn = maxOccurredOn;
+        return this;
+    }
+
     public ListMovementsQuery Build()
     {
-        return new(_pageNumber, _pageSize, _kinds);
+        return new(
+            _pageNumber,
+            _pageSize,
+            _kinds,
+            _minOccurredOn,
+            _maxOccurredOn
+        );
     }
 }

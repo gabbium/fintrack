@@ -39,6 +39,16 @@ public class MovementSteps(TestFixture fx)
             }
         }
 
+        if (request.MinOccurredOn is not null)
+        {
+            queryParams.Add("minOccurredOn", request.MinOccurredOn.Value.ToString("O"));
+        }
+
+        if (request.MaxOccurredOn is not null)
+        {
+            queryParams.Add("maxOccurredOn", request.MaxOccurredOn.Value.ToString("O"));
+        }
+
         var queryString = QueryString.Create(queryParams);
 
         return await _httpClient.GetAsync("/api/v1/movements" + queryString);

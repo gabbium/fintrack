@@ -11,5 +11,9 @@ internal sealed class ListMovementsQueryValidator
         RuleFor(query => query.PageSize)
             .GreaterThan(0)
             .LessThanOrEqualTo(100);
+
+        RuleFor(query => query.MinOccurredOn)
+            .LessThanOrEqualTo(query => query.MaxOccurredOn)
+            .When(query => query.MinOccurredOn is not null && query.MaxOccurredOn is not null);
     }
 }

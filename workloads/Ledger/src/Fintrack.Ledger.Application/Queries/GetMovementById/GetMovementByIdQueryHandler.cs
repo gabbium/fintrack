@@ -14,7 +14,9 @@ internal sealed class GetMovementByIdQueryHandler(
         var movement = await movementRepository.GetByIdAsync(query.Id, cancellationToken);
 
         if (movement is null)
+        {
             return Error.NotFound("Movement was not found.");
+        }
 
         return MovementDto.FromDomain(movement);
     }

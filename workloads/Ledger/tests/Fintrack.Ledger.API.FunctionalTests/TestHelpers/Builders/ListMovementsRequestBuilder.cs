@@ -7,7 +7,9 @@ public class ListMovementsRequestBuilder
 {
     private int _pageNumber = 1;
     private int _pageSize = 10;
-    private MovementKind[]? _kind = null;
+    private MovementKind[]? _kind;
+    private DateTimeOffset? _minOccurredOn;
+    private DateTimeOffset? _maxOccurredOn;
 
     public ListMovementsRequestBuilder WithPageNumber(int pageNumber)
     {
@@ -27,13 +29,27 @@ public class ListMovementsRequestBuilder
         return this;
     }
 
+    public ListMovementsRequestBuilder WithMinOccurredOn(DateTimeOffset minOccurredOn)
+    {
+        _minOccurredOn = minOccurredOn;
+        return this;
+    }
+
+    public ListMovementsRequestBuilder WithMaxOccurredOn(DateTimeOffset maxOccurredOn)
+    {
+        _maxOccurredOn = maxOccurredOn;
+        return this;
+    }
+
     public ListMovementsRequest Build()
     {
         return new()
         {
             PageNumber = _pageNumber,
             PageSize = _pageSize,
-            Kind = _kind
+            Kind = _kind,
+            MinOccurredOn = _minOccurredOn,
+            MaxOccurredOn = _maxOccurredOn
         };
     }
 }

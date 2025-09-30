@@ -14,7 +14,9 @@ internal sealed class DeleteMovementCommandHandler(
         var movement = await movementRepository.GetByIdAsync(command.Id, cancellationToken);
 
         if (movement is null)
+        {
             return Result.Success();
+        }
 
         await movementRepository.RemoveAsync(movement, cancellationToken);
 

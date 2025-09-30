@@ -16,10 +16,10 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
     public async Task GivenLoggedInUserAndExistingMovements_WhenListingMovementsWithPagination_ThenOkWithBodyAndCorrectPagination()
     {
         _auth.Given_LoggedInUser();
-        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithKind(MovementKind.Expense).Build());
-        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithKind(MovementKind.Income).Build());
-        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithKind(MovementKind.Expense).Build());
-        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithKind(MovementKind.Income).Build());
+        await _movement.Given_ExistingMovement();
+        await _movement.Given_ExistingMovement();
+        await _movement.Given_ExistingMovement();
+        await _movement.Given_ExistingMovement();
 
         var requestPage1 = new ListMovementsRequestBuilder().WithPageNumber(1).WithPageSize(2).Build();
         var responsePage1 = await _movement.When_AttemptToList(requestPage1);
@@ -54,7 +54,43 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
 
         var body = await response.ShouldBeOkWithBody<PaginatedList<MovementDto>>();
         body.Items.ShouldNotBeEmpty();
-        body.Items.ShouldAllBe(x => x.Kind == kind);
+        body.Items.ShouldAllBe(movement => movement.Kind == kind);
+    }
+
+    [Fact]
+    public async Task GivenLoggedInUserAndExistingMovements_WhenListingMovementsWithMinOccurredOnFilter_ThenOkWithBodyFilteredByOccurredOn()
+    {
+        _auth.Given_LoggedInUser();
+        var occurredOn = DateTimeOffset.Parse("2025-10-10T00:00:00Z");
+        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithOccurredOn(occurredOn.AddDays(-1)).Build());
+        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithOccurredOn(occurredOn).Build());
+        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithOccurredOn(occurredOn.AddDays(1)).Build());
+
+        var request = new ListMovementsRequestBuilder().WithMinOccurredOn(occurredOn).Build();
+        var response = await _movement.When_AttemptToList(request);
+
+        var body = await response.ShouldBeOkWithBody<PaginatedList<MovementDto>>();
+        body.Items.ShouldNotBeEmpty();
+        body.Items.ShouldAllBe(movement => movement.OccurredOn >= occurredOn);
+        body.Items.Count.ShouldBe(2);
+    }
+
+    [Fact]
+    public async Task GivenLoggedInUserAndExistingMovements_WhenListingMovementsWithMaxOccurredOnFilter_ThenOkWithBodyFilteredByOccurredOn()
+    {
+        _auth.Given_LoggedInUser();
+        var occurredOn = DateTimeOffset.Parse("2025-10-20T00:00:00Z");
+        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithOccurredOn(occurredOn.AddDays(-1)).Build());
+        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithOccurredOn(occurredOn).Build());
+        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithOccurredOn(occurredOn.AddDays(1)).Build());
+
+        var request = new ListMovementsRequestBuilder().WithMaxOccurredOn(occurredOn).Build();
+        var response = await _movement.When_AttemptToList(request);
+
+        var body = await response.ShouldBeOkWithBody<PaginatedList<MovementDto>>();
+        body.Items.ShouldNotBeEmpty();
+        body.Items.ShouldAllBe(movement => movement.OccurredOn <= occurredOn);
+        body.Items.Count.ShouldBe(2);
     }
 
     [Fact]

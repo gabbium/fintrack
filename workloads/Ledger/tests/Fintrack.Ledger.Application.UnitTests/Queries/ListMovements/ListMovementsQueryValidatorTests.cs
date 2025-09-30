@@ -68,4 +68,20 @@ public class ListMovementsQueryValidatorTests
         // Assert
         result.ShouldHaveValidationErrorFor(q => q.PageSize);
     }
+
+    [Fact]
+    public void Validate_WhenMinOccurredOnIsGreaterThanMaxOccurredOn_ThenHasValidationError()
+    {
+        // Arrange
+        var query = new ListMovementsQueryBuilder()
+            .WithMinOccurredOn(new DateTimeOffset(2025, 10, 10, 0, 0, 0, TimeSpan.Zero))
+            .WithMaxOccurredOn(new DateTimeOffset(2025, 10, 1, 0, 0, 0, TimeSpan.Zero))
+            .Build();
+
+        // Act
+        var result = _validator.TestValidate(query);
+
+        // Assert
+        result.ShouldHaveValidationErrorFor(q => q.MinOccurredOn);
+    }
 }

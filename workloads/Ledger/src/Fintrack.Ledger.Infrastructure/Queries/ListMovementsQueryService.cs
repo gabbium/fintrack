@@ -18,6 +18,16 @@ internal sealed class ListMovementsQueryService(LedgerDbContext context) : IList
             queryable = queryable.Where(movement => query.Kinds.Contains(movement.Kind));
         }
 
+        if (query.MinOccurredOn is not null)
+        {
+            queryable = queryable.Where(x => x.OccurredOn >= query.MinOccurredOn.Value);
+        }
+
+        if (query.MaxOccurredOn is not null)
+        {
+            queryable = queryable.Where(x => x.OccurredOn <= query.MaxOccurredOn.Value);
+        }
+
         var totalItems = await queryable.CountAsync(cancellationToken);
 
         var movements = await queryable
