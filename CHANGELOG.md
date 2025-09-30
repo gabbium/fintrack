@@ -1,3 +1,9 @@
+## [1.4.0](https://github.com/gabbium/fintrack/compare/v1.3.0...v1.4.0) (2025-09-30)
+
+### Features
+
+* list movements filters and sorting ([#7](https://github.com/gabbium/fintrack/issues/7)) ([6837acc](https://github.com/gabbium/fintrack/commit/6837acce89c1255902d1ba8cb4c816278f6d2d86))
+
 ## [1.3.0](https://github.com/gabbium/fintrack/compare/v1.2.0...v1.3.0) (2025-09-29)
 
 ### Features
