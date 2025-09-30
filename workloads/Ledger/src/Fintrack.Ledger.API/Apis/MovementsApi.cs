@@ -52,7 +52,8 @@ public sealed class MovementsApi : IApi
         var query = new ListMovementsQuery(
             request.PageNumber,
             request.PageSize,
-            [.. request.Kind ?? [] ],
+            request.Order,
+            request.Kind?.ToList(),
             request.MinOccurredOn,
             request.MaxOccurredOn);
 

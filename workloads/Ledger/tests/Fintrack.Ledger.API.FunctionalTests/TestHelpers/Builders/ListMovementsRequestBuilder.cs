@@ -7,6 +7,7 @@ public class ListMovementsRequestBuilder
 {
     private int _pageNumber = 1;
     private int _pageSize = 10;
+    private string? _order;
     private MovementKind[]? _kind;
     private DateTimeOffset? _minOccurredOn;
     private DateTimeOffset? _maxOccurredOn;
@@ -23,9 +24,15 @@ public class ListMovementsRequestBuilder
         return this;
     }
 
-    public ListMovementsRequestBuilder WithKinds(MovementKind[] kinds)
+    public ListMovementsRequestBuilder WithOrder(string order)
     {
-        _kind = kinds;
+        _order = order;
+        return this;
+    }
+
+    public ListMovementsRequestBuilder WithKind(MovementKind[] kind)
+    {
+        _kind = kind;
         return this;
     }
 
@@ -47,6 +54,7 @@ public class ListMovementsRequestBuilder
         {
             PageNumber = _pageNumber,
             PageSize = _pageSize,
+            Order = _order,
             Kind = _kind,
             MinOccurredOn = _minOccurredOn,
             MaxOccurredOn = _maxOccurredOn

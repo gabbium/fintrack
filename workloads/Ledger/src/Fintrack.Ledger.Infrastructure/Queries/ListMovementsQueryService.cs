@@ -10,12 +10,11 @@ internal sealed class ListMovementsQueryService(LedgerDbContext context) : IList
         CancellationToken cancellationToken = default)
     {
         var queryable = context.Movements
-            .AsNoTracking()
-            .AsQueryable();
+            .AsNoTracking();
 
-        if (query.Kinds.Count > 0)
+        if (query.Kind is { Count: > 0 })
         {
-            queryable = queryable.Where(movement => query.Kinds.Contains(movement.Kind));
+            queryable = queryable.Where(movement => query.Kind.Contains(movement.Kind));
         }
 
         if (query.MinOccurredOn is not null)
@@ -29,6 +28,17 @@ internal sealed class ListMovementsQueryService(LedgerDbContext context) : IList
         }
 
         var totalItems = await queryable.CountAsync(cancellationToken);
+
+        var normalizedOrder = query.Order?.Trim().ToLowerInvariant();
+
+        queryable = normalizedOrder switch
+        {
+            "occurredon desc" => queryable.OrderByDescending(movement => movement.OccurredOn).ThenBy(m => m.Id),
+            "occurredon asc" => queryable.OrderBy(movement => movement.OccurredOn).ThenBy(m => m.Id),
+            "amount desc" => queryable.OrderByDescending(movement => movement.Amount).ThenBy(m => m.Id),
+            "amount asc" => queryable.OrderBy(movement => movement.Amount).ThenBy(m => m.Id),
+            _ => queryable.OrderByDescending(movement => movement.OccurredOn).ThenBy(m => m.Id),
+        };
 
         var movements = await queryable
             .Skip((query.PageNumber - 1) * query.PageSize)

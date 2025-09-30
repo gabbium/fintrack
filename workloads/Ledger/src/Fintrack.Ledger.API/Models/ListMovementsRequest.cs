@@ -16,6 +16,9 @@ public sealed class ListMovementsRequest
     [Description("Items per page.")]
     public int PageSize { get; init; }
 
+    [Description("Sort order, e.g. 'occurredOn desc' or 'amount asc'.")]
+    public string? Order { get; init; }
+
     [Description("Filter by movement kind.")]
     public MovementKind[]? Kind { get; init; }
 

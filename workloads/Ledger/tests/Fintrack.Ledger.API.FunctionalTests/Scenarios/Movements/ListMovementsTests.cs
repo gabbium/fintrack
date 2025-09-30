@@ -40,21 +40,35 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
         bodyPage3.Items.ShouldBeEmpty();
     }
 
-    [Theory]
-    [InlineData(MovementKind.Income)]
-    [InlineData(MovementKind.Expense)]
-    public async Task GivenLoggedInUserAndExistingMovements_WhenListingMovementsWithKindFilter_ThenOkWithBodyFilteredByKind(MovementKind kind)
+    [Fact]
+    public async Task GivenLoggedInUserAndExistingMovements_WhenListingMovementsWithOrder_ThenOkWithBodyOrdered()
+    {
+        _auth.Given_LoggedInUser();
+        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().Build());
+        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().Build());
+        await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().Build());
+
+        var request = new ListMovementsRequestBuilder().WithOrder("occurredon asc").Build();
+        var response = await _movement.When_AttemptToList(request);
+
+        var body = await response.ShouldBeOkWithBody<PaginatedList<MovementDto>>();
+        body.Items.ShouldNotBeEmpty();
+        body.Items.Select(movement => movement.OccurredOn).ShouldBeInOrder(SortDirection.Ascending);
+    }
+
+    [Fact]
+    public async Task GivenLoggedInUserAndExistingMovements_WhenListingMovementsWithKindFilter_ThenOkWithBodyFilteredByKind()
     {
         _auth.Given_LoggedInUser();
         await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithKind(MovementKind.Expense).Build());
         await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithKind(MovementKind.Income).Build());
 
-        var request = new ListMovementsRequestBuilder().WithKinds([kind]).Build();
+        var request = new ListMovementsRequestBuilder().WithKind([MovementKind.Expense]).Build();
         var response = await _movement.When_AttemptToList(request);
 
         var body = await response.ShouldBeOkWithBody<PaginatedList<MovementDto>>();
-        body.Items.ShouldNotBeEmpty();
-        body.Items.ShouldAllBe(movement => movement.Kind == kind);
+        body.Items.Count.ShouldBe(1);
+        body.Items.ShouldAllBe(movement => movement.Kind == MovementKind.Expense);
     }
 
     [Fact]
@@ -70,9 +84,8 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
         var response = await _movement.When_AttemptToList(request);
 
         var body = await response.ShouldBeOkWithBody<PaginatedList<MovementDto>>();
-        body.Items.ShouldNotBeEmpty();
-        body.Items.ShouldAllBe(movement => movement.OccurredOn >= occurredOn);
         body.Items.Count.ShouldBe(2);
+        body.Items.ShouldAllBe(movement => movement.OccurredOn >= occurredOn);
     }
 
     [Fact]
@@ -88,9 +101,8 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
         var response = await _movement.When_AttemptToList(request);
 
         var body = await response.ShouldBeOkWithBody<PaginatedList<MovementDto>>();
-        body.Items.ShouldNotBeEmpty();
-        body.Items.ShouldAllBe(movement => movement.OccurredOn <= occurredOn);
         body.Items.Count.ShouldBe(2);
+        body.Items.ShouldAllBe(movement => movement.OccurredOn <= occurredOn);
     }
 
     [Fact]

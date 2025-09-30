@@ -31,6 +31,11 @@ public class MovementSteps(TestFixture fx)
             ["pageSize"] = request.PageSize.ToString()
         };
 
+        if (request.Order is not null)
+        {
+            queryParams["order"] = request.Order;
+        }
+
         if (request.Kind is { Length: > 0 })
         {
             foreach (var kind in request.Kind)
