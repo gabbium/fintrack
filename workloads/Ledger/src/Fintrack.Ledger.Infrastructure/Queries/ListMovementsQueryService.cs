@@ -9,8 +9,7 @@ internal sealed class ListMovementsQueryService(LedgerDbContext context) : IList
         ListMovementsQuery query,
         CancellationToken cancellationToken = default)
     {
-        var queryable = context.Movements
-            .AsNoTracking();
+        var queryable = context.Movements.AsNoTracking();
 
         if (query.Kind is { Count: > 0 })
         {
@@ -19,12 +18,12 @@ internal sealed class ListMovementsQueryService(LedgerDbContext context) : IList
 
         if (query.MinOccurredOn is not null)
         {
-            queryable = queryable.Where(x => x.OccurredOn >= query.MinOccurredOn.Value);
+            queryable = queryable.Where(movement => movement.OccurredOn >= query.MinOccurredOn.Value);
         }
 
         if (query.MaxOccurredOn is not null)
         {
-            queryable = queryable.Where(x => x.OccurredOn <= query.MaxOccurredOn.Value);
+            queryable = queryable.Where(movement => movement.OccurredOn <= query.MaxOccurredOn.Value);
         }
 
         var totalItems = await queryable.CountAsync(cancellationToken);
@@ -33,11 +32,21 @@ internal sealed class ListMovementsQueryService(LedgerDbContext context) : IList
 
         queryable = normalizedOrder switch
         {
-            "occurredon desc" => queryable.OrderByDescending(movement => movement.OccurredOn).ThenBy(m => m.Id),
-            "occurredon asc" => queryable.OrderBy(movement => movement.OccurredOn).ThenBy(m => m.Id),
-            "amount desc" => queryable.OrderByDescending(movement => movement.Amount).ThenBy(m => m.Id),
-            "amount asc" => queryable.OrderBy(movement => movement.Amount).ThenBy(m => m.Id),
-            _ => queryable.OrderByDescending(movement => movement.OccurredOn).ThenBy(m => m.Id),
+            "occurredon desc" => queryable
+                .OrderByDescending(movement => movement.OccurredOn)
+                .ThenBy(movement => movement.Id),
+            "occurredon asc" => queryable
+                .OrderBy(movement => movement.OccurredOn)
+                .ThenBy(movement => movement.Id),
+            "amount desc" => queryable
+                .OrderByDescending(movement => movement.Amount)
+                .ThenBy(movement => movement.Id),
+            "amount asc" => queryable
+                .OrderBy(movement => movement.Amount)
+                .ThenBy(movement => movement.Id),
+            _ => queryable
+                .OrderByDescending(movement => movement.OccurredOn)
+                .ThenBy(movement => movement.Id),
         };
 
         var movements = await queryable
