@@ -5,7 +5,7 @@ internal sealed class GetMovementByIdQueryValidator
 {
     public GetMovementByIdQueryValidator()
     {
-        RuleFor(q => q.Id)
+        RuleFor(query => query.Id)
             .NotEmpty();
     }
 }

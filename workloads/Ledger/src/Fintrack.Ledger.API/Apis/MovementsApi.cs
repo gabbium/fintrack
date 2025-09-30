@@ -51,7 +51,11 @@ public sealed class MovementsApi : IApi
     {
         var query = new ListMovementsQuery(
             request.PageNumber,
-            request.PageSize);
+            request.PageSize,
+            request.Order,
+            request.Kind?.ToList(),
+            request.MinOccurredOn,
+            request.MaxOccurredOn);
 
         var result = await mediator.SendAsync(query, cancellationToken);
 

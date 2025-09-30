@@ -44,6 +44,7 @@ public static class OpenApiExtensions
                 flow.WithClientId("scalar");
                 flow.WithPkce(Pkce.Sha256);
             });
+            options.WithPersistentAuthentication();
         });
 
         app.MapGet("/", () => Results.Redirect("/scalar/v1")).ExcludeFromDescription();

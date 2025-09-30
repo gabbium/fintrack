@@ -16,10 +16,14 @@ public sealed class Movement : BaseEntity, IAggregateRoot
         DateTimeOffset occurredOn)
     {
         if (userId == Guid.Empty)
+        {
             throw new ArgumentException("UserId cannot be empty.", nameof(userId));
+        }
 
         if (amount <= 0)
+        {
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be greater than zero.");
+        }
 
         UserId = userId;
         Kind = kind;
@@ -36,7 +40,9 @@ public sealed class Movement : BaseEntity, IAggregateRoot
     public void ChangeAmount(decimal newAmount)
     {
         if (newAmount <= 0)
+        {
             throw new ArgumentOutOfRangeException(nameof(newAmount), "Amount must be greater than zero.");
+        }
 
         Amount = newAmount;
     }

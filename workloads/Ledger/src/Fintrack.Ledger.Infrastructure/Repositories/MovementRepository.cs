@@ -8,7 +8,7 @@ public sealed class MovementRepository(LedgerDbContext context) : IMovementRepos
     {
         return await context.Movements
             .AsNoTracking()
-            .FirstOrDefaultAsync(m => m.Id == id, cancellationToken);
+            .FirstOrDefaultAsync(movement => movement.Id == id, cancellationToken);
     }
 
     public async Task AddAsync(Movement movement, CancellationToken cancellationToken = default)

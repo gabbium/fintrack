@@ -1,12 +1,12 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var keycloak = builder.AddKeycloak("keycloak", 8080)
+var keycloak = builder.AddKeycloak("keycloak", 18080)
     .WithDataVolume()
     .WithRealmImport("./Realms");
 
 var postgres = builder.AddPostgres("postgres")
     .WithDataVolume()
-    .WithHostPort(5432);
+    .WithHostPort(15432);
 
 var ledgerDb = postgres.AddDatabase("ledgerdb");
 
@@ -17,7 +17,7 @@ builder.AddProject<Projects.Fintrack_Ledger_API>("ledger-api")
     .WithReference(keycloak).WaitFor(keycloak)
     .WithReference(ledgerDb).WaitFor(ledgerDb)
     .WithReference(ledgerMigrator).WaitForCompletion(ledgerMigrator)
-    .WithEnvironment("Identity__Url", "http://localhost:8080/realms/fintrack")
+    .WithEnvironment("Identity__Authority", "http://localhost:18080/realms/fintrack")
     .WithHttpHealthCheck("/health/ready");
 
 var app = builder.Build();

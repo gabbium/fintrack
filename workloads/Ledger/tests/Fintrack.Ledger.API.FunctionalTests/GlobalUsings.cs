@@ -3,6 +3,7 @@ global using System.Net.Http.Json;
 global using System.Security.Claims;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
+global using CleanArch;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Hosting;
 global using Microsoft.AspNetCore.Http;
