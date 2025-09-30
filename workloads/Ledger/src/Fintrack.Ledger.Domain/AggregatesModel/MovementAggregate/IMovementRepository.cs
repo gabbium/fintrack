@@ -1,6 +1,6 @@
 ﻿namespace Fintrack.Ledger.Domain.AggregatesModel.MovementAggregate;
 
-public interface IMovementRepository
+public interface IMovementRepository : IRepository<Movement>
 {
     Task<Movement?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 

@@ -4,13 +4,15 @@ namespace Fintrack.Ledger.API.Models;
 
 public sealed class ListMovementsRequest
 {
-    [DefaultValue(1)]
+    [Required]
     [Range(1, int.MaxValue)]
+    [DefaultValue(1)]
     [Description("Page number.")]
     public int PageNumber { get; init; }
 
-    [DefaultValue(20)]
+    [Required]
     [Range(1, 100)]
+    [DefaultValue(20)]
     [Description("Items per page.")]
     public int PageSize { get; init; }
 

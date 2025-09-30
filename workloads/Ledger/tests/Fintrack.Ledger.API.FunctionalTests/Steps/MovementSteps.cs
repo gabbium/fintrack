@@ -10,30 +10,6 @@ public class MovementSteps(TestFixture fx)
 {
     private readonly HttpClient _httpClient = fx.Factory.CreateDefaultClient();
 
-    public CreateMovementRequest Given_ValidCreateRequest()
-    {
-        return new CreateMovementRequestBuilder().Build();
-    }
-
-    public CreateMovementRequest Given_InvalidCreateRequest_TooLongDescription()
-    {
-        return new CreateMovementRequestBuilder()
-                .WithDescription(new string('a', 129))
-                .Build();
-    }
-
-    public UpdateMovementRequest Given_ValidUpdateRequest()
-    {
-        return new UpdateMovementRequestBuilder().Build();
-    }
-
-    public UpdateMovementRequest Given_InvalidUpdateRequest_TooLongDescription()
-    {
-        return new UpdateMovementRequestBuilder()
-                .WithDescription(new string('a', 129))
-                .Build();
-    }
-
     public async Task<MovementDto> Given_ExistingMovement(CreateMovementRequest? request = null)
     {
         request ??= new CreateMovementRequestBuilder().Build();

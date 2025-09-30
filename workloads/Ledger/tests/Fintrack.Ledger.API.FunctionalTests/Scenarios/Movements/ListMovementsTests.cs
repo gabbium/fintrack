@@ -13,7 +13,7 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
     private readonly MovementSteps _movement = new(fx);
 
     [Fact]
-    public async Task GivenLoggedInUserAndExistingMovements_WhenListingWithPagination_ThenOkWithBodyAndOfTheExpectedPage()
+    public async Task GivenLoggedInUserAndExistingMovements_WhenListingMovementsWithPagination_ThenOkWithBodyAndCorrectPagination()
     {
         _auth.Given_LoggedInUser();
         await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithKind(MovementKind.Expense).Build());
@@ -43,7 +43,7 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
     [Theory]
     [InlineData(MovementKind.Income)]
     [InlineData(MovementKind.Expense)]
-    public async Task GivenLoggedInUserAndExistingMovements_WhenListingWithKindFilter_ThenOkWithBodyAndOnlyOfThatKind(MovementKind kind)
+    public async Task GivenLoggedInUserAndExistingMovements_WhenListingMovementsWithKindFilter_ThenOkWithBodyFilteredByKind(MovementKind kind)
     {
         _auth.Given_LoggedInUser();
         await _movement.Given_ExistingMovement(new CreateMovementRequestBuilder().WithKind(MovementKind.Expense).Build());
@@ -58,7 +58,7 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
     }
 
     [Fact]
-    public async Task GivenLoggedInUser_WhenListingWithInvalidRequest_ThenBadRequestWithValidation()
+    public async Task GivenLoggedInUser_WhenListingMovementsWithInvalidRequest_ThenBadRequestWithValidation()
     {
         _auth.Given_LoggedInUser();
 
@@ -69,7 +69,7 @@ public class ListMovementsTests(TestFixture fx) : TestBase(fx)
     }
 
     [Fact]
-    public async Task GivenAnonymousUser_WhenListingWithValidRequest_ThenUnauthorizedWithBearerChallenge()
+    public async Task GivenAnonymousUser_WhenListingMovements_ThenUnauthorizedWithBearerChallenge()
     {
         _auth.Given_AnonymousUser();
 
