@@ -1,4 +1,6 @@
-﻿using Fintrack.ServiceDefaults.ApiVersioning;
+﻿using Fintrack.Ledger.Api.Services;
+using Fintrack.Ledger.Application.Interfaces;
+using Fintrack.ServiceDefaults.ApiVersioning;
 using Fintrack.ServiceDefaults.Authentication;
 using Fintrack.ServiceDefaults.OpenApi;
 
@@ -13,6 +15,13 @@ public static class DependencyInjection
         builder.AddOidcJwtAuthentication();
 
         builder.AddOpenApiWithTransformers(["v1"]);
+
+        builder.Services.ConfigureHttpJsonOptions(options =>
+        {
+            options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        });
+
+        builder.Services.AddTransient<IIdentityService, IdentityService>();
 
         return builder;
     }

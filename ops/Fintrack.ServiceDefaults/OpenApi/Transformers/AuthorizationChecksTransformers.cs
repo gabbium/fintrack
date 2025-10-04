@@ -2,7 +2,7 @@
 
 namespace Fintrack.ServiceDefaults.OpenApi.Transformers;
 
-public sealed class AuthorizationChecksTransformers : IOpenApiOperationTransformer
+internal sealed class AuthorizationChecksTransformers : IOpenApiOperationTransformer
 {
     public Task TransformAsync(
         OpenApiOperation operation,

@@ -8,7 +8,7 @@ public sealed class DefaultExceptionHandler : IExceptionHandler
         CancellationToken cancellationToken)
     {
         var error = Error.Failure("An unexpected error occurred");
-        
+
         var problem = CustomResults.Problem(error);
 
         await problem.ExecuteAsync(httpContext);

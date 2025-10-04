@@ -10,10 +10,12 @@
     <Project Path="services/Ledger/src/Fintrack.Ledger.Application/Fintrack.Ledger.Application.csproj" />
     <Project Path="services/Ledger/src/Fintrack.Ledger.Domain/Fintrack.Ledger.Domain.csproj" />
     <Project Path="services/Ledger/src/Fintrack.Ledger.Infrastructure/Fintrack.Ledger.Infrastructure.csproj" />
+    <Project Path="services/Ledger/src/Fintrack.Ledger.Worker.Maintenance/Fintrack.Ledger.Worker.Maintenance.csproj" />
   </Folder>
   <Folder Name="/Services/Ledger/tests/">
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Api.FunctionalTests/Fintrack.Ledger.Api.FunctionalTests.csproj" />
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Application.UnitTests/Fintrack.Ledger.Application.UnitTests.csproj" />
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Domain.UnitTests/Fintrack.Ledger.Domain.UnitTests.csproj" />
+    <Project Path="services/Ledger/tests/Fintrack.Ledger.Worker.Maintenance.IntegrationTests/Fintrack.Ledger.Worker.Maintenance.IntegrationTests.csproj" Id="817a9883-1f0b-4c54-b6bd-b92295caf78b" />
   </Folder>
 </Solution>

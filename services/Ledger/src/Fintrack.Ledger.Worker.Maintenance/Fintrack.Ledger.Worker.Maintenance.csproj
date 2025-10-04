@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <UserSecretsId>dotnet-Fintrack.Ledger.Worker.DbMigrator-601da9a5-5484-4083-a3eb-44ef86231e01</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\ops\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Fintrack.Ledger.Infrastructure\Fintrack.Ledger.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

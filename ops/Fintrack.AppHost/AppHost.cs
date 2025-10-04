@@ -2,8 +2,8 @@
 
 var keycloak = builder.AddKeycloak("keycloak", 8080)
     .WithDataVolume()
-    .WithLifetime(ContainerLifetime.Persistent)
-    .WithRealmImport("./Realms");
+    .WithRealmImport("./Realms")
+    .WithLifetime(ContainerLifetime.Persistent);
 
 var postgres = builder.AddPostgres("postgres")
     .WithDataVolume()
@@ -13,6 +13,9 @@ var postgres = builder.AddPostgres("postgres")
 var ledgerDb = postgres.AddDatabase("ledgerdb");
 
 // Services
+var ledgerWorkerMaintenance = builder.AddProject<Projects.Fintrack_Ledger_Worker_Maintenance>("fintrack-ledger-worker-maintenance")
+    .WithReference(ledgerDb).WaitFor(ledgerDb);
+
 builder.AddProject<Projects.Fintrack_Ledger_Api>("fintrack-ledger-api")
     .WithReference(keycloak).WaitFor(keycloak)
     .WithReference(ledgerDb).WaitFor(ledgerDb)

@@ -1,6 +1,6 @@
 ﻿namespace Fintrack.ServiceDefaults.OpenApi.Transformers;
 
-public sealed class OpenApiVersioningDocumentTransformer(
+internal sealed class OpenApiVersioningDocumentTransformer(
     IApiVersionDescriptionProvider apiVersionDescriptionProvider,
     IOptions<OpenApiOptions> options)
     : IOpenApiDocumentTransformer

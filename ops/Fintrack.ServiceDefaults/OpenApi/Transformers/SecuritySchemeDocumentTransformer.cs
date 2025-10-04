@@ -2,7 +2,7 @@
 
 namespace Fintrack.ServiceDefaults.OpenApi.Transformers;
 
-public sealed class SecuritySchemeDocumentTransformer : IOpenApiDocumentTransformer
+internal sealed class SecuritySchemeDocumentTransformer : IOpenApiDocumentTransformer
 {
     public Task TransformAsync(
         OpenApiDocument document,
