@@ -7,11 +7,16 @@ public static class DependencyInjectionExtensions
     public static IHostApplicationBuilder AddCustomSerilog(
         this IHostApplicationBuilder builder)
     {
-        builder.Logging.ClearProviders();
-
         builder.Services.AddSerilog((sp, loggerConfiguration) =>
         {
             loggerConfiguration.ReadFrom.Configuration(builder.Configuration);
+
+            var otlpExporterEndpoint = builder.Configuration["OTEL_EXPORTER_OTLP_ENDPOINT"];
+
+            if (!string.IsNullOrWhiteSpace(otlpExporterEndpoint))
+            {
+                loggerConfiguration.WriteTo.OpenTelemetry(otlpExporterEndpoint);
+            }
         });
 
         return builder;

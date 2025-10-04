@@ -41,61 +41,17 @@ services:
     depends_on:
       - postgres
 
-  prometheus:
-    image: prom/prometheus:v2.55.1
-    restart: unless-stopped
-    volumes:
-      - ./observability/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
-      - prometheus_data:/prometheus
-
-  tempo:
-    image: grafana/tempo:2.6.1
-    restart: unless-stopped
-    command: ["-config.file=/etc/tempo.yml"]
-    volumes:
-      - ./observability/tempo/tempo.yml:/etc/tempo.yml:ro
-
-  loki:
-    image: grafana/loki:2.9.8
-    restart: unless-stopped
-    command: ["-config.file=/etc/loki/loki.yml"]
-    volumes:
-      - ./observability/loki/loki.yml:/etc/loki/loki.yml:ro
-
-  otelcol:
-    image: otel/opentelemetry-collector-contrib:0.112.0
-    restart: unless-stopped
-    command: ["--config=/etc/otelcol-config.yml"]
-    ports:
-      - "4317:4317"
-      - "4318:4318"
-    volumes:
-      - ./observability/otelcol/otelcol-config.yml:/etc/otelcol-config.yml:ro
-    depends_on:
-      - prometheus
-      - loki
-      - tempo
-
-  grafana:
-    image: grafana/grafana:11.2.0
+  aspire-dashboard:
+    image: mcr.microsoft.com/dotnet/aspire-dashboard:latest
     restart: unless-stopped
     environment:
-      GF_SECURITY_ADMIN_USER: admin
-      GF_SECURITY_ADMIN_PASSWORD: ${GF_SECURITY_ADMIN_PASSWORD}
+      ASPIRE_DASHBOARD_UNSECURED_ALLOW_ANONYMOUS: "true"
     ports:
-      - "3000:3000"
-    volumes:
-      - grafana_data:/var/lib/grafana
-      - ./observability/grafana/provisioning/datasources:/etc/grafana/provisioning/datasources:ro
-      - ./observability/grafana/provisioning/dashboards:/etc/grafana/provisioning/dashboards:ro
-    depends_on:
-      - prometheus
-      - tempo
-      - loki
+      - "18888:18888"
+      - "4317:18889"
+      - "4318:18890"
 
 volumes:
   portainer_data:
   postgres_data:
   keycloak_data:
-  prometheus_data:
-  grafana_data:

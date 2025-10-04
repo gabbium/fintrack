@@ -9,12 +9,6 @@ public static class DependencyInjectionExtensions
     public static IHostApplicationBuilder AddCustomOpenTelemetry(
         this IHostApplicationBuilder builder)
     {
-        builder.Logging.AddOpenTelemetry(loggerOptions =>
-        {
-            loggerOptions.IncludeFormattedMessage = true;
-            loggerOptions.IncludeScopes = true;
-        });
-
         builder.Services.AddOpenTelemetry()
             .WithMetrics(metrics =>
             {
@@ -29,7 +23,8 @@ public static class DependencyInjectionExtensions
                     tracing.SetSampler(new AlwaysOnSampler());
                 }
 
-                tracing.AddAspNetCoreInstrumentation()
+                tracing.AddSource(builder.Environment.ApplicationName)
+                    .AddAspNetCoreInstrumentation()
                     .AddHttpClientInstrumentation();
             });
 
@@ -44,7 +39,6 @@ public static class DependencyInjectionExtensions
 
         if (useOtlpExporter)
         {
-            builder.Services.Configure<OpenTelemetryLoggerOptions>(logging => logging.AddOtlpExporter());
             builder.Services.ConfigureOpenTelemetryMeterProvider(metrics => metrics.AddOtlpExporter());
             builder.Services.ConfigureOpenTelemetryTracerProvider(tracing => tracing.AddOtlpExporter());
         }
