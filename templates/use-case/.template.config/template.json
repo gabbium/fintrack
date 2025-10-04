@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Fintrack",
+  "classifications": ["UseCase", "CQRS", "Fintrack"],
+  "identity": "Fintrack.UseCase.Template",
+  "name": "Fintrack Use Case (Command or Query)",
+  "shortName": "fintrack-usecase",
+  "description": "Creates a Fintrack CQRS Use Case (Command or Query) with Handler and Validator.",
+  "tags": { "language": "C#", "type": "item" },
+  "symbols": {
+    "ServiceName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "Ledger",
+      "description": "Service domain name (e.g., Ledger, Planning)",
+      "replaces": "ServiceName",
+      "fileRename": "ServiceName"
+    },
+    "UseCaseName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "DeleteMovement",
+      "description": "The use case name, e.g. DeleteMovement, CreateMovement, GetMovements",
+      "replaces": "UseCaseName",
+      "fileRename": "UseCaseName"
+    },
+    "UseCaseType": {
+      "type": "parameter",
+      "datatype": "choice",
+      "choices": [
+        { "choice": "Command", "description": "Generates a Command use case" },
+        { "choice": "Query", "description": "Generates a Query use case" }
+      ],
+      "defaultValue": "Command",
+      "description": "Type of the use case"
+    }
+  },
+  "sources": [
+    {
+      "source": "./Command",
+      "target": "./",
+      "condition": "(UseCaseType == 'Command')"
+    },
+    {
+      "source": "./Query",
+      "target": "./",
+      "condition": "(UseCaseType == 'Query')"
+    }
+  ],
+  "primaryOutputs": [
+    { "path": "UseCaseNameCommand.cs" },
+    { "path": "UseCaseNameCommandHandler.cs" },
+    { "path": "UseCaseNameCommandValidator.cs" },
+    { "path": "UseCaseNameQuery.cs" },
+    { "path": "UseCaseNameQueryHandler.cs" },
+    { "path": "UseCaseNameQueryValidator.cs" }
+  ]
+}

@@ -1,23 +1,21 @@
 <Solution>
-  <Folder Name="/aspire/" />
-  <Folder Name="/aspire/src/">
-    <Project Path="aspire/src/Fintrack.AppHost/Fintrack.AppHost.csproj" />
-    <Project Path="aspire/src/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj" />
+  <Folder Name="/Ops/">
+    <Project Path="ops/Fintrack.AppHost/Fintrack.AppHost.csproj" />
+    <Project Path="ops/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj" />
   </Folder>
-  <Folder Name="/aspire/tests/" />
-  <Folder Name="/workloads/" />
-  <Folder Name="/workloads/Ledger/" />
-  <Folder Name="/workloads/Ledger/src/">
-    <Project Path="workloads/Ledger/src/Fintrack.Ledger.API/Fintrack.Ledger.API.csproj" />
-    <Project Path="workloads/Ledger/src/Fintrack.Ledger.Application/Fintrack.Ledger.Application.csproj" Id="ec5bb1f9-ecb8-4e49-9dfd-ad2126d38d64" />
-    <Project Path="workloads/Ledger/src/Fintrack.Ledger.Domain/Fintrack.Ledger.Domain.csproj" Id="662d5bf9-ecaa-4c7c-aee6-4313b9e8b88a" />
-    <Project Path="workloads/Ledger/src/Fintrack.Ledger.Infrastructure/Fintrack.Ledger.Infrastructure.csproj" Id="4e88be19-3373-4479-bb70-4f285d5d1ff6" />
-    <Project Path="workloads/Ledger/src/Fintrack.Ledger.MigrationService/Fintrack.Ledger.MigrationService.csproj" />
+  <Folder Name="/Services/" />
+  <Folder Name="/Services/Ledger/" />
+  <Folder Name="/Services/Ledger/src/">
+    <Project Path="services/Ledger/src/Fintrack.Ledger.Api/Fintrack.Ledger.Api.csproj" />
+    <Project Path="services/Ledger/src/Fintrack.Ledger.Application/Fintrack.Ledger.Application.csproj" />
+    <Project Path="services/Ledger/src/Fintrack.Ledger.Domain/Fintrack.Ledger.Domain.csproj" />
+    <Project Path="services/Ledger/src/Fintrack.Ledger.Infrastructure/Fintrack.Ledger.Infrastructure.csproj" />
+    <Project Path="services/Ledger/src/Fintrack.Ledger.Worker.Maintenance/Fintrack.Ledger.Worker.Maintenance.csproj" />
   </Folder>
-  <Folder Name="/workloads/Ledger/tests/">
-    <Project Path="workloads/Ledger/tests/Fintrack.Ledger.API.FunctionalTests/Fintrack.Ledger.API.FunctionalTests.csproj" Id="570aabd8-d8d9-4aab-950c-73445ca32bd8" />
-    <Project Path="workloads/Ledger/tests/Fintrack.Ledger.Application.UnitTests/Fintrack.Ledger.Application.UnitTests.csproj" Id="63a512ea-b235-4517-8609-5353ecac58a8" />
-    <Project Path="workloads/Ledger/tests/Fintrack.Ledger.Domain.UnitTests/Fintrack.Ledger.Domain.UnitTests.csproj" Id="3b317ff6-f77b-43ec-b921-c45b7ceb22a3" />
-    <Project Path="workloads/Ledger/tests/Fintrack.Ledger.MigrationService.IntegrationTests/Fintrack.Ledger.MigrationService.IntegrationTests.csproj" Id="f0897045-a5a7-4eaf-8033-5f2e93f3e643" />
+  <Folder Name="/Services/Ledger/tests/">
+    <Project Path="services/Ledger/tests/Fintrack.Ledger.Api.FunctionalTests/Fintrack.Ledger.Api.FunctionalTests.csproj" />
+    <Project Path="services/Ledger/tests/Fintrack.Ledger.Application.UnitTests/Fintrack.Ledger.Application.UnitTests.csproj" />
+    <Project Path="services/Ledger/tests/Fintrack.Ledger.Domain.UnitTests/Fintrack.Ledger.Domain.UnitTests.csproj" />
+    <Project Path="services/Ledger/tests/Fintrack.Ledger.Worker.Maintenance.IntegrationTests/Fintrack.Ledger.Worker.Maintenance.IntegrationTests.csproj" />
   </Folder>
 </Solution>

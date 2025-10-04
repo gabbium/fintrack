@@ -1,0 +1,8 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\ops\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Fintrack.Ledger.Infrastructure\Fintrack.Ledger.Infrastructure.csproj" />
+  </ItemGroup>
+  
+</Project>
