@@ -1,5 +1,4 @@
 ﻿using Asp.Versioning.ApiExplorer;
-using Ledger.API.BuildingBlocks.OpenApi;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;

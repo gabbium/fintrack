@@ -6,7 +6,7 @@ namespace Ledger.API.BuildingBlocks.OpenTelemetry.Extensions;
 
 public static class DependencyInjectionExtensions
 {
-    public static IHostApplicationBuilder AddCustomOpenTelemetry(
+    public static IHostApplicationBuilder AddDefaultOpenTelemetry(
         this IHostApplicationBuilder builder)
     {
         builder.Services.AddOpenTelemetry()
