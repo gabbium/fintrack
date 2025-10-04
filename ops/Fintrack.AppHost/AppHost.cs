@@ -13,7 +13,7 @@ var postgres = builder.AddPostgres("postgres")
 var ledgerDb = postgres.AddDatabase("ledgerdb");
 
 // Services
-var ledgerWorkerMaintenance = builder.AddProject<Projects.Fintrack_Ledger_Worker_Maintenance>("fintrack-ledger-worker-maintenance")
+builder.AddProject<Projects.Fintrack_Ledger_Worker_Maintenance>("fintrack-ledger-worker-maintenance")
     .WithReference(ledgerDb).WaitFor(ledgerDb);
 
 builder.AddProject<Projects.Fintrack_Ledger_Api>("fintrack-ledger-api")
