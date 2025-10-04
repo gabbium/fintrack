@@ -1,13 +1,11 @@
-server:
-  http_listen_port: 3200
-  grpc_listen_port: 4317
-
 distributor:
   receivers:
     otlp:
       protocols:
         grpc:
+          endpoint: :4317
         http:
+          endpoint: :4318
 
 storage:
   trace:

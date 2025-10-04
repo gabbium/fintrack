@@ -1,2 +1,18 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path=".editorconfig" />
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.props" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/Ledger.API/Ledger.API.csproj" />
+    <Project Path="src/Ledger.Application/Ledger.Application.csproj" />
+    <Project Path="src/Ledger.Domain/Ledger.Domain.csproj" />
+    <Project Path="src/Ledger.Infrastructure/Ledger.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Ledger.API.FunctionalTests/Ledger.API.FunctionalTests.csproj" />
+    <Project Path="tests/Ledger.Application.UnitTests/Ledger.Application.UnitTests.csproj" />
+    <Project Path="tests/Ledger.Domain.UnitTests/Ledger.Domain.UnitTests.csproj" />
+  </Folder>
 </Solution>
