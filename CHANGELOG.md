@@ -1,3 +1,9 @@
+## [1.5.0](https://github.com/gabbium/fintrack/compare/v1.4.0...v1.5.0) (2025-10-04)
+
+### Features
+
+* tech enhancements ([#10](https://github.com/gabbium/fintrack/issues/10)) ([f2364b4](https://github.com/gabbium/fintrack/commit/f2364b4dc4fb048adb58a266c474d7061788c0b6))
+
 ## [1.4.0](https://github.com/gabbium/fintrack/compare/v1.3.0...v1.4.0) (2025-09-30)
 
 ### Features
