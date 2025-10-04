@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/Ops/">
-    <Project Path="ops/Fintrack.AppHost/Fintrack.AppHost.csproj" Id="0be38b79-fcc2-4946-a2ab-fcf9d716323c" />
-    <Project Path="ops/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj" Id="ca318649-65e3-407a-9b15-7126ae586457" />
+    <Project Path="ops/Fintrack.AppHost/Fintrack.AppHost.csproj" />
+    <Project Path="ops/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/Services/" />
   <Folder Name="/Services/Ledger/" />
@@ -16,6 +16,6 @@
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Api.FunctionalTests/Fintrack.Ledger.Api.FunctionalTests.csproj" />
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Application.UnitTests/Fintrack.Ledger.Application.UnitTests.csproj" />
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Domain.UnitTests/Fintrack.Ledger.Domain.UnitTests.csproj" />
-    <Project Path="services/Ledger/tests/Fintrack.Ledger.Worker.Maintenance.IntegrationTests/Fintrack.Ledger.Worker.Maintenance.IntegrationTests.csproj" Id="817a9883-1f0b-4c54-b6bd-b92295caf78b" />
+    <Project Path="services/Ledger/tests/Fintrack.Ledger.Worker.Maintenance.IntegrationTests/Fintrack.Ledger.Worker.Maintenance.IntegrationTests.csproj" />
   </Folder>
 </Solution>

@@ -2,7 +2,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\ops\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\Fintrack.Ledger.Infrastructure\Fintrack.Ledger.Infrastructure.csproj" />
+    <ProjectReference Include="..\Fintrack.ServiceName.Infrastructure\Fintrack.ServiceName.Infrastructure.csproj" />
   </ItemGroup>
-  
+
 </Project>

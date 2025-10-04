@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "Fintrack",
+  "classifications": ["Service", "Microservice", "Fintrack"],
+  "identity": "Fintrack.Service.Template",
+  "name": "Fintrack Service",
+  "shortName": "fintrack-service",
+  "description": "Creates a Fintrack service skeleton with src and tests projects.",
+  "tags": { "language": "C#", "type": "project" },
+  "preferNameDirectory": true,
+  "symbols": {
+    "ServiceName": {
+      "type": "parameter",
+      "datatype": "text",
+      "defaultValue": "Ledger",
+      "description": "Service domain name (e.g., Ledger, Planning)",
+      "replaces": "ServiceName",
+      "fileRename": "ServiceName"
+    },
+    "HttpPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "defaultValue": "5001",
+      "description": "HTTP port for the service",
+      "replaces": "HttpPort"
+    },
+    "HttpsPort": {
+      "type": "parameter",
+      "datatype": "integer",
+      "defaultValue": "7001",
+      "description": "HTTPS port for the service",
+      "replaces": "HttpsPort"
+    },
+    "DbSuffix": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": { "value": "Db" }
+    },
+    "DbContextSuffix": {
+      "type": "generated",
+      "generator": "constant",
+      "parameters": { "value": "DbContext" }
+    },
+    "DatabaseName": {
+      "type": "generated",
+      "generator": "join",
+      "parameters": {
+        "symbols": [
+          { "type": "ref", "value": "ServiceName" },
+          { "type": "const", "value": "Db" }
+        ],
+        "separator": ""
+      },
+      "description": "Database name derived from ServiceName + 'Db'",
+      "replaces": "DatabaseName"
+    },
+    "DbContextName": {
+      "type": "generated",
+      "generator": "join",
+      "parameters": {
+        "symbols": [
+          { "type": "ref", "value": "ServiceName" },
+          { "type": "const", "value": "DbContext" }
+        ],
+        "separator": ""
+      },
+      "description": "DbContext class name derived from ServiceName + 'DbContext'",
+      "replaces": "DbContextName",
+      "fileRename": "DbContextName"
+    },
+    "DbSchemaName": {
+      "type": "generated",
+      "generator": "casing",
+      "parameters": { "source": "ServiceName", "toLower": true },
+      "description": "Lower-cased schema name derived from ServiceName",
+      "replaces": "DbSchemaName"
+    },
+    "OpenApiTitle": {
+      "type": "generated",
+      "generator": "join",
+      "parameters": {
+        "symbols": [
+          { "type": "const", "value": "Fintrack - " },
+          { "type": "ref", "value": "ServiceName" },
+          { "type": "const", "value": " HTTP API" }
+        ],
+        "separator": ""
+      },
+      "description": "OpenAPI document title derived from ServiceName",
+      "replaces": "OpenApiTitle"
+    },
+
+    "OpenApiDescription": {
+      "type": "generated",
+      "generator": "join",
+      "parameters": {
+        "symbols": [
+          { "type": "const", "value": "The " },
+          { "type": "ref", "value": "ServiceName" },
+          { "type": "const", "value": " Service HTTP API" }
+        ],
+        "separator": ""
+      },
+      "description": "OpenAPI document description derived from ServiceName",
+      "replaces": "OpenApiDescription"
+    },
+
+    "OidcAudience": {
+      "type": "generated",
+      "generator": "casing",
+      "parameters": {
+        "source": "ServiceName",
+        "toLower": true
+      },
+      "description": "OIDC JWT audience derived from ServiceName",
+      "replaces": "OidcAudience"
+    }
+  }
+}
