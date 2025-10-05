@@ -1,4 +1,4 @@
-name: Terraform Deploy
+name: Terraform Plan/Apply
 
 on:
   workflow_dispatch:
@@ -23,29 +23,13 @@ on:
         required: true
         default: true
         type: boolean
-    secrets:
-      AZURE_CLIENT_ID:
-        required: true
-      AZURE_TENANT_ID:
-        required: true
-      AZURE_SUBSCRIPTION_ID:
-        required: true
-      LEDGER_DB_CONNECTION_STRING:
-        required: true
-      AUTHENTICATION_OIDC_JWT_AUTHORITY:
-        required: true
 
 permissions:
   id-token: write
   contents: read
 
-concurrency:
-  group: terraform-deploy
-  cancel-in-progress: true
-
 jobs:
   terraform:
-    name: Terraform Plan/Apply
     runs-on: ubuntu-latest
 
     defaults:
@@ -60,8 +44,6 @@ jobs:
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
-        with:
-          terraform_version: 1.9.5
 
       - name: Cache Terraform providers
         uses: actions/cache@v4
@@ -72,12 +54,15 @@ jobs:
             tf-${{ runner.os }}-
 
       - name: Create ci.auto.tfvars.json
+        env:
+          LEDGER_DB_CONNECTION_STRING: ${{ secrets.LEDGER_DB_CONNECTION_STRING }}
+          AUTHENTICATION_OIDC_JWT_AUTHORITY: ${{ secrets.AUTHENTICATION_OIDC_JWT_AUTHORITY }}
         run: |
           cat > ci.auto.tfvars.json <<JSON
           {
             "image_version": "${{ inputs.version }}",
-            "ledger_db_connection_string": "${{ secrets.LEDGER_DB_CONNECTION_STRING }}",
-            "authentication_oidc_jwt_authority": "${{ secrets.AUTHENTICATION_OIDC_JWT_AUTHORITY }}"
+            "ledger_db_connection_string": "$LEDGER_DB_CONNECTION_STRING",
+            "authentication_oidc_jwt_authority": "$AUTHENTICATION_OIDC_JWT_AUTHORITY"
           }
           JSON
           echo "✅ Using image version: ${{ inputs.version }}"

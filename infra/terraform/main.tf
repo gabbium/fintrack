@@ -14,7 +14,7 @@ resource "azurerm_container_app" "ledger_api" {
   revision_mode                 = "Single"
 
   secret {
-    name  = "db-connection-string"
+    name  = "ledger-db-connection-string"
     value = var.ledger_db_connection_string
   }
 
@@ -27,7 +27,7 @@ resource "azurerm_container_app" "ledger_api" {
 
       env {
         name         = "ConnectionStrings__LedgerDb"
-        secret_name  = "db-connection-string"
+        secret_name  = "ledger-db-connection-string"
       }
 
       env {
@@ -57,7 +57,7 @@ resource "azurerm_container_app_job" "ledger_migrationservice" {
   replica_retry_limit           = 0
 
   secret {
-    name  = "db-connection-string"
+    name  = "ledger-db-connection-string"
     value = var.ledger_db_connection_string
   }
 
@@ -74,7 +74,7 @@ resource "azurerm_container_app_job" "ledger_migrationservice" {
 
       env {
         name         = "ConnectionStrings__LedgerDb"
-        secret_name  = "db-connection-string"
+        secret_name  = "ledger-db-connection-string"
       }
     }
   }

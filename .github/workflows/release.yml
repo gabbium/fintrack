@@ -4,16 +4,11 @@ on:
   push:
     branches: ["main"]
 
-concurrency:
-  group: release-${{ github.ref }}
-  cancel-in-progress: true
-
 permissions:
   contents: write
 
 jobs:
   version:
-    name: Build & Release
     runs-on: ubuntu-latest
     outputs:
       published: ${{ steps.semrel.outputs.new_release_published }}
