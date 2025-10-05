@@ -1,0 +1,58 @@
+name: PR Check — 🧪 Backend Sonar
+
+on:
+  pull_request:
+    paths:
+      - "backend/**"
+      - ".github/workflows/backend-sonar.yml"
+
+jobs:
+  sonar-analysis:
+    name: 🧪 Analyze | Build, Test & Sonar
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: 📦 Checkout | Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ☕ Setup | Java 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: 21
+          distribution: zulu
+
+      - name: ⚙️ Setup | .NET 9.0 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: 📦 Install | SonarScanner for .NET
+        run: |
+          dotnet tool install --global dotnet-sonarscanner
+          echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
+
+      - name: 📊 Run | SonarCloud Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: |
+          dotnet sonarscanner begin \
+            /k:"gabbium_fintrack" \
+            /n:"fintrack" \
+            /o:"gabbium" \
+            /d:sonar.host.url="https://sonarcloud.io" \
+            /d:sonar.token="$SONAR_TOKEN" \
+            /d:sonar.qualitygate.wait=true \
+            /d:sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml \
+            /d:sonar.exclusions=**/Migrations/**
+          dotnet build --configuration Release
+          dotnet test --configuration Release --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+          dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
