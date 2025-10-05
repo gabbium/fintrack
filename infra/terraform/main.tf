@@ -26,13 +26,13 @@ resource "azurerm_container_app" "ledger_api" {
       memory = "1Gi"
 
       env {
-        name         = "ConnectionStrings__LedgerDb"
-        secret_name  = "ledger-db-connection-string"
+        name  = "Authentication__OidcJwt__Authority"
+        value = var.authentication_oidc_jwt_authority
       }
 
       env {
-        name  = "Authentication__OidcJwt__Authority"
-        value = var.authentication_oidc_jwt_authority
+        name         = "ConnectionStrings__LedgerDb"
+        secret_name  = "ledger-db-connection-string"
       }
     }
   }
