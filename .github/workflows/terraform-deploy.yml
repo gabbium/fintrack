@@ -1,0 +1,120 @@
+name: Terraform Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Docker image version (e.g., 1.2.3)"
+        required: true
+        type: string
+      apply:
+        description: "Apply changes (true) or only plan (false)"
+        required: true
+        default: true
+        type: boolean
+  workflow_call:
+    inputs:
+      version:
+        description: "Docker image version (e.g., 1.2.3)"
+        required: true
+        type: string
+      apply:
+        description: "Apply changes (true) or only plan (false)"
+        required: true
+        default: true
+        type: boolean
+    secrets:
+      AZURE_CLIENT_ID:
+        required: true
+      AZURE_TENANT_ID:
+        required: true
+      AZURE_SUBSCRIPTION_ID:
+        required: true
+      LEDGER_DB_CONNECTION_STRING:
+        required: true
+      AUTHENTICATION_OIDC_JWT_AUTHORITY:
+        required: true
+
+permissions:
+  id-token: write
+  contents: read
+
+concurrency:
+  group: terraform-deploy
+  cancel-in-progress: true
+
+jobs:
+  terraform:
+    name: Terraform Plan/Apply
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: infra/terraform
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.5
+
+      - name: Cache Terraform providers
+        uses: actions/cache@v4
+        with:
+          path: .terraform
+          key: tf-${{ runner.os }}-${{ hashFiles('**/*.tf') }}
+          restore-keys: |
+            tf-${{ runner.os }}-
+
+      - name: Create ci.auto.tfvars.json
+        run: |
+          cat > ci.auto.tfvars.json <<JSON
+          {
+            "image_version": "${{ inputs.version }}",
+            "ledger_db_connection_string": "${{ secrets.LEDGER_DB_CONNECTION_STRING }}",
+            "authentication_oidc_jwt_authority": "${{ secrets.AUTHENTICATION_OIDC_JWT_AUTHORITY }}"
+          }
+          JSON
+          echo "✅ Using image version: ${{ inputs.version }}"
+
+      - name: Terraform Init
+        env:
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: terraform init -input=false
+
+      - name: Terraform Fmt & Validate
+        run: |
+          terraform fmt -check
+          terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        env:
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: terraform plan -input=false -out=tfplan
+
+      - name: Upload plan artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: tfplan-${{ inputs.version }}
+          path: tfplan
+
+      - name: Terraform Apply
+        if: inputs.apply == true
+        env:
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: terraform apply -input=false -auto-approve tfplan
