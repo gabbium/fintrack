@@ -1,3 +1,9 @@
+## [1.7.1](https://github.com/gabbium/fintrack/compare/v1.7.0...v1.7.1) (2025-10-05)
+
+### Bug Fixes
+
+* update workflows names and triggers ([eb0a833](https://github.com/gabbium/fintrack/commit/eb0a8332d86af822ad9e48749a0bfbfdffe4d2e2))
+
 ## [1.7.0](https://github.com/gabbium/fintrack/compare/v1.6.1...v1.7.0) (2025-10-05)
 
 ### Features
