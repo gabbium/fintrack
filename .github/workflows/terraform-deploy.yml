@@ -104,12 +104,6 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         run: terraform plan -input=false -out=tfplan
 
-      - name: Upload plan artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: tfplan-${{ env.IMAGE_VERSION }}
-          path: infra/terraform/tfplan
-
       - name: Terraform Apply
         if: inputs.apply == true
         env:
