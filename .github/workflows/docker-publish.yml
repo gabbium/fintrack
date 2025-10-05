@@ -24,9 +24,9 @@ jobs:
             image: gabbium/fintrack-ledger-api
             dockerfile: ./services/Ledger/src/Fintrack.Ledger.Api/Dockerfile
 
-          - name: ledger-worker-maintenance
-            image: gabbium/fintrack-ledger-worker-maintenance
-            dockerfile: ./services/Ledger/src/Fintrack.Ledger.Worker.Maintenance/Dockerfile
+          - name: ledger-migrationservice
+            image: gabbium/fintrack-ledger-migrationservice
+            dockerfile: ./services/Ledger/src/Fintrack.Ledger.MigrationService/Dockerfile
 
     steps:
       - name: Checkout code

@@ -10,12 +10,12 @@
     <Project Path="services/Ledger/src/Fintrack.Ledger.Application/Fintrack.Ledger.Application.csproj" />
     <Project Path="services/Ledger/src/Fintrack.Ledger.Domain/Fintrack.Ledger.Domain.csproj" />
     <Project Path="services/Ledger/src/Fintrack.Ledger.Infrastructure/Fintrack.Ledger.Infrastructure.csproj" />
-    <Project Path="services/Ledger/src/Fintrack.Ledger.Worker.Maintenance/Fintrack.Ledger.Worker.Maintenance.csproj" />
+    <Project Path="services/Ledger/src/Fintrack.Ledger.MigrationService/Fintrack.Ledger.MigrationService.csproj" />
   </Folder>
   <Folder Name="/Services/Ledger/tests/">
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Api.FunctionalTests/Fintrack.Ledger.Api.FunctionalTests.csproj" />
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Application.UnitTests/Fintrack.Ledger.Application.UnitTests.csproj" />
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Domain.UnitTests/Fintrack.Ledger.Domain.UnitTests.csproj" />
-    <Project Path="services/Ledger/tests/Fintrack.Ledger.Worker.Maintenance.IntegrationTests/Fintrack.Ledger.Worker.Maintenance.IntegrationTests.csproj" />
+    <Project Path="services/Ledger/tests/Fintrack.Ledger.MigrationService.IntegrationTests/Fintrack.Ledger.MigrationService.IntegrationTests.csproj" />
   </Folder>
 </Solution>

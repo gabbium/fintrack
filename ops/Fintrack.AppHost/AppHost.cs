@@ -13,10 +13,10 @@ var postgres = builder.AddPostgres("postgres")
 var ledgerDb = postgres.AddDatabase("ledgerdb");
 
 // Services
-builder.AddProject<Projects.Fintrack_Ledger_Worker_Maintenance>("ftrk-ledger-maint")
+builder.AddProject<Projects.Fintrack_Ledger_MigrationService>("fintrack-ledger-migrationservice")
     .WithReference(ledgerDb).WaitFor(ledgerDb);
 
-builder.AddProject<Projects.Fintrack_Ledger_Api>("ftrk-ledger-api")
+builder.AddProject<Projects.Fintrack_Ledger_Api>("fintrack-ledger-api")
     .WithReference(keycloak).WaitFor(keycloak)
     .WithReference(ledgerDb).WaitFor(ledgerDb)
     .WithEnvironment(ctx =>
