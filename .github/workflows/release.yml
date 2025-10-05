@@ -3,17 +3,20 @@ name: Release
 on:
   push:
     branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
 
 jobs:
   release:
     name: Build & Release
-
     runs-on: ubuntu-latest
-
-    permissions:
-      contents: write
-      issues: write
-      pull-requests: write
+    outputs:
+      published: ${{ steps.detect.outputs.published }}
+      version: ${{ steps.detect.outputs.version }}
 
     steps:
       - name: Checkout code
@@ -26,10 +29,51 @@ jobs:
         with:
           node-version: 23.x
 
+      - name: (Pre) Latest release tag (if any)
+        id: pre
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          PREV=$(gh release list --limit 1 --json tagName -q '.[0].tagName' || true)
+          echo "prev_tag=$PREV"
+          echo "prev_tag=$PREV" >> "$GITHUB_OUTPUT"
+
       - name: Install semantic-release
-        run: npm install
+        run: npm ci
 
       - name: Run semantic-release
         run: npx semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Detect new release & extract version
+        id: detect
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          LATEST=$(gh release list --limit 1 --json tagName,createdAt -q '.[0].tagName' || true)
+          echo "latest_tag=$LATEST"
+
+          PREV="${{ steps.pre.outputs.prev_tag }}"
+
+          if [[ -n "$LATEST" && "$LATEST" != "$PREV" ]]; then
+            VER="${LATEST#v}"
+            echo "published=true" >> "$GITHUB_OUTPUT"
+            echo "version=$VER" >> "$GITHUB_OUTPUT"
+            echo "Detected new release tag: $LATEST -> version=$VER"
+          else
+            echo "published=false" >> "$GITHUB_OUTPUT"
+            echo "version=" >> "$GITHUB_OUTPUT"
+            echo "No new release detected (prev=$PREV latest=$LATEST)"
+          fi
+
+  publish-docker:
+    name: Publish Docker Images
+    needs: release
+    if: ${{ needs.release.outputs.published == 'true' && needs.release.outputs.version != '' }}
+    uses: ./.github/workflows/publish-docker.yml
+    secrets: inherit
+    with:
+      version: ${{ needs.release.outputs.version }}
