@@ -1,3 +1,9 @@
+## [1.7.0](https://github.com/gabbium/fintrack/compare/v1.6.1...v1.7.0) (2025-10-05)
+
+### Features
+
+* enterprise workflows ([#12](https://github.com/gabbium/fintrack/issues/12)) ([f161ba8](https://github.com/gabbium/fintrack/commit/f161ba8e8596b4e5019d88a4a2561c4b2c3c9abe))
+
 ## [1.6.1](https://github.com/gabbium/fintrack/compare/v1.6.0...v1.6.1) (2025-10-05)
 
 ### Bug Fixes
