@@ -1,3 +1,9 @@
+## [1.5.2](https://github.com/gabbium/fintrack/compare/v1.5.1...v1.5.2) (2025-10-05)
+
+### Bug Fixes
+
+* change docker published to be triggered on release ([9a233bb](https://github.com/gabbium/fintrack/commit/9a233bb06a7881d5c3ebd25d4447c77fe219f201))
+
 ## [1.5.1](https://github.com/gabbium/fintrack/compare/v1.5.0...v1.5.1) (2025-10-05)
 
 ### Bug Fixes
