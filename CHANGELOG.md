@@ -1,3 +1,9 @@
+## [1.6.1](https://github.com/gabbium/fintrack/compare/v1.6.0...v1.6.1) (2025-10-05)
+
+### Bug Fixes
+
+* format tf file ([e8c2a10](https://github.com/gabbium/fintrack/commit/e8c2a104a4db407beca481d273581431c2533196))
+
 ## [1.6.0](https://github.com/gabbium/fintrack/compare/v1.5.4...v1.6.0) (2025-10-05)
 
 ### Features
