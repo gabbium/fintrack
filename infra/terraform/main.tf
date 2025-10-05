@@ -8,10 +8,10 @@ data "azurerm_container_app_environment" "cae" {
 }
 
 resource "azurerm_container_app" "ledger_api" {
-  name                          = "ca-ftrk-ledger-api"
-  resource_group_name           = "rg-shared"
-  container_app_environment_id  = data.azurerm_container_app_environment.cae.id
-  revision_mode                 = "Single"
+  name                         = "ca-ftrk-ledger-api"
+  resource_group_name          = "rg-shared"
+  container_app_environment_id = data.azurerm_container_app_environment.cae.id
+  revision_mode                = "Single"
 
   secret {
     name  = "ledger-db-connection-string"
@@ -31,8 +31,8 @@ resource "azurerm_container_app" "ledger_api" {
       }
 
       env {
-        name         = "ConnectionStrings__LedgerDb"
-        secret_name  = "ledger-db-connection-string"
+        name        = "ConnectionStrings__LedgerDb"
+        secret_name = "ledger-db-connection-string"
       }
     }
   }
@@ -49,12 +49,12 @@ resource "azurerm_container_app" "ledger_api" {
 }
 
 resource "azurerm_container_app_job" "ledger_migrationservice" {
-  name                          = "ca-ftrk-ledger-migrationservice"
-  resource_group_name           = "rg-shared"
-  location                      = "brazilsouth"
-  container_app_environment_id  = data.azurerm_container_app_environment.cae.id
-  replica_timeout_in_seconds    = 1800
-  replica_retry_limit           = 0
+  name                         = "ca-ftrk-ledger-migrationservice"
+  resource_group_name          = "rg-shared"
+  location                     = "brazilsouth"
+  container_app_environment_id = data.azurerm_container_app_environment.cae.id
+  replica_timeout_in_seconds   = 1800
+  replica_retry_limit          = 0
 
   secret {
     name  = "ledger-db-connection-string"
@@ -73,8 +73,8 @@ resource "azurerm_container_app_job" "ledger_migrationservice" {
       memory = "0.5Gi"
 
       env {
-        name         = "ConnectionStrings__LedgerDb"
-        secret_name  = "ledger-db-connection-string"
+        name        = "ConnectionStrings__LedgerDb"
+        secret_name = "ledger-db-connection-string"
       }
     }
   }
