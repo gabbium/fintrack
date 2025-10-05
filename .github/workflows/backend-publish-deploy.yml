@@ -1,4 +1,4 @@
-name: Backend — 🐳 Publish & 🚀 Deploy (by tag)
+name: Backend — Publish & Deploy
 
 on:
   workflow_dispatch:

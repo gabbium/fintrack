@@ -1,6 +1,7 @@
-name: Release — 🏷️ Version
+name: Release & Versioning
 
 on:
+  workflow_dispatch:
   push:
     branches: ["main"]
 
