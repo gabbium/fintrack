@@ -1,19 +1,18 @@
-name: PR Check — 🧹 .NET Format
+name: PR Check — 🧹 Backend Format
 
 on:
   pull_request:
     paths:
-      - "**/*.sln"
-      - "**/*.cs"
-      - ".editorconfig"
-      - "Directory.*.props"
-      - "src/**"
-      - "tests/**"
+      - "backend/**"
+      - ".github/workflows/backend-format.yml"
 
 jobs:
   format-check:
     name: 🧹 Check | Code Formatting
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
 
     steps:
       - name: 📦 Checkout | Repository
@@ -26,5 +25,5 @@ jobs:
         with:
           dotnet-version: 9.0.x
 
-      - name: 🧾 Verify | Code Style (.editorconfig)
+      - name: 🧾 Verify | .editorconfig Compliance
         run: dotnet format --verify-no-changes --verbosity minimal

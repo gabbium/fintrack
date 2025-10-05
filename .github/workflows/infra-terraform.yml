@@ -1,0 +1,45 @@
+name: PR Check — ☁️ Infra Terraform
+
+on:
+  pull_request:
+    paths:
+      - "infra/**"
+      - ".github/workflows/infra-terraform.yml"
+
+jobs:
+  terraform-validate-plan:
+    name: ☁️ Validate | Terraform Code
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: infra
+
+    steps:
+      - name: 📦 Checkout | Repository
+        uses: actions/checkout@v4
+
+      - name: ⚙️ Setup | Terraform 1.9.5
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.5
+
+      - name: 🧾 Validate | fmt & syntax
+        env:
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: |
+          terraform init -backend=false
+          terraform fmt -check -recursive
+          terraform validate -no-color
+
+      - name: 📋 Plan | Dry Run
+        env:
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: |
+          terraform init -backend=false
+          terraform plan -input=false -lock=false -no-color
