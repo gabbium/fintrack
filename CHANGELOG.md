@@ -1,3 +1,9 @@
+## [1.6.0](https://github.com/gabbium/fintrack/compare/v1.5.4...v1.6.0) (2025-10-05)
+
+### Features
+
+* add terraform files + workflows for deploy ([#11](https://github.com/gabbium/fintrack/issues/11)) ([f84ae1d](https://github.com/gabbium/fintrack/commit/f84ae1dc7c2bf4b02907e8bf1f79144c2cb5bd7b))
+
 ## [1.5.4](https://github.com/gabbium/fintrack/compare/v1.5.3...v1.5.4) (2025-10-05)
 
 ### Bug Fixes
