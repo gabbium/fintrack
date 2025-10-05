@@ -6,6 +6,10 @@ on:
       - "infra/terraform/**"
       - ".github/workflows/infra-terraform.yml"
 
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   terraform-validate-plan:
     name: ☁️ Validate | Terraform Code
