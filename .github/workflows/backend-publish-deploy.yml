@@ -61,8 +61,8 @@ jobs:
       - name: 🐳 Build & Push (ledger-api)
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83
         with:
-          context: .
-          file: backend/services/Ledger/src/Fintrack.Ledger.Api/Dockerfile
+          context: backend
+          file: services/Ledger/src/Fintrack.Ledger.Api/Dockerfile
           push: true
           tags: gabbium/fintrack-ledger-api:${{ needs.guard.outputs.version }}
           provenance: false
@@ -71,8 +71,8 @@ jobs:
       - name: 🐳 Build & Push (ledger-migrationservice)
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83
         with:
-          context: .
-          file: backend/services/Ledger/src/Fintrack.Ledger.MigrationService/Dockerfile
+          context: backend
+          file: services/Ledger/src/Fintrack.Ledger.MigrationService/Dockerfile
           push: true
           tags: gabbium/fintrack-ledger-migrationservice:${{ needs.guard.outputs.version }}
           provenance: false
