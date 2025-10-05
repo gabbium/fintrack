@@ -13,16 +13,15 @@ var postgres = builder.AddPostgres("postgres")
 var ledgerDb = postgres.AddDatabase("ledgerdb");
 
 // Services
-builder.AddProject<Projects.Fintrack_Ledger_Worker_Maintenance>("fintrack-ledger-worker-maintenance")
+builder.AddProject<Projects.Fintrack_Ledger_Worker_Maintenance>("ftrk-ledger-maint")
     .WithReference(ledgerDb).WaitFor(ledgerDb);
 
-builder.AddProject<Projects.Fintrack_Ledger_Api>("fintrack-ledger-api")
+builder.AddProject<Projects.Fintrack_Ledger_Api>("ftrk-ledger-api")
     .WithReference(keycloak).WaitFor(keycloak)
     .WithReference(ledgerDb).WaitFor(ledgerDb)
     .WithEnvironment(ctx =>
     {
-        var baseUrl = keycloak.GetEndpoint("http").Url;
-        ctx.EnvironmentVariables["Authentication__OidcJwt__Authority"] = $"{baseUrl}/realms/fintrack";
+        ctx.EnvironmentVariables["Authentication__OidcJwt__Authority"] = $"http:/localhost:8080/realms/fintrack";
     });
 
 var app = builder.Build();

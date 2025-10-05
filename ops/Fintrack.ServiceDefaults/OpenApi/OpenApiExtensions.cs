@@ -23,6 +23,11 @@ public static class OpenApiExtensions
                     options.AddDocumentTransformer<OpenApiVersioningDocumentTransformer>();
                     options.AddOperationTransformer<AuthorizationChecksTransformers>();
                     options.AddDocumentTransformer<SecuritySchemeDocumentTransformer>();
+                    options.AddDocumentTransformer((document, context, cancellationToken) =>
+                    {
+                        document.Servers = [];
+                        return Task.CompletedTask;
+                    });
                 }
             );
         }

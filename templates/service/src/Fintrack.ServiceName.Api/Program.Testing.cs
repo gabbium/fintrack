@@ -1,4 +1,4 @@
-﻿namespace Fintrack.ServiceName.API;
+﻿namespace Fintrack.ServiceName.Api;
 
 public partial class Program
 {

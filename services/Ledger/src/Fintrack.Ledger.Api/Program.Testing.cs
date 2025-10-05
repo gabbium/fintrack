@@ -1,4 +1,4 @@
-﻿namespace Fintrack.Ledger.API;
+﻿namespace Fintrack.Ledger.Api;
 
 public partial class Program
 {

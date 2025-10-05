@@ -1,5 +1,5 @@
 ﻿using Fintrack.Ledger.Api.FunctionalTests.TestHelpers.Infrastructure.Authorize;
-using Fintrack.Ledger.API;
+using Fintrack.Ledger.Api;
 
 namespace Fintrack.Ledger.Api.FunctionalTests.TestHelpers.Infrastructure;
 
