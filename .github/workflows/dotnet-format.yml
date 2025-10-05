@@ -1,0 +1,30 @@
+name: PR Check — 🧹 .NET Format
+
+on:
+  pull_request:
+    paths:
+      - "**/*.sln"
+      - "**/*.cs"
+      - ".editorconfig"
+      - "Directory.*.props"
+      - "src/**"
+      - "tests/**"
+
+jobs:
+  format-check:
+    name: 🧹 Check | Code Formatting
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📦 Checkout | Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ⚙️ Setup | .NET 9.0 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: 🧾 Verify | Code Style (.editorconfig)
+        run: dotnet format --verify-no-changes --verbosity minimal
