@@ -1,3 +1,9 @@
+## [1.5.3](https://github.com/gabbium/fintrack/compare/v1.5.2...v1.5.3) (2025-10-05)
+
+### Bug Fixes
+
+* use package.json ([c38182d](https://github.com/gabbium/fintrack/commit/c38182dd85be6d1214e4a8b7e2b7f7b14d46b705))
+
 ## [1.5.2](https://github.com/gabbium/fintrack/compare/v1.5.1...v1.5.2) (2025-10-05)
 
 ### Bug Fixes
