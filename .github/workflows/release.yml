@@ -27,14 +27,7 @@ jobs:
           node-version: 23.x
 
       - name: Install semantic-release
-        run: |
-          npm install semantic-release \
-            @semantic-release/changelog \
-            @semantic-release/commit-analyzer \
-            @semantic-release/git \
-            @semantic-release/github \
-            @semantic-release/release-notes-generator \
-            conventional-changelog-conventionalcommits
+        run: npm install
 
       - name: Run semantic-release
         run: npx semantic-release
