@@ -1,0 +1,114 @@
+name: Terraform Plan/Apply
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Docker image version (e.g., 1.2.3)"
+        required: true
+        type: string
+      apply:
+        description: "Apply changes (true) or only plan (false)"
+        required: true
+        default: true
+        type: boolean
+  workflow_call:
+    inputs:
+      version:
+        description: "Docker image version (e.g., 1.2.3)"
+        required: true
+        type: string
+      apply:
+        description: "Apply changes (true) or only plan (false)"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+
+    env:
+      IMAGE_VERSION: ${{ inputs.version }}
+
+    defaults:
+      run:
+        working-directory: infra/terraform
+        shell: bash
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate inputs (SemVer)
+        run: |
+          if [[ -z "${IMAGE_VERSION:-}" ]]; then
+            echo "ERROR: IMAGE_VERSION is empty."
+            exit 1
+          fi
+          if [[ ! "${IMAGE_VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
+            echo "ERROR: IMAGE_VERSION '${IMAGE_VERSION}' is not a valid semantic version."
+            exit 1
+          fi
+          echo "✔ IMAGE_VERSION validated: ${IMAGE_VERSION}"
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
+
+      - name: Cache Terraform providers
+        uses: actions/cache@v4
+        with:
+          path: infra/terraform/.terraform
+          key: tf-${{ runner.os }}-${{ hashFiles('**/*.tf') }}
+          restore-keys: |
+            tf-${{ runner.os }}-
+
+      - name: Create ci.auto.tfvars.json
+        env:
+          AUTHENTICATION_OIDC_JWT_AUTHORITY: ${{ secrets.AUTHENTICATION_OIDC_JWT_AUTHORITY }}
+          LEDGER_DB_CONNECTION_STRING: ${{ secrets.LEDGER_DB_CONNECTION_STRING }}
+        run: |
+          jq -n \
+            --arg version "${IMAGE_VERSION}" \
+            --arg conn "$LEDGER_DB_CONNECTION_STRING" \
+            --arg auth "$AUTHENTICATION_OIDC_JWT_AUTHORITY" \
+            '{image_version:$version, ledger_db_connection_string:$conn, authentication_oidc_jwt_authority:$auth}' \
+            > ci.auto.tfvars.json
+          echo "✅ Using image version: ${IMAGE_VERSION}"
+
+      - name: Terraform Init
+        env:
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: terraform init -input=false
+
+      - name: Terraform Fmt & Validate
+        run: |
+          terraform fmt -check
+          terraform validate
+
+      - name: Terraform Plan
+        id: plan
+        env:
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: terraform plan -input=false -out=tfplan
+
+      - name: Terraform Apply
+        if: inputs.apply == true
+        env:
+          ARM_USE_OIDC: true
+          ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
+          ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
+          ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        run: terraform apply -input=false -auto-approve tfplan
