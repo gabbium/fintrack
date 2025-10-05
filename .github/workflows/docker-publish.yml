@@ -22,12 +22,10 @@ jobs:
         include:
           - name: ledger-api
             image: gabbium/fintrack-ledger-api
-            context: ./services/Ledger/src/Fintrack.Ledger.Api
             dockerfile: ./services/Ledger/src/Fintrack.Ledger.Api/Dockerfile
 
           - name: ledger-worker-maintenance
             image: gabbium/fintrack-ledger-worker-maintenance
-            context: ./services/Ledger/src/Fintrack.Ledger.Worker.Maintenance
             dockerfile: ./services/Ledger/src/Fintrack.Ledger.Worker.Maintenance/Dockerfile
 
     steps:
