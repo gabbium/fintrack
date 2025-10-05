@@ -1,3 +1,10 @@
+## [1.5.4](https://github.com/gabbium/fintrack/compare/v1.5.3...v1.5.4) (2025-10-05)
+
+### Bug Fixes
+
+* remove not used permission ([a797496](https://github.com/gabbium/fintrack/commit/a797496f6a3ec0c20e7ed5e4ab2b6753f4e25e1f))
+* updt release workflow to trigger docker publish ([3a46b6b](https://github.com/gabbium/fintrack/commit/3a46b6bb68baad1b80f44122ec601a98a849afec))
+
 ## [1.5.3](https://github.com/gabbium/fintrack/compare/v1.5.2...v1.5.3) (2025-10-05)
 
 ### Bug Fixes
