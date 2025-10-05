@@ -1,3 +1,9 @@
+## [1.5.1](https://github.com/gabbium/fintrack/compare/v1.5.0...v1.5.1) (2025-10-05)
+
+### Bug Fixes
+
+* rename maintenance service ([23bcf66](https://github.com/gabbium/fintrack/commit/23bcf66e73722ead11d938d6877a1f61693f76ce))
+
 ## [1.5.0](https://github.com/gabbium/fintrack/compare/v1.4.0...v1.5.0) (2025-10-04)
 
 ### Features
