@@ -30,6 +30,10 @@ permissions:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+
+    env:
+      IMAGE_VERSION: ${{ inputs.version }}
+
     strategy:
       fail-fast: false
       matrix:
@@ -44,10 +48,23 @@ jobs:
             context: .
 
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Validate inputs (SemVer)
+        shell: bash
+        run: |
+          if [[ -z "${IMAGE_VERSION:-}" ]]; then
+            echo "ERROR: IMAGE_VERSION is empty."
+            exit 1
+          fi
+          if [[ ! "${IMAGE_VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
+            echo "ERROR: IMAGE_VERSION '${IMAGE_VERSION}' is not a valid semantic version."
+            exit 1
+          fi
+          echo "✔ IMAGE_VERSION validated: ${IMAGE_VERSION}"
 
       - name: Setup QEMU
         uses: docker/setup-qemu-action@29109295f81e9208d7d86ff1c6c12d2833863392

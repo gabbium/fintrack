@@ -32,9 +32,13 @@ jobs:
   terraform:
     runs-on: ubuntu-latest
 
+    env:
+      IMAGE_VERSION: ${{ inputs.version }}
+
     defaults:
       run:
         working-directory: infra/terraform
+        shell: bash
 
     steps:
       - name: Checkout code
@@ -42,30 +46,41 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Validate inputs (SemVer)
+        run: |
+          if [[ -z "${IMAGE_VERSION:-}" ]]; then
+            echo "ERROR: IMAGE_VERSION is empty."
+            exit 1
+          fi
+          if [[ ! "${IMAGE_VERSION}" =~ ^[0-9]+\.[0-9]+\.[0-9]+([.-][0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
+            echo "ERROR: IMAGE_VERSION '${IMAGE_VERSION}' is not a valid semantic version."
+            exit 1
+          fi
+          echo "✔ IMAGE_VERSION validated: ${IMAGE_VERSION}"
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
 
       - name: Cache Terraform providers
         uses: actions/cache@v4
         with:
-          path: .terraform
+          path: infra/terraform/.terraform
           key: tf-${{ runner.os }}-${{ hashFiles('**/*.tf') }}
           restore-keys: |
             tf-${{ runner.os }}-
 
       - name: Create ci.auto.tfvars.json
         env:
-          LEDGER_DB_CONNECTION_STRING: ${{ secrets.LEDGER_DB_CONNECTION_STRING }}
           AUTHENTICATION_OIDC_JWT_AUTHORITY: ${{ secrets.AUTHENTICATION_OIDC_JWT_AUTHORITY }}
+          LEDGER_DB_CONNECTION_STRING: ${{ secrets.LEDGER_DB_CONNECTION_STRING }}
         run: |
-          cat > ci.auto.tfvars.json <<JSON
-          {
-            "image_version": "${{ inputs.version }}",
-            "ledger_db_connection_string": "$LEDGER_DB_CONNECTION_STRING",
-            "authentication_oidc_jwt_authority": "$AUTHENTICATION_OIDC_JWT_AUTHORITY"
-          }
-          JSON
-          echo "✅ Using image version: ${{ inputs.version }}"
+          jq -n \
+            --arg version "${IMAGE_VERSION}" \
+            --arg conn "$LEDGER_DB_CONNECTION_STRING" \
+            --arg auth "$AUTHENTICATION_OIDC_JWT_AUTHORITY" \
+            '{image_version:$version, ledger_db_connection_string:$conn, authentication_oidc_jwt_authority:$auth}' \
+            > ci.auto.tfvars.json
+          echo "✅ Using image version: ${IMAGE_VERSION}"
 
       - name: Terraform Init
         env:
@@ -92,8 +107,8 @@ jobs:
       - name: Upload plan artifact
         uses: actions/upload-artifact@v4
         with:
-          name: tfplan-${{ inputs.version }}
-          path: tfplan
+          name: tfplan-${{ env.IMAGE_VERSION }}
+          path: infra/terraform/tfplan
 
       - name: Terraform Apply
         if: inputs.apply == true

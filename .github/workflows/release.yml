@@ -10,6 +10,7 @@ permissions:
 jobs:
   version:
     runs-on: ubuntu-latest
+
     outputs:
       published: ${{ steps.semrel.outputs.new_release_published }}
       version: ${{ steps.semrel.outputs.new_release_version }}
