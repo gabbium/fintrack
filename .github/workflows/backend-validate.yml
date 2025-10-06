@@ -35,7 +35,7 @@ jobs:
         run: dotnet format --verify-no-changes --verbosity minimal
 
   sonar-analysis:
-    name: "SonarCloud — Analyze"
+    name: "SonarCloud Analyze"
     runs-on: ubuntu-latest
     needs: format-check
     defaults:
@@ -86,7 +86,7 @@ jobs:
           dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
 
   docker-validate:
-    name: "Docker — Build check (no push)"
+    name: "Docker Build check (no push)"
     runs-on: ubuntu-latest
     needs: format-check
     strategy:

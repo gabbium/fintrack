@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   terraform-validate-plan:
-    name: Validate | Terraform Code
+    name: Validate Terraform Code
     runs-on: ubuntu-latest
     defaults:
       run:

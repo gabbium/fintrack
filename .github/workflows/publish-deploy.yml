@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   guard:
-    name: Guard | Ensure ref is a tag
+    name: Ensure ref is a tag
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.extract.outputs.version }}
@@ -38,7 +38,7 @@ jobs:
           echo "Resolved version: $ver"
 
   publish_images:
-    name: Build & Push | Docker Images
+    name: Build & Push Docker Images
     needs: guard
     runs-on: ubuntu-latest
 
@@ -79,13 +79,14 @@ jobs:
           sbom: false
 
   deploy:
-    name: Apply | Terraform
+    name: Apply Terraform
     needs: [guard, publish_images]
     runs-on: ubuntu-latest
+    environment: prod
 
     env:
       TF_VAR_image_version: ${{ needs.guard.outputs.version }}
-      TF_VAR_authentication_oidc_jwt_authority: ${{ secrets.AUTHENTICATION_OIDC_JWT_AUTHORITY }}
+      TF_VAR_authentication_oidc_jwt_authority: ${{ vars.AUTHENTICATION_OIDC_JWT_AUTHORITY }}
       TF_VAR_ledger_db_connection_string: ${{ secrets.LEDGER_DB_CONNECTION_STRING }}
 
     defaults:
