@@ -1,3 +1,9 @@
+## [1.7.5](https://github.com/gabbium/fintrack/compare/v1.7.4...v1.7.5) (2025-10-06)
+
+### Bug Fixes
+
+* workflow docker output ([8eb36e4](https://github.com/gabbium/fintrack/commit/8eb36e4e05d23b75e53dd92adf09128d0f38a03d))
+
 ## [1.7.4](https://github.com/gabbium/fintrack/compare/v1.7.3...v1.7.4) (2025-10-06)
 
 ### Bug Fixes
