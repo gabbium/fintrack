@@ -1,3 +1,9 @@
+## [1.7.6](https://github.com/gabbium/fintrack/compare/v1.7.5...v1.7.6) (2025-10-06)
+
+### Bug Fixes
+
+* tf use remote backend ([90fba4a](https://github.com/gabbium/fintrack/commit/90fba4a5b19ec3b355f398e74027c5a3adf4825f))
+
 ## [1.7.5](https://github.com/gabbium/fintrack/compare/v1.7.4...v1.7.5) (2025-10-06)
 
 ### Bug Fixes
