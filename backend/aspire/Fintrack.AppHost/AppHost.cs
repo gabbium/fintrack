@@ -2,7 +2,7 @@
 
 var keycloak = builder.AddKeycloak("keycloak", 8080)
     .WithDataVolume()
-    .WithRealmImport("./Realms")
+    .WithRealmImport("../../../infra/keycloak/realms")
     .WithLifetime(ContainerLifetime.Persistent);
 
 var postgres = builder.AddPostgres("postgres")
@@ -13,15 +13,16 @@ var postgres = builder.AddPostgres("postgres")
 var ledgerDb = postgres.AddDatabase("ledgerdb");
 
 // Services
-builder.AddProject<Projects.Fintrack_Ledger_MigrationService>("fintrack-ledger-migrationservice")
+builder.AddProject<Projects.Fintrack_Ledger_MigrationService>("ledger-migrationservice")
     .WithReference(ledgerDb).WaitFor(ledgerDb);
 
-builder.AddProject<Projects.Fintrack_Ledger_Api>("fintrack-ledger-api")
+builder.AddProject<Projects.Fintrack_Ledger_Api>("ledger-api")
     .WithReference(keycloak).WaitFor(keycloak)
     .WithReference(ledgerDb).WaitFor(ledgerDb)
     .WithEnvironment(ctx =>
     {
-        ctx.EnvironmentVariables["Authentication__OidcJwt__Authority"] = $"http:/localhost:8080/realms/fintrack";
+        var keycloakUrl = keycloak.GetEndpoint("http").Url;
+        ctx.EnvironmentVariables["Authentication__OidcJwt__Authority"] = $"{keycloakUrl}/realms/fintrack";
     });
 
 var app = builder.Build();
