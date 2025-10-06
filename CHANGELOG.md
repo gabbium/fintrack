@@ -1,3 +1,9 @@
+## [1.7.3](https://github.com/gabbium/fintrack/compare/v1.7.2...v1.7.3) (2025-10-06)
+
+### Bug Fixes
+
+* docker file path ([c239d1b](https://github.com/gabbium/fintrack/commit/c239d1b1253a3db2d353409b5b61d16a5089dba1))
+
 ## [1.7.2](https://github.com/gabbium/fintrack/compare/v1.7.1...v1.7.2) (2025-10-05)
 
 ### Bug Fixes
