@@ -117,4 +117,4 @@ jobs:
           load: false
           provenance: false
           sbom: false
-          outputs: type=none
+          outputs: type=cacheonly

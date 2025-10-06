@@ -63,8 +63,8 @@ jobs:
         with:
           context: backend
           file: backend/services/Ledger/src/Fintrack.Ledger.Api/Dockerfile
-          push: true
           tags: gabbium/fintrack-ledger-api:${{ needs.guard.outputs.version }}
+          push: true
           provenance: false
           sbom: false
 
@@ -73,8 +73,8 @@ jobs:
         with:
           context: backend
           file: backend/services/Ledger/src/Fintrack.Ledger.MigrationService/Dockerfile
-          push: true
           tags: gabbium/fintrack-ledger-migrationservice:${{ needs.guard.outputs.version }}
+          push: true
           provenance: false
           sbom: false
 
