@@ -1,3 +1,9 @@
+## [1.7.4](https://github.com/gabbium/fintrack/compare/v1.7.3...v1.7.4) (2025-10-06)
+
+### Bug Fixes
+
+* workflow job dependency ([e6d348f](https://github.com/gabbium/fintrack/commit/e6d348fc88d7c81ee63955f5e699f7b3c5f818a6))
+
 ## [1.7.3](https://github.com/gabbium/fintrack/compare/v1.7.2...v1.7.3) (2025-10-06)
 
 ### Bug Fixes
