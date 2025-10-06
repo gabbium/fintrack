@@ -47,4 +47,4 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         run: |
           terraform init -backend=false
-          terraform plan -input=false -lock=false -no-color
+          terraform plan -input=false -lock=false -no-color -var-file=ci.tfvars
