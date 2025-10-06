@@ -1,4 +1,4 @@
-name: Backend — Publish & Deploy
+name: Publish & Deploy
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: backend-publish-deploy-${{ github.ref }}
+  group: publish-deploy-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
