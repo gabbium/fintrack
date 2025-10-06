@@ -1,3 +1,9 @@
+## [1.7.8](https://github.com/gabbium/fintrack/compare/v1.7.7...v1.7.8) (2025-10-06)
+
+### Bug Fixes
+
+* use environment instead of repo to store conn strings ([7322ddf](https://github.com/gabbium/fintrack/commit/7322ddfdd24bc140b47162d055e12e1cec33b887))
+
 ## [1.7.7](https://github.com/gabbium/fintrack/compare/v1.7.6...v1.7.7) (2025-10-06)
 
 ### Bug Fixes
