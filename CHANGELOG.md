@@ -1,3 +1,9 @@
+## [1.7.7](https://github.com/gabbium/fintrack/compare/v1.7.6...v1.7.7) (2025-10-06)
+
+### Bug Fixes
+
+* update workflow name ([#13](https://github.com/gabbium/fintrack/issues/13)) ([35d4152](https://github.com/gabbium/fintrack/commit/35d4152c3669028cee4fd1506cbdfdeeb4d647fc))
+
 ## [1.7.6](https://github.com/gabbium/fintrack/compare/v1.7.5...v1.7.6) (2025-10-06)
 
 ### Bug Fixes
