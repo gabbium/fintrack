@@ -114,7 +114,7 @@ jobs:
           -backend-config="resource_group_name=rg-shared" \
           -backend-config="storage_account_name=stgabbiumtfstate" \
           -backend-config="container_name=tfstate" \
-          -backend-config="key=fintrack/prod.tfstate" \
+          -backend-config="key=fintrack/prod.tfstate"
 
       - name: 📋 Plan
         env:
