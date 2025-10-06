@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   release:
-    name: 🏷️ Semantic Release
+    name: Semantic Release
     runs-on: ubuntu-latest
 
     steps:
