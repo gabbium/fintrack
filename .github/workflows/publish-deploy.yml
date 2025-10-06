@@ -1,4 +1,4 @@
-name: Backend — Publish & Deploy
+name: Publish & Deploy
 
 on:
   workflow_dispatch:
@@ -8,7 +8,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: backend-publish-deploy-${{ github.ref }}
+  group: publish-deploy-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -110,11 +110,12 @@ jobs:
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
           ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-        run: terraform init -reconfigure \
-          -backend-config="resource_group_name=rg-shared" \
-          -backend-config="storage_account_name=stgabbiumtfstate" \
-          -backend-config="container_name=tfstate" \
-          -backend-config="key=fintrack/prod.tfstate" \
+        run: |
+          terraform init -reconfigure \
+            -backend-config="resource_group_name=rg-shared" \
+            -backend-config="storage_account_name=stgabbiumtfstate" \
+            -backend-config="container_name=tfstate" \
+            -backend-config="key=fintrack/prod.tfstate"
 
       - name: 📋 Plan
         env:
