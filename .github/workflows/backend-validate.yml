@@ -100,7 +100,10 @@ jobs:
             context: backend
 
     steps:
-      - uses: actions/checkout@v4
+      - name: 📦 Checkout | Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: 🧰 Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -112,3 +115,6 @@ jobs:
           file: ${{ matrix.file }}
           push: false
           load: false
+          provenance: false
+          sbom: false
+          outputs: type=none

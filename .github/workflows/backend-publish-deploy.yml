@@ -80,7 +80,7 @@ jobs:
 
   deploy:
     name: Apply | Terraform
-    needs: publish_images
+    needs: [guard, publish_images]
     runs-on: ubuntu-latest
 
     env:
