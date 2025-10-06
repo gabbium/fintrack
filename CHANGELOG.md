@@ -1,3 +1,9 @@
+## [1.7.2](https://github.com/gabbium/fintrack/compare/v1.7.1...v1.7.2) (2025-10-05)
+
+### Bug Fixes
+
+* update docker context ([398b112](https://github.com/gabbium/fintrack/commit/398b1123c5fbf6ffe138015affc3f02961142123))
+
 ## [1.7.1](https://github.com/gabbium/fintrack/compare/v1.7.0...v1.7.1) (2025-10-05)
 
 ### Bug Fixes
