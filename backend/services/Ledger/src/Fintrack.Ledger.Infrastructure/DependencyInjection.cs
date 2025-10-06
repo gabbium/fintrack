@@ -11,7 +11,7 @@ public static class DependencyInjection
     {
         builder.Services.AddDbContext<LedgerDbContext>(options =>
         {
-            options.UseNpgsql(builder.Configuration.GetConnectionString("ledgerdb"));
+            options.UseNpgsql(builder.Configuration.GetConnectionString("LedgerDb"));
         });
 
         builder.EnrichNpgsqlDbContext<LedgerDbContext>();

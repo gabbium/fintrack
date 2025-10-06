@@ -11,6 +11,7 @@ var postgres = builder.AddPostgres("postgres")
     .WithLifetime(ContainerLifetime.Persistent);
 
 var ledgerDb = postgres.AddDatabase("ledgerdb");
+var planningDb = postgres.AddDatabase("planningdb");
 
 // Services
 builder.AddProject<Projects.Fintrack_Ledger_MigrationService>("ledger-migrationservice")
@@ -19,6 +20,18 @@ builder.AddProject<Projects.Fintrack_Ledger_MigrationService>("ledger-migrations
 builder.AddProject<Projects.Fintrack_Ledger_Api>("ledger-api")
     .WithReference(keycloak).WaitFor(keycloak)
     .WithReference(ledgerDb).WaitFor(ledgerDb)
+    .WithEnvironment(ctx =>
+    {
+        var keycloakUrl = keycloak.GetEndpoint("http").Url;
+        ctx.EnvironmentVariables["Authentication__OidcJwt__Authority"] = $"{keycloakUrl}/realms/fintrack";
+    });
+
+builder.AddProject<Projects.Fintrack_Planning_MigrationService>("planning-migrationservice")
+    .WithReference(planningDb).WaitFor(planningDb);
+
+builder.AddProject<Projects.Fintrack_Planning_Api>("planning-api")
+    .WithReference(keycloak).WaitFor(keycloak)
+    .WithReference(planningDb).WaitFor(planningDb)
     .WithEnvironment(ctx =>
     {
         var keycloakUrl = keycloak.GetEndpoint("http").Url;

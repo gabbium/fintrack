@@ -8,7 +8,7 @@ using Fintrack.Ledger.Application.UseCases.UpdateMovement;
 
 namespace Fintrack.Ledger.Api.Apis;
 
-public sealed class MovementApi : IApi
+public sealed class MovementsApi : IApi
 {
     public void Map(IEndpointRouteBuilder builder)
     {
