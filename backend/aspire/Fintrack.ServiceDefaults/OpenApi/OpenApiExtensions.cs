@@ -53,7 +53,9 @@ public static class OpenApiExtensions
             scalarOptions.WithPersistentAuthentication();
         });
 
-        app.MapGet("/", () => Results.Redirect("/scalar/v1"));
+        app.MapGet("/", () => Results.Redirect("/scalar/v1"))
+            .ExcludeFromDescription()
+            .ExcludeFromApiReference();
 
         return app;
     }
