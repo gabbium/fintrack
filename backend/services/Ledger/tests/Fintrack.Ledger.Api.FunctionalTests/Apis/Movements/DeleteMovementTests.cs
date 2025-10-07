@@ -32,7 +32,7 @@ public class DeleteMovementTests(TestFixture fx) : TestBase(fx)
     }
 
     [Fact]
-    public async Task GivenLoggedInUser_WhenDeletingWithInvalidId_ThenBadRequestWithValidation()
+    public async Task GivenLoggedInUser_WhenDeletingMovementWithInvalidId_ThenBadRequestWithValidation()
     {
         _auth.Given_LoggedInUser();
 

@@ -88,7 +88,6 @@ public class ListMovementsQueryValidatorTests
         result.ShouldHaveValidationErrorFor(q => q.PageSize);
     }
 
-
     [Fact]
     public void Validate_WhenOrderIsInvalid_ThenHasValidationError()
     {

@@ -63,7 +63,6 @@ public class DeleteMovementCommandHandlerTests
         var result = await _handler.HandleAsync(command);
 
         // Assert
-
         result.IsSuccess.ShouldBeTrue();
 
         _movementRepositoryMock.Verify(r =>
