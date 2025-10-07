@@ -49,7 +49,7 @@ resource "azurerm_container_app" "ledger_api" {
 }
 
 resource "azurerm_container_app_job" "ledger_migrationservice" {
-  name                         = "ca-ftrk-ledger-migrationservice"
+  name                         = "ca-ftrk-ledger-migrsvc"
   resource_group_name          = "rg-shared"
   location                     = "brazilsouth"
   container_app_environment_id = data.azurerm_container_app_environment.cae.id
@@ -122,7 +122,7 @@ resource "azurerm_container_app" "planning_api" {
 }
 
 resource "azurerm_container_app_job" "planning_migrationservice" {
-  name                         = "ca-ftrk-planning-migrationservice"
+  name                         = "ca-ftrk-planning-migrsvc"
   resource_group_name          = "rg-shared"
   location                     = "brazilsouth"
   container_app_environment_id = data.azurerm_container_app_environment.cae.id
