@@ -17,7 +17,7 @@ public sealed class Movement : BaseEntity, IAggregateRoot
     {
         if (userId == Guid.Empty)
         {
-            throw new ArgumentException("UserId cannot be empty.", nameof(userId));
+            throw new ArgumentException("User id cannot be empty.", nameof(userId));
         }
 
         if (amount <= 0)
