@@ -13,34 +13,44 @@ public sealed class MovementsApi : IApi
     public void Map(IEndpointRouteBuilder builder)
     {
         var v1 = builder.MapGroup("movements")
-            .RequireAuthorization()
             .WithTags("Movements")
+            .RequireAuthorization()
             .HasApiVersion(1, 0);
 
         v1.MapGet(string.Empty, ListMovements)
             .WithName(nameof(ListMovements))
+            .WithSummary("List movements")
+            .WithDescription("Get all movements filtered by date range with optional ordering.")
             .Produces<PaginatedList<MovementDto>>(StatusCodes.Status200OK)
             .ProducesValidationProblem(StatusCodes.Status400BadRequest);
 
         v1.MapGet("{id:guid}", GetMovementById)
             .WithName(nameof(GetMovementById))
+            .WithSummary("Get movement")
+            .WithDescription("Retrieve details of a specific movement by its ID.")
             .Produces<MovementDto>(StatusCodes.Status200OK)
             .ProducesValidationProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         v1.MapPost(string.Empty, CreateMovement)
             .WithName(nameof(CreateMovement))
+            .WithSummary("Create movement")
+            .WithDescription("Record a new expense or income.")
             .Produces<MovementDto>(StatusCodes.Status201Created)
             .ProducesValidationProblem(StatusCodes.Status400BadRequest);
 
         v1.MapPut("{id:guid}", UpdateMovement)
             .WithName(nameof(UpdateMovement))
+            .WithSummary("Update movement")
+            .WithDescription("Modify amount, kind, occurrence date, description.")
             .Produces<MovementDto>(StatusCodes.Status200OK)
             .ProducesValidationProblem(StatusCodes.Status400BadRequest)
             .ProducesProblem(StatusCodes.Status404NotFound);
 
         v1.MapDelete("{id:guid}", DeleteMovement)
             .WithName(nameof(DeleteMovement))
+            .WithSummary("Delete movement")
+            .WithDescription("Permanently remove a movement from the system.")
             .Produces(StatusCodes.Status204NoContent)
             .ProducesValidationProblem(StatusCodes.Status400BadRequest);
     }
