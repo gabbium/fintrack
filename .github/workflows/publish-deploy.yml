@@ -78,6 +78,26 @@ jobs:
           provenance: false
           sbom: false
 
+      - name: 🐳 Build & Push (planning-api)
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83
+        with:
+          context: backend
+          file: backend/services/Planning/src/Fintrack.Planning.Api/Dockerfile
+          tags: gabbium/fintrack-planning-api:${{ needs.guard.outputs.version }}
+          push: true
+          provenance: false
+          sbom: false
+
+      - name: 🐳 Build & Push (planning-migrationservice)
+        uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83
+        with:
+          context: backend
+          file: backend/services/Planning/src/Fintrack.Planning.MigrationService/Dockerfile
+          tags: gabbium/fintrack-planning-migrationservice:${{ needs.guard.outputs.version }}
+          push: true
+          provenance: false
+          sbom: false
+
   deploy:
     name: Apply Terraform
     needs: [guard, publish_images]
@@ -88,6 +108,7 @@ jobs:
       TF_VAR_image_version: ${{ needs.guard.outputs.version }}
       TF_VAR_authentication_oidc_jwt_authority: ${{ vars.AUTHENTICATION_OIDC_JWT_AUTHORITY }}
       TF_VAR_ledger_db_connection_string: ${{ secrets.LEDGER_DB_CONNECTION_STRING }}
+      TF_VAR_planning_db_connection_string: ${{ secrets.PLANNING_DB_CONNECTION_STRING }}
 
     defaults:
       run:

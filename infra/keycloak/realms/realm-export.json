@@ -388,7 +388,8 @@
           "attributes": {}
         }
       ],
-      "ledger-api": []
+      "ledger-api": [],
+      "planning-api": []
     }
   },
   "groups": [],
@@ -445,6 +446,20 @@
       "createdTimestamp": 1759105305797,
       "totp": false,
       "serviceAccountClientId": "ledger-api",
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": ["default-roles-fintrack"],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "2312783c-2b7d-4c83-ba92-0f65270e3b98",
+      "username": "service-account-planning-api",
+      "emailVerified": false,
+      "enabled": true,
+      "createdTimestamp": 1759807186414,
+      "totp": false,
+      "serviceAccountClientId": "planning-api",
       "disableableCredentialTypes": [],
       "requiredActions": [],
       "realmRoles": ["default-roles-fintrack"],
@@ -687,10 +702,63 @@
         "backchannel.logout.session.required": "true",
         "standard.token.exchange.enabled": "false",
         "frontchannel.logout.session.required": "true",
-        "post.logout.redirect.uris": "+",
         "oauth2.device.authorization.grant.enabled": "false",
         "display.on.consent.screen": "false",
         "use.jwks.url": "false",
+        "backchannel.logout.revoke.offline.tokens": "false"
+      },
+      "authenticationFlowBindingOverrides": {},
+      "fullScopeAllowed": true,
+      "nodeReRegistrationTimeout": -1,
+      "defaultClientScopes": [
+        "web-origins",
+        "service_account",
+        "acr",
+        "profile",
+        "roles",
+        "basic",
+        "email"
+      ],
+      "optionalClientScopes": [
+        "address",
+        "phone",
+        "organization",
+        "offline_access",
+        "microprofile-jwt"
+      ]
+    },
+    {
+      "id": "eb41b983-8049-4214-8a05-5459dbf2811b",
+      "clientId": "planning-api",
+      "name": "Fintrack Planning API",
+      "description": "",
+      "rootUrl": "",
+      "adminUrl": "",
+      "baseUrl": "",
+      "surrogateAuthRequired": false,
+      "enabled": true,
+      "alwaysDisplayInConsole": false,
+      "clientAuthenticatorType": "client-secret",
+      "secret": "**********",
+      "redirectUris": ["/*"],
+      "webOrigins": ["/*"],
+      "notBefore": 0,
+      "bearerOnly": false,
+      "consentRequired": false,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "directAccessGrantsEnabled": false,
+      "serviceAccountsEnabled": true,
+      "publicClient": false,
+      "frontchannelLogout": true,
+      "protocol": "openid-connect",
+      "attributes": {
+        "realm_client": "false",
+        "oidc.ciba.grant.enabled": "false",
+        "client.secret.creation.time": "1759807186",
+        "backchannel.logout.session.required": "true",
+        "standard.token.exchange.enabled": "false",
+        "oauth2.device.authorization.grant.enabled": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
       },
       "authenticationFlowBindingOverrides": {},
@@ -770,9 +838,16 @@
       "clientAuthenticatorType": "client-secret",
       "redirectUris": [
         "https://localhost:7001/scalar/v1",
+        "http://localhost:5002/scalar/v1",
+        "https://localhost:7002/scalar/v1",
         "http://localhost:5001/scalar/v1"
       ],
-      "webOrigins": ["https://localhost:7001", "http://localhost:5001"],
+      "webOrigins": [
+        "https://localhost:7001",
+        "http://localhost:5001",
+        "https://localhost:7002",
+        "http://localhost:5002"
+      ],
       "notBefore": 0,
       "bearerOnly": false,
       "consentRequired": false,
@@ -788,7 +863,7 @@
         "oidc.ciba.grant.enabled": "false",
         "backchannel.logout.session.required": "true",
         "standard.token.exchange.enabled": "false",
-        "post.logout.redirect.uris": "http://localhost:5001##https://localhost:7001",
+        "post.logout.redirect.uris": "http://localhost:5001##https://localhost:7001##http://localhost:5002##https://localhost:7002",
         "frontchannel.logout.session.required": "true",
         "oauth2.device.authorization.grant.enabled": "false",
         "display.on.consent.screen": "false",
@@ -799,8 +874,22 @@
       "nodeReRegistrationTimeout": -1,
       "protocolMappers": [
         {
-          "id": "8cbaed0f-5c72-4257-815b-a2fe34739655",
-          "name": "aud",
+          "id": "1183c738-c55c-4e43-9d54-6a591bc3aa6e",
+          "name": "Planning API Audience",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-audience-mapper",
+          "consentRequired": false,
+          "config": {
+            "included.client.audience": "planning-api",
+            "id.token.claim": "false",
+            "lightweight.claim": "false",
+            "access.token.claim": "true",
+            "introspection.token.claim": "true"
+          }
+        },
+        {
+          "id": "2f7d9a9b-8fd5-4db6-b866-f0fc11a04d93",
+          "name": "Ledger API Audience",
           "protocol": "openid-connect",
           "protocolMapper": "oidc-audience-mapper",
           "consentRequired": false,
@@ -808,9 +897,8 @@
             "included.client.audience": "ledger-api",
             "id.token.claim": "false",
             "lightweight.claim": "false",
-            "introspection.token.claim": "true",
             "access.token.claim": "true",
-            "userinfo.token.claim": "false"
+            "introspection.token.claim": "true"
           }
         }
       ],

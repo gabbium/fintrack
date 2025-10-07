@@ -98,6 +98,12 @@ jobs:
           - name: ledger-migrationservice
             file: backend/services/Ledger/src/Fintrack.Ledger.MigrationService/Dockerfile
             context: backend
+          - name: planning-api
+            file: backend/services/Planning/src/Fintrack.Planning.Api/Dockerfile
+            context: backend
+          - name: planning-migrationservice
+            file: backend/services/Planning/src/Fintrack.Planning.MigrationService/Dockerfile
+            context: backend
 
     steps:
       - name: 📦 Checkout | Repository
