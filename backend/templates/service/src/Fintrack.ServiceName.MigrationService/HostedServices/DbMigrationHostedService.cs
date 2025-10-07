@@ -22,7 +22,7 @@ public sealed class DbMigrationHostedService(
 
         try
         {
-            logger.LogInformation("Migrating database associated with context {DbContext}", contextName);
+            logger.LogInformation("Migrating database associated with {DbContext}", contextName);
 
             var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync(stoppingToken);
 
@@ -48,7 +48,7 @@ public sealed class DbMigrationHostedService(
             activity?.AddTag("exception.stacktrace", ex.ToString());
             activity?.SetStatus(ActivityStatusCode.Error);
 
-            logger.LogError(ex, "An error occurred while migrating the database used on context {DbContext}", contextName);
+            logger.LogError(ex, "An error occurred while migrating the database used on {DbContext}", contextName);
 
             throw;
         }
