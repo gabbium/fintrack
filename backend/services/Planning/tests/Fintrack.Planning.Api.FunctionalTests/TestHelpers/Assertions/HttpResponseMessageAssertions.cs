@@ -52,6 +52,13 @@ public static class HttpResponseMessageAssertions
         problem.ShouldNotBeNull();
     }
 
+    public static void ShouldBeUnauthorizedWithBearerChallenge(this HttpResponseMessage response)
+    {
+        response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        response.Headers.WwwAuthenticate.ShouldContain(
+            header => string.Equals(header.Scheme, "Bearer", StringComparison.OrdinalIgnoreCase));
+    }
+
     public static async Task ShouldBeNotFoundWithProblem(this HttpResponseMessage response)
     {
         response.StatusCode.ShouldBe(HttpStatusCode.NotFound);
@@ -66,16 +73,9 @@ public static class HttpResponseMessageAssertions
         problem.ShouldNotBeNull();
     }
 
-    public static void ShouldBeUnauthorizedWithBearerChallenge(this HttpResponseMessage response)
+    public static async Task ShouldBeUnprocessableEntityWithProblem(this HttpResponseMessage response)
     {
-        response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
-        response.Headers.WwwAuthenticate.ShouldContain(
-            header => string.Equals(header.Scheme, "Bearer", StringComparison.OrdinalIgnoreCase));
-    }
-
-    public static async Task ShouldBeUnauthorizedWithProblem(this HttpResponseMessage response)
-    {
-        response.StatusCode.ShouldBe(HttpStatusCode.Unauthorized);
+        response.StatusCode.ShouldBe(HttpStatusCode.UnprocessableEntity);
         var problem = await response.Content.ReadFromJsonAsync<ProblemDetails>(TestConstants.Json);
         problem.ShouldNotBeNull();
     }

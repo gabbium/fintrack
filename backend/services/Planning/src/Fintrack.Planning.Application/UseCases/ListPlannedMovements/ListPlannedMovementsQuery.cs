@@ -1,0 +1,14 @@
+using Fintrack.Planning.Application.Models;
+using Fintrack.Planning.Domain.PlannedMovementAggregate;
+
+namespace Fintrack.Planning.Application.UseCases.ListPlannedMovements;
+
+public sealed record ListPlannedMovementsQuery(
+    int PageNumber,
+    int PageSize,
+    string? Order,
+    List<PlannedMovementKind>? Kind,
+    List<PlannedMovementStatus>? Status,
+    DateTimeOffset? MinDueOn,
+    DateTimeOffset? MaxDueOn)
+    : IQuery<PaginatedList<PlannedMovementDto>>;

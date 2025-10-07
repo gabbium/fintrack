@@ -1,4 +1,4 @@
-﻿namespace Fintrack.Planning.Api.FunctionalTests.TestHelpers.Infrastructure.Authorize;
+﻿namespace Fintrack.Planning.Api.FunctionalTests.TestHelpers.Infrastructure.Authentication;
 
 public class AutoAuthorizeAccessor : IAutoAuthorizeAccessor
 {

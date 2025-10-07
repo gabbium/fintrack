@@ -1,4 +1,9 @@
-﻿namespace Fintrack.Planning.Infrastructure;
+﻿using Fintrack.Planning.Application.UseCases.ListPlannedMovements;
+using Fintrack.Planning.Domain.PlannedMovementAggregate;
+using Fintrack.Planning.Infrastructure.Queries;
+using Fintrack.Planning.Infrastructure.Repositories;
+
+namespace Fintrack.Planning.Infrastructure;
 
 public static class DependencyInjection
 {
@@ -12,6 +17,9 @@ public static class DependencyInjection
         builder.EnrichNpgsqlDbContext<PlanningDbContext>();
 
         builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<PlanningDbContext>());
+
+        builder.Services.AddScoped<IPlannedMovementRepository, PlannedMovementRepository>();
+        builder.Services.AddScoped<IListPlannedMovementsQueryService, ListPlannedMovementsQueryService>();
 
         return builder;
     }
