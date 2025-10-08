@@ -33,6 +33,6 @@ RUN dotnet publish Fintrack.ServiceName.MigrationService.csproj -c "$BUILD_CONFI
 
 FROM base AS final
 WORKDIR /app
-COPY --chown=nonroot:nonroot --from=publish /app/publish ./
+COPY --chown=nonroot:nonroot --chmod=755 --from=publish /app/publish ./
 USER nonroot
 ENTRYPOINT ["dotnet", "Fintrack.ServiceName.MigrationService.dll"]

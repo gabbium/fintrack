@@ -37,6 +37,6 @@ RUN dotnet publish Fintrack.Ledger.Api.csproj -c "$BUILD_CONFIGURATION" --no-res
 
 FROM base AS final
 WORKDIR /app
-COPY --chown=nonroot:nonroot --from=publish /app/publish ./
+COPY --chown=nonroot:nonroot --chmod=755 --from=publish /app/publish ./
 USER nonroot
 ENTRYPOINT ["dotnet", "Fintrack.Ledger.Api.dll"]
