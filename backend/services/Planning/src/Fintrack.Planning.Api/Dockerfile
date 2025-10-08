@@ -38,6 +38,6 @@ RUN dotnet publish Fintrack.Planning.Api.csproj -c "$BUILD_CONFIGURATION" --no-r
 
 FROM base AS final
 WORKDIR /app
-COPY --chown=nonroot:nonroot --chmod=755 --from=publish /app/publish ./
+COPY --chown=root:root --chmod=555 --from=publish /app/publish ./
 USER nonroot
 ENTRYPOINT ["dotnet", "Fintrack.Planning.Api.dll"]
