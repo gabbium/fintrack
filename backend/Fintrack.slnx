@@ -3,6 +3,9 @@
     <Project Path="aspire/Fintrack.AppHost/Fintrack.AppHost.csproj" />
     <Project Path="aspire/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj" />
   </Folder>
+  <Folder Name="/BuildingBlocks/">
+    <Project Path="building-blocks/BuildingBlocks.MigrationService/BuildingBlocks.MigrationService.csproj" />
+  </Folder>
   <Folder Name="/Services/" />
   <Folder Name="/Services/Ledger/" />
   <Folder Name="/Services/Ledger/src/">

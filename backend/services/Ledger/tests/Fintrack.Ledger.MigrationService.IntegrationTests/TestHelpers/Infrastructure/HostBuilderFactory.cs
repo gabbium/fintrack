@@ -1,6 +1,6 @@
-﻿using Fintrack.Ledger.Application.Interfaces;
+﻿using BuildingBlocks.MigrationService.HostedServices;
+using Fintrack.Ledger.Application.Interfaces;
 using Fintrack.Ledger.Infrastructure;
-using Fintrack.Ledger.MigrationService.HostedServices;
 using Fintrack.Ledger.MigrationService.Services;
 
 namespace Fintrack.Ledger.MigrationService.IntegrationTests.TestHelpers.Infrastructure;
@@ -14,7 +14,7 @@ public static class HostBuilderFactory
             {
                 services.AddDbContext<LedgerDbContext>(o => o.UseNpgsql(connectionString));
 
-                services.AddHostedService<DbMigrationHostedService>();
+                services.AddHostedService<DbMigrationHostedService<LedgerDbContext>>();
 
                 services.AddTransient<IIdentityService, IdentityService>();
             })

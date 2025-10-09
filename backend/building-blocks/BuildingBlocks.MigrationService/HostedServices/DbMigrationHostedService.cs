@@ -1,13 +1,18 @@
-﻿using Fintrack.Ledger.Infrastructure;
+﻿using System.Reflection;
 
-namespace Fintrack.Ledger.MigrationService.HostedServices;
+namespace BuildingBlocks.MigrationService.HostedServices;
 
-public sealed class DbMigrationHostedService(
+public sealed class DbMigrationHostedService<TDbContext>(
     IServiceProvider serviceProvider,
-    IHostApplicationLifetime hostApplicationLifetime) : BackgroundService
+    IHostApplicationLifetime hostApplicationLifetime)
+    : BackgroundService
+    where TDbContext : DbContext
 {
-    public const string ActivitySourceName = "Fintrack.Ledger.MigrationService";
-    private static readonly ActivitySource s_activitySource = new(ActivitySourceName);
+    private static readonly string s_defaultActivitySourceName =
+        Assembly.GetEntryAssembly()?.GetName().Name
+        ?? "BuildingBlocks.MigrationService";
+
+    private static readonly ActivitySource s_activitySource = new(s_defaultActivitySourceName);
 
     protected override async Task ExecuteAsync(
         CancellationToken stoppingToken)
@@ -16,9 +21,9 @@ public sealed class DbMigrationHostedService(
 
         using var scope = serviceProvider.CreateScope();
         var scopeServices = scope.ServiceProvider;
-        var logger = scopeServices.GetRequiredService<ILogger<LedgerDbContext>>();
-        var dbContext = scopeServices.GetRequiredService<LedgerDbContext>();
-        var contextName = typeof(LedgerDbContext).Name;
+        var logger = scopeServices.GetRequiredService<ILogger<TDbContext>>();
+        var dbContext = scopeServices.GetRequiredService<TDbContext>();
+        var contextName = typeof(TDbContext).Name;
 
         try
         {
@@ -56,4 +61,3 @@ public sealed class DbMigrationHostedService(
         }
     }
 }
-
