@@ -48,8 +48,6 @@ public sealed class DbMigrationHostedService(
             activity?.AddTag("exception.stacktrace", ex.ToString());
             activity?.SetStatus(ActivityStatusCode.Error);
 
-            logger.LogError(ex, "An error occurred while migrating the database used on {DbContext}", contextName);
-
             throw;
         }
         finally
