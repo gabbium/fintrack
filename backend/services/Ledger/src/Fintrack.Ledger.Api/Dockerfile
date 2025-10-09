@@ -33,7 +33,11 @@ RUN dotnet build Fintrack.Ledger.Api.csproj -c "$BUILD_CONFIGURATION" --no-resto
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish Fintrack.Ledger.Api.csproj -c "$BUILD_CONFIGURATION" --no-restore -o /app/publish /p:UseAppHost=false
+RUN dotnet publish Fintrack.Ledger.Api.csproj \
+    -c "$BUILD_CONFIGURATION" \
+    --no-restore \
+    -o /app/publish \
+    /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app

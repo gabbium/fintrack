@@ -30,7 +30,11 @@ RUN dotnet build Fintrack.Planning.MigrationService.csproj -c "$BUILD_CONFIGURAT
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish Fintrack.Planning.MigrationService.csproj -c "$BUILD_CONFIGURATION" --no-restore -o /app/publish /p:UseAppHost=false
+RUN dotnet publish Fintrack.Planning.MigrationService.csproj \
+    -c "$BUILD_CONFIGURATION" \
+    --no-restore \
+    -o /app/publish \
+    /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
