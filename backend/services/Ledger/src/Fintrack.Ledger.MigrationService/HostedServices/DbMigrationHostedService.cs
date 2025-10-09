@@ -18,10 +18,19 @@ public sealed class DbMigrationHostedService(
         var scopeServices = scope.ServiceProvider;
         var logger = scopeServices.GetRequiredService<ILogger<LedgerDbContext>>();
         var dbContext = scopeServices.GetRequiredService<LedgerDbContext>();
+        var contextName = typeof(LedgerDbContext).Name;
 
         try
         {
-            logger.LogInformation("Migrating database associated with context {DbContext}", typeof(LedgerDbContext).Name);
+            logger.LogInformation("Migrating database associated with {DbContext}", contextName);
+
+            var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync(stoppingToken);
+
+            if (!pendingMigrations.Any())
+            {
+                logger.LogInformation("No pending migrations found for {DbContext}. Skipping migration.", contextName);
+                return;
+            }
 
             var strategy = dbContext.Database.CreateExecutionStrategy();
 
@@ -30,7 +39,7 @@ public sealed class DbMigrationHostedService(
                 await dbContext.Database.MigrateAsync(stoppingToken);
             });
 
-            logger.LogInformation("Database migration completed for {DbContext}.", typeof(LedgerDbContext).Name);
+            logger.LogInformation("Database migration completed for {DbContext}.", contextName);
         }
         catch (Exception ex)
         {
@@ -39,12 +48,12 @@ public sealed class DbMigrationHostedService(
             activity?.AddTag("exception.stacktrace", ex.ToString());
             activity?.SetStatus(ActivityStatusCode.Error);
 
-            logger.LogError(ex, "An error occurred while migrating the database used on context {DbContext}", typeof(LedgerDbContext).Name);
-
             throw;
         }
-
-        hostApplicationLifetime.StopApplication();
+        finally
+        {
+            hostApplicationLifetime.StopApplication();
+        }
     }
 }
 

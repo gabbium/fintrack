@@ -13,3 +13,9 @@ variable "ledger_db_connection_string" {
   type        = string
   sensitive   = true
 }
+
+variable "planning_db_connection_string" {
+  description = "Planning Database connection string (secret)"
+  type        = string
+  sensitive   = true
+}

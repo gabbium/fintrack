@@ -2,29 +2,29 @@
 
 namespace Fintrack.Ledger.Infrastructure.Repositories;
 
-public sealed class MovementRepository(LedgerDbContext context) : IMovementRepository
+public sealed class MovementRepository(LedgerDbContext dbContext) : IMovementRepository
 {
     public async Task<Movement?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        return await context.Movements
+        return await dbContext.Movements
             .AsNoTracking()
             .FirstOrDefaultAsync(movement => movement.Id == id, cancellationToken);
     }
 
     public async Task AddAsync(Movement movement, CancellationToken cancellationToken = default)
     {
-        await context.Movements.AddAsync(movement, cancellationToken);
+        await dbContext.Movements.AddAsync(movement, cancellationToken);
     }
 
     public Task UpdateAsync(Movement movement, CancellationToken cancellationToken = default)
     {
-        context.Movements.Update(movement);
+        dbContext.Movements.Update(movement);
         return Task.CompletedTask;
     }
 
     public Task RemoveAsync(Movement movement, CancellationToken cancellationToken = default)
     {
-        context.Movements.Remove(movement);
+        dbContext.Movements.Remove(movement);
         return Task.CompletedTask;
     }
 }

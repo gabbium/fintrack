@@ -62,6 +62,7 @@ public class MovementSteps(TestFixture fx)
     {
         return await _httpClient.GetAsync("/api/v1/movements/" + id);
     }
+
     public async Task<HttpResponseMessage> When_AttemptToCreate(CreateMovementRequest request)
     {
         return await _httpClient.PostAsJsonAsync("/api/v1/movements", request);

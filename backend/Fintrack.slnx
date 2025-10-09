@@ -18,4 +18,18 @@
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Domain.UnitTests/Fintrack.Ledger.Domain.UnitTests.csproj" />
     <Project Path="services/Ledger/tests/Fintrack.Ledger.MigrationService.IntegrationTests/Fintrack.Ledger.MigrationService.IntegrationTests.csproj" />
   </Folder>
+  <Folder Name="/Services/Planning/" />
+  <Folder Name="/Services/Planning/src/">
+    <Project Path="services/Planning/src/Fintrack.Planning.Api/Fintrack.Planning.Api.csproj" />
+    <Project Path="services/Planning/src/Fintrack.Planning.Application/Fintrack.Planning.Application.csproj" />
+    <Project Path="services/Planning/src/Fintrack.Planning.Domain/Fintrack.Planning.Domain.csproj" />
+    <Project Path="services/Planning/src/Fintrack.Planning.Infrastructure/Fintrack.Planning.Infrastructure.csproj" />
+    <Project Path="services/Planning/src/Fintrack.Planning.MigrationService/Fintrack.Planning.MigrationService.csproj" />
+  </Folder>
+  <Folder Name="/Services/Planning/tests/">
+    <Project Path="services/Planning/tests/Fintrack.Planning.Api.FunctionalTests/Fintrack.Planning.Api.FunctionalTests.csproj" />
+    <Project Path="services/Planning/tests/Fintrack.Planning.Application.UnitTests/Fintrack.Planning.Application.UnitTests.csproj" />
+    <Project Path="services/Planning/tests/Fintrack.Planning.Domain.UnitTests/Fintrack.Planning.Domain.UnitTests.csproj" />
+    <Project Path="services/Planning/tests/Fintrack.Planning.MigrationService.IntegrationTests/Fintrack.Planning.MigrationService.IntegrationTests.csproj" />
+  </Folder>
 </Solution>

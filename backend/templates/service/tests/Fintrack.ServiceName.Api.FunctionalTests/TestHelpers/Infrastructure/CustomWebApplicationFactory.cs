@@ -1,5 +1,4 @@
-﻿using Fintrack.ServiceName.Api.FunctionalTests.TestHelpers.Infrastructure.Authorize;
-using Fintrack.ServiceName.Api;
+﻿using Fintrack.ServiceName.Api.FunctionalTests.TestHelpers.Infrastructure.Authentication;
 
 namespace Fintrack.ServiceName.Api.FunctionalTests.TestHelpers.Infrastructure;
 

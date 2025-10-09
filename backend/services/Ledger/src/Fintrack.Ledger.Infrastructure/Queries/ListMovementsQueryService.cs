@@ -3,13 +3,13 @@ using Fintrack.Ledger.Application.UseCases.ListMovements;
 
 namespace Fintrack.Ledger.Infrastructure.Queries;
 
-internal sealed class ListMovementsQueryService(LedgerDbContext context) : IListMovementsQueryService
+internal sealed class ListMovementsQueryService(LedgerDbContext dbContext) : IListMovementsQueryService
 {
     public async Task<PaginatedList<MovementDto>> ListAsync(
         ListMovementsQuery query,
         CancellationToken cancellationToken = default)
     {
-        var queryable = context.Movements.AsNoTracking();
+        var queryable = dbContext.Movements.AsNoTracking();
 
         if (query.Kind is { Count: > 0 })
         {
