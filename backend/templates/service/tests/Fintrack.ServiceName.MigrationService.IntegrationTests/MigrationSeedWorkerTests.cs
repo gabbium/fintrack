@@ -1,11 +1,11 @@
-﻿using Fintrack.Planning.Infrastructure;
-using Fintrack.Planning.MigrationService.IntegrationTests.TestHelpers.Containers;
-using Fintrack.Planning.MigrationService.IntegrationTests.TestHelpers.Infrastructure;
-using Fintrack.Planning.MigrationService.Services;
+﻿using Fintrack.ServiceName.Infrastructure;
+using Fintrack.ServiceName.MigrationService.IntegrationTests.TestHelpers.Containers;
+using Fintrack.ServiceName.MigrationService.IntegrationTests.TestHelpers.Infrastructure;
+using Fintrack.ServiceName.MigrationService.Services;
 
-namespace Fintrack.Planning.MigrationService.IntegrationTests.HostedServices;
+namespace Fintrack.ServiceName.MigrationService.IntegrationTests;
 
-public class DbMigrationHostedServiceTests(PostgresContainer postgres) : IClassFixture<PostgresContainer>
+public class MigrationSeedWorkerTests(PostgresContainer postgres) : IClassFixture<PostgresContainer>
 {
     [Fact]
     public async Task RunsMigrationsAndLeavesNoPending()
@@ -13,11 +13,11 @@ public class DbMigrationHostedServiceTests(PostgresContainer postgres) : IClassF
         var host = HostBuilderFactory.BuildMigrationWorker(postgres.ConnectionString);
         await host.RunAsync();
 
-        var dbOptions = new DbContextOptionsBuilder<PlanningDbContext>()
+        var dbOptions = new DbContextOptionsBuilder<DbContextName>()
             .UseNpgsql(postgres.ConnectionString)
             .Options;
 
-        using var dbContext = new PlanningDbContext(dbOptions, new IdentityService());
+        using var dbContext = new DbContextName(dbOptions, new IdentityService());
 
         var pendingMigrations = await dbContext.Database.GetPendingMigrationsAsync();
         pendingMigrations.ShouldBeEmpty();

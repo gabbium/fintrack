@@ -1,4 +1,4 @@
-﻿using BuildingBlocks.MigrationService.HostedServices;
+﻿using BuildingBlocks.MigrationService;
 using Fintrack.Ledger.Application.Interfaces;
 using Fintrack.Ledger.Infrastructure;
 using Fintrack.Ledger.MigrationService.Services;
@@ -9,7 +9,7 @@ public static class DependencyInjection
 {
     public static IHostApplicationBuilder AddWorkerServices(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddHostedService<DbMigrationHostedService<LedgerDbContext>>();
+        builder.AddMigration<LedgerDbContext>();
 
         builder.Services.AddTransient<IIdentityService, IdentityService>();
 

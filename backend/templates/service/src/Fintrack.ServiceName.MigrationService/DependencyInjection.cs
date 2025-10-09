@@ -9,7 +9,7 @@ public static class DependencyInjection
 {
     public static IHostApplicationBuilder AddWorkerServices(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddHostedService<DbMigrationHostedService<DbContextName>>();
+        builder.AddMigration<DbContextName>();
 
         builder.Services.AddTransient<IIdentityService, IdentityService>();
 

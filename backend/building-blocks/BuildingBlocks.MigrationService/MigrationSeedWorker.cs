@@ -1,16 +1,12 @@
-﻿namespace BuildingBlocks.MigrationService.HostedServices;
+﻿namespace BuildingBlocks.MigrationService;
 
-public sealed class DbMigrationHostedService<TDbContext>(
+public sealed class MigrationSeedWorker<TDbContext>(
     IServiceProvider serviceProvider,
     IHostApplicationLifetime hostApplicationLifetime)
     : BackgroundService
     where TDbContext : DbContext
 {
-    private static readonly string s_defaultActivitySourceName =
-        Assembly.GetEntryAssembly()?.GetName().Name
-        ?? "BuildingBlocks.MigrationService";
-
-    private static readonly ActivitySource s_activitySource = new(s_defaultActivitySourceName);
+    private static readonly ActivitySource s_activitySource = new(MigrationExtensions.ActivitySourceName);
 
     protected override async Task ExecuteAsync(
         CancellationToken stoppingToken)
