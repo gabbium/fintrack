@@ -23,6 +23,8 @@ Main components:
 
 - **Ledger API** – handles income and expense tracking
 - **Ledger Migration Service** – applies EF Core migrations during deployment for **ledgerdb**
+- **Planning API** – handles financial planning and scheduled transactions
+- **Planning Migration Service** – applies EF Core migrations during deployment for **planningdb**
 - **Aspire Dashboard** – provides observability (logs, metrics, traces)
 
 ---
