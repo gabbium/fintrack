@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace BuildingBlocks.MigrationService.HostedServices;
+﻿namespace BuildingBlocks.MigrationService.HostedServices;
 
 public sealed class DbMigrationHostedService<TDbContext>(
     IServiceProvider serviceProvider,

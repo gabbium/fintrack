@@ -4,6 +4,7 @@
     <Project Path="aspire/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/BuildingBlocks/">
+    <Project Path="building-blocks/BuildingBlocks.CleanArch/BuildingBlocks.CleanArch.csproj" Id="53356052-7cf1-48a5-beff-c35f7cde184c" />
     <Project Path="building-blocks/BuildingBlocks.MigrationService/BuildingBlocks.MigrationService.csproj" />
   </Folder>
   <Folder Name="/Services/" />
