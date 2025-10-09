@@ -1,3 +1,9 @@
+## [1.8.0](https://github.com/gabbium/fintrack/compare/v1.7.8...v1.8.0) (2025-10-09)
+
+### Features
+
+* planning service ([#14](https://github.com/gabbium/fintrack/issues/14)) ([0258d47](https://github.com/gabbium/fintrack/commit/0258d4723a4b473f44437d52a46263649ce52e59))
+
 ## [1.7.8](https://github.com/gabbium/fintrack/compare/v1.7.7...v1.7.8) (2025-10-06)
 
 ### Bug Fixes
