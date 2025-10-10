@@ -10,7 +10,7 @@ using Fintrack.Planning.Application.UseCases.UpdatePlannedMovement;
 
 namespace Fintrack.Planning.Api.Apis;
 
-public sealed class PlannedMovementsApi : IApi
+public sealed class PlannedMovementsApi : IMinimalApi
 {
     public void Map(IEndpointRouteBuilder builder)
     {
@@ -93,9 +93,7 @@ public sealed class PlannedMovementsApi : IApi
 
         var result = await mediator.SendAsync(query, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.Ok(result.Value)
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(() => Results.Ok(result.Value));
     }
 
     public static async Task<IResult> GetPlannedMovementById(
@@ -107,9 +105,7 @@ public sealed class PlannedMovementsApi : IApi
 
         var result = await mediator.SendAsync(query, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.Ok(result.Value)
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(() => Results.Ok(result.Value));
     }
 
     public static async Task<IResult> CreatePlannedMovement(
@@ -125,12 +121,10 @@ public sealed class PlannedMovementsApi : IApi
 
         var result = await mediator.SendAsync(command, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.CreatedAtRoute(
-                routeName: nameof(GetPlannedMovementById),
-                routeValues: new { id = result.Value!.Id },
-                value: result.Value)
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(() => Results.CreatedAtRoute(
+            routeName: nameof(GetPlannedMovementById),
+            routeValues: new { id = result.Value!.Id },
+            value: result.Value));
     }
 
     public static async Task<IResult> UpdatePlannedMovement(
@@ -148,9 +142,7 @@ public sealed class PlannedMovementsApi : IApi
 
         var result = await mediator.SendAsync(command, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.Ok(result.Value)
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(() => Results.Ok(result.Value));
     }
 
     public static async Task<IResult> RealizePlannedMovement(
@@ -162,9 +154,7 @@ public sealed class PlannedMovementsApi : IApi
 
         var result = await mediator.SendAsync(command, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.NoContent()
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(Results.NoContent);
     }
 
     public static async Task<IResult> CancelPlannedMovement(
@@ -176,9 +166,7 @@ public sealed class PlannedMovementsApi : IApi
 
         var result = await mediator.SendAsync(command, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.NoContent()
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(Results.NoContent);
     }
 
     public static async Task<IResult> DeletePlannedMovement(
@@ -190,8 +178,6 @@ public sealed class PlannedMovementsApi : IApi
 
         var result = await mediator.SendAsync(command, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.NoContent()
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(Results.NoContent);
     }
 }

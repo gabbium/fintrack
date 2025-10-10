@@ -1,12 +1,17 @@
-﻿using BuildingBlocks.CleanArch;
-
-namespace Fintrack.Ledger.Application;
+﻿namespace Fintrack.Ledger.Application;
 
 public static class DependencyInjection
 {
     public static IHostApplicationBuilder AddApplicationServices(this IHostApplicationBuilder builder)
     {
-        builder.AddMediator(Assembly.GetExecutingAssembly());
+        builder.Services.AddMediator(config =>
+        {
+            config.FromAssembly(Assembly.GetExecutingAssembly());
+            config.AddBehavior(typeof(LoggingBehavior<,>));
+            config.AddBehavior(typeof(ValidationBehavior<,>));
+        });
+
+        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
 
         return builder;
     }

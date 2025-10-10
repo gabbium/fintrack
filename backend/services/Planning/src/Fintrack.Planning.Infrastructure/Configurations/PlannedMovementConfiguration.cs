@@ -6,28 +6,28 @@ internal sealed class PlannedMovementConfiguration : IEntityTypeConfiguration<Pl
 {
     public void Configure(EntityTypeBuilder<PlannedMovement> builder)
     {
-        builder.HasKey(plannedMovement => plannedMovement.Id);
+        builder.HasKey(pm => pm.Id);
 
-        builder.HasIndex(plannedMovement => plannedMovement.UserId);
+        builder.HasIndex(pm => pm.UserId);
 
-        builder.Property(plannedMovement => plannedMovement.UserId);
+        builder.Property(pm => pm.UserId);
 
-        builder.Property(plannedMovement => plannedMovement.Kind)
+        builder.Property(pm => pm.Kind)
             .HasConversion<string>()
             .HasMaxLength(30);
 
-        builder.Property(plannedMovement => plannedMovement.Amount)
+        builder.Property(pm => pm.Amount)
             .HasPrecision(18, 2);
 
-        builder.Property(plannedMovement => plannedMovement.Description)
+        builder.Property(pm => pm.Description)
             .HasMaxLength(128);
 
-        builder.Property(plannedMovement => plannedMovement.DueOn);
+        builder.Property(pm => pm.DueOn);
 
-        builder.Property(plannedMovement => plannedMovement.Status)
+        builder.Property(pm => pm.Status)
             .HasConversion<string>()
             .HasMaxLength(30);
 
-        builder.Ignore(plannedMovement => plannedMovement.DomainEvents);
+        builder.Ignore(pm => pm.DomainEvents);
     }
 }

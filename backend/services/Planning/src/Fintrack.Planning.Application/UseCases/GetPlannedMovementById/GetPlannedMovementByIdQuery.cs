@@ -4,5 +4,5 @@ namespace Fintrack.Planning.Application.UseCases.GetPlannedMovementById;
 
 public sealed record GetPlannedMovementByIdQuery(
     Guid Id)
-    : IQuery<PlannedMovementDto>;
+    : IQuery<Result<PlannedMovementDto>>;
 

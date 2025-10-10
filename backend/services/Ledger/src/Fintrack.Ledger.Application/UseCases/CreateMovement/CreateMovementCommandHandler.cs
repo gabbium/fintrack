@@ -8,7 +8,7 @@ internal sealed class CreateMovementCommandHandler(
     IIdentityService identityService,
     IMovementRepository movementRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<CreateMovementCommand, MovementDto>
+    : ICommandHandler<CreateMovementCommand, Result<MovementDto>>
 {
     public async Task<Result<MovementDto>> HandleAsync(
         CreateMovementCommand command,

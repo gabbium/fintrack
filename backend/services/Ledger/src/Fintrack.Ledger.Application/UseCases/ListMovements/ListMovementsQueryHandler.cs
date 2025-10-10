@@ -4,7 +4,7 @@ namespace Fintrack.Ledger.Application.UseCases.ListMovements;
 
 internal sealed class ListMovementsQueryHandler(
     IListMovementsQueryService listMovementsQueryService)
-    : IQueryHandler<ListMovementsQuery, PaginatedList<MovementDto>>
+    : IQueryHandler<ListMovementsQuery, Result<PaginatedList<MovementDto>>>
 {
     public async Task<Result<PaginatedList<MovementDto>>> HandleAsync(
         ListMovementsQuery query,

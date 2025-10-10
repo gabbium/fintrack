@@ -1,6 +1,5 @@
 ﻿using Fintrack.Planning.Api.FunctionalTests.Steps;
 using Fintrack.Planning.Api.FunctionalTests.TestHelpers;
-using Fintrack.Planning.Api.FunctionalTests.TestHelpers.Assertions;
 using Fintrack.Planning.Application.Models;
 
 namespace Fintrack.Planning.Api.FunctionalTests.Apis.PlannedMovements;

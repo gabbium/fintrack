@@ -8,7 +8,7 @@ public sealed class PlannedMovementRepository(PlanningDbContext dbContext) : IPl
     {
         return await dbContext.PlannedMovements
             .AsNoTracking()
-            .FirstOrDefaultAsync(plannedMovement => plannedMovement.Id == id, cancellationToken);
+            .FirstOrDefaultAsync(pm => pm.Id == id, cancellationToken);
     }
 
     public async Task AddAsync(PlannedMovement plannedMovement, CancellationToken cancellationToken = default)

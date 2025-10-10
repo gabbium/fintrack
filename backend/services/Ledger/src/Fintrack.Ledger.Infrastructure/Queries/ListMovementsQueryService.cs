@@ -13,48 +13,44 @@ internal sealed class ListMovementsQueryService(LedgerDbContext dbContext) : ILi
 
         if (query.Kind is { Count: > 0 })
         {
-            queryable = queryable.Where(movement => query.Kind.Contains(movement.Kind));
+            queryable = queryable.Where(mov => query.Kind.Contains(mov.Kind));
         }
 
         if (query.MinOccurredOn is not null)
         {
-            queryable = queryable.Where(movement => movement.OccurredOn >= query.MinOccurredOn.Value);
+            queryable = queryable.Where(mov => mov.OccurredOn >= query.MinOccurredOn.Value);
         }
 
         if (query.MaxOccurredOn is not null)
         {
-            queryable = queryable.Where(movement => movement.OccurredOn <= query.MaxOccurredOn.Value);
+            queryable = queryable.Where(mov => mov.OccurredOn <= query.MaxOccurredOn.Value);
         }
-
-        var totalItems = await queryable.CountAsync(cancellationToken);
 
         var normalizedOrder = query.Order?.Trim().ToLowerInvariant();
 
         queryable = normalizedOrder switch
         {
             "occurredon desc" => queryable
-                .OrderByDescending(movement => movement.OccurredOn)
-                .ThenBy(movement => movement.Id),
+                .OrderByDescending(mov => mov.OccurredOn)
+                .ThenBy(mov => mov.Id),
             "occurredon asc" => queryable
-                .OrderBy(movement => movement.OccurredOn)
-                .ThenBy(movement => movement.Id),
+                .OrderBy(mov => mov.OccurredOn)
+                .ThenBy(mov => mov.Id),
             "amount desc" => queryable
-                .OrderByDescending(movement => movement.Amount)
-                .ThenBy(movement => movement.Id),
+                .OrderByDescending(mov => mov.Amount)
+                .ThenBy(mov => mov.Id),
             "amount asc" => queryable
-                .OrderBy(movement => movement.Amount)
-                .ThenBy(movement => movement.Id),
+                .OrderBy(mov => mov.Amount)
+                .ThenBy(mov => mov.Id),
             _ => queryable
-                .OrderByDescending(movement => movement.OccurredOn)
-                .ThenBy(movement => movement.Id),
+                .OrderByDescending(mov => mov.OccurredOn)
+                .ThenBy(mov => mov.Id),
         };
 
-        var movements = await queryable
-            .Skip((query.PageNumber - 1) * query.PageSize)
-            .Take(query.PageSize)
-            .Select(movement => MovementDto.FromDomain(movement))
-            .ToListAsync(cancellationToken);
-
-        return new PaginatedList<MovementDto>(movements, totalItems, query.PageNumber, query.PageSize);
+        return await queryable.ToPaginatedListAsync(
+            query.PageNumber,
+            query.PageSize,
+            movement => MovementDto.FromDomain(movement),
+            cancellationToken);
     }
 }

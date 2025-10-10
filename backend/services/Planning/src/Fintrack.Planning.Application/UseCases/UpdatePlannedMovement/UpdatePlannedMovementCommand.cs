@@ -9,4 +9,4 @@ public sealed record UpdatePlannedMovementCommand(
     decimal Amount,
     string? Description,
     DateTimeOffset DueOn)
-    : ICommand<PlannedMovementDto>;
+    : ICommand<Result<PlannedMovementDto>>;

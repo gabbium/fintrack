@@ -1,6 +1,5 @@
 ﻿using Fintrack.Planning.Api.FunctionalTests.Steps;
 using Fintrack.Planning.Api.FunctionalTests.TestHelpers;
-using Fintrack.Planning.Api.FunctionalTests.TestHelpers.Assertions;
 using Fintrack.Planning.Api.FunctionalTests.TestHelpers.Builders;
 using Fintrack.Planning.Application.Models;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;

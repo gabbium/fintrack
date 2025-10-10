@@ -2,7 +2,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\aspire\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\..\..\..\building-blocks\BuildingBlocks.MigrationService\BuildingBlocks.MigrationService.csproj" />
     <ProjectReference Include="..\Fintrack.Ledger.Infrastructure\Fintrack.Ledger.Infrastructure.csproj" />
   </ItemGroup>
   

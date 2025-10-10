@@ -6,7 +6,7 @@ namespace Fintrack.Planning.Application.UseCases.UpdatePlannedMovement;
 internal sealed class UpdatePlannedMovementCommandHandler(
     IPlannedMovementRepository plannedMovementRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<UpdatePlannedMovementCommand, PlannedMovementDto>
+    : ICommandHandler<UpdatePlannedMovementCommand, Result<PlannedMovementDto>>
 {
     public async Task<Result<PlannedMovementDto>> HandleAsync(
         UpdatePlannedMovementCommand command,

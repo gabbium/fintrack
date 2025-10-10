@@ -3,9 +3,16 @@
     <Project Path="aspire/Fintrack.AppHost/Fintrack.AppHost.csproj" />
     <Project Path="aspire/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj" />
   </Folder>
-  <Folder Name="/BuildingBlocks/">
-    <Project Path="building-blocks/BuildingBlocks.CleanArch/BuildingBlocks.CleanArch.csproj" Id="53356052-7cf1-48a5-beff-c35f7cde184c" />
-    <Project Path="building-blocks/BuildingBlocks.MigrationService/BuildingBlocks.MigrationService.csproj" />
+  <Folder Name="/CleanArch/">
+    <Project Path="cleanarch/CleanArch.Mediator.LoggingBehavior/CleanArch.Mediator.Behaviors.csproj" Id="6eeecb0c-f9cf-4bdf-b256-59f1f9360c4f" />
+    <Project Path="cleanarch/CleanArch.Mediator.Primitives/CleanArch.Mediator.Primitives.csproj" Id="918394db-da56-410d-9f27-34d22e7be8c5" />
+    <Project Path="cleanarch/CleanArch.Mediator/CleanArch.Mediator.csproj" Id="8721a1ff-dd93-4f67-99cc-80bcc20d8f5c" />
+    <Project Path="cleanarch/CleanArch.MinimalApis/CleanArch.MinimalApis.csproj" Id="c6bab10f-922e-42f0-a640-11ae21ec232b" />
+    <Project Path="cleanarch/CleanArch.Persistence.EFCore/CleanArch.Persistence.EFCore.csproj" Id="94976e3e-9552-41b5-958c-687428c00d9b" />
+    <Project Path="cleanarch/CleanArch.Persistence.Primitives/CleanArch.Persistence.Primitives.csproj" Id="fc096fee-f7be-4e0a-b2c9-6acd72260c7f" />
+    <Project Path="cleanarch/CleanArch.Results.AspNetCore/CleanArch.Results.AspNetCore.csproj" Id="79f38014-64c6-4dc1-8fda-6fabfa189462" />
+    <Project Path="cleanarch/CleanArch.Results/CleanArch.Results.csproj" Id="0f75d764-84f9-440f-8ee0-87e8137464db" />
+    <Project Path="cleanarch/CleanArch.TestHelpers/CleanArch.TestHelpers.csproj" />
   </Folder>
   <Folder Name="/Services/" />
   <Folder Name="/Services/Ledger/" />

@@ -8,4 +8,4 @@ public sealed record CreatePlannedMovementCommand(
     decimal Amount,
     string? Description,
     DateTimeOffset DueOn)
-    : ICommand<PlannedMovementDto>;
+    : ICommand<Result<PlannedMovementDto>>;

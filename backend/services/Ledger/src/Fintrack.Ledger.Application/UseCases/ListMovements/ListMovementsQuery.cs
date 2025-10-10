@@ -10,4 +10,4 @@ public sealed record ListMovementsQuery(
     List<MovementKind>? Kind,
     DateTimeOffset? MinOccurredOn,
     DateTimeOffset? MaxOccurredOn)
-    : IQuery<PaginatedList<MovementDto>>;
+    : IQuery<Result<PaginatedList<MovementDto>>>;

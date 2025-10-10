@@ -1,13 +1,12 @@
-﻿global using System.Net;
-global using System.Net.Http.Json;
+﻿global using System.Net.Http.Json;
 global using System.Security.Claims;
 global using System.Text.Json;
 global using System.Text.Json.Serialization;
-global using CleanArch;
-global using Microsoft.AspNetCore.Builder;
+global using CleanArch.Persistence.Primitives;
+global using CleanArch.TestHelpers.Assertions;
+global using CleanArch.TestHelpers.AutoAuthorize;
 global using Microsoft.AspNetCore.Hosting;
 global using Microsoft.AspNetCore.Http;
-global using Microsoft.AspNetCore.Mvc;
 global using Microsoft.AspNetCore.Mvc.Testing;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.DependencyInjection;

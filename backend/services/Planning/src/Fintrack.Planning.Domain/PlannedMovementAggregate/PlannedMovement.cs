@@ -1,7 +1,8 @@
 ﻿namespace Fintrack.Planning.Domain.PlannedMovementAggregate;
 
-public sealed class PlannedMovement : BaseEntity, IAggregateRoot
+public sealed class PlannedMovement : HasDomainEventsBase, IAggregateRoot
 {
+    public Guid Id { get; private set; }
     public Guid UserId { get; private set; }
     public PlannedMovementKind Kind { get; private set; }
     public decimal Amount { get; private set; }
@@ -27,6 +28,7 @@ public sealed class PlannedMovement : BaseEntity, IAggregateRoot
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be greater than zero.");
         }
 
+        Id = Guid.NewGuid();
         UserId = userId;
         Kind = kind;
         Amount = amount;

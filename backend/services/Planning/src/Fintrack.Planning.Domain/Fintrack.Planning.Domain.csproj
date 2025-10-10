@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <PackageReference Include="Gabbium.CleanArch" />
+    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.Mediator.Primitives\CleanArch.Mediator.Primitives.csproj" />
+    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.Persistence.Primitives\CleanArch.Persistence.Primitives.csproj" />
   </ItemGroup>
-  
+
 </Project>

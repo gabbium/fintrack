@@ -11,4 +11,4 @@ public sealed record ListPlannedMovementsQuery(
     List<PlannedMovementStatus>? Status,
     DateTimeOffset? MinDueOn,
     DateTimeOffset? MaxDueOn)
-    : IQuery<PaginatedList<PlannedMovementDto>>;
+    : IQuery<Result<PaginatedList<PlannedMovementDto>>>;

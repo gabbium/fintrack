@@ -8,7 +8,7 @@ using Fintrack.Ledger.Application.UseCases.UpdateMovement;
 
 namespace Fintrack.Ledger.Api.Apis;
 
-public sealed class MovementsApi : IApi
+public sealed class MovementsApi : IMinimalApi
 {
     public void Map(IEndpointRouteBuilder builder)
     {
@@ -70,9 +70,7 @@ public sealed class MovementsApi : IApi
 
         var result = await mediator.SendAsync(query, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.Ok(result.Value)
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(() => Results.Ok(result.Value));
     }
 
     public static async Task<IResult> GetMovementById(
@@ -84,9 +82,7 @@ public sealed class MovementsApi : IApi
 
         var result = await mediator.SendAsync(query, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.Ok(result.Value)
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(() => Results.Ok(result.Value));
     }
 
     public static async Task<IResult> CreateMovement(
@@ -102,12 +98,10 @@ public sealed class MovementsApi : IApi
 
         var result = await mediator.SendAsync(command, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.CreatedAtRoute(
-                routeName: nameof(GetMovementById),
-                routeValues: new { id = result.Value!.Id },
-                value: result.Value)
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(() => Results.CreatedAtRoute(
+            routeName: nameof(GetMovementById),
+            routeValues: new { id = result.Value!.Id },
+            value: result.Value));
     }
 
     public static async Task<IResult> UpdateMovement(
@@ -125,9 +119,7 @@ public sealed class MovementsApi : IApi
 
         var result = await mediator.SendAsync(command, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.Ok(result.Value)
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(() => Results.Ok(result.Value));
     }
 
     public static async Task<IResult> DeleteMovement(
@@ -139,8 +131,6 @@ public sealed class MovementsApi : IApi
 
         var result = await mediator.SendAsync(command, cancellationToken);
 
-        return result.IsSuccess
-            ? Results.NoContent()
-            : CustomResults.Problem(result);
+        return result.ToMinimalApiResult(Results.NoContent);
     }
 }

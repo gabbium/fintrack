@@ -1,5 +1,4 @@
-﻿using BuildingBlocks.MigrationService;
-using Fintrack.Planning.Application.Interfaces;
+﻿using Fintrack.Planning.Application.Interfaces;
 using Fintrack.Planning.Infrastructure;
 using Fintrack.Planning.MigrationService.Services;
 
@@ -14,7 +13,7 @@ public static class HostBuilderFactory
             {
                 services.AddDbContext<PlanningDbContext>(o => o.UseNpgsql(connectionString));
 
-                services.AddHostedService<MigrationSeedWorker<PlanningDbContext>>();
+                services.AddMigration<PlanningDbContext>();
 
                 services.AddTransient<IIdentityService, IdentityService>();
             })

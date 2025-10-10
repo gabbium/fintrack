@@ -2,4 +2,4 @@
 
 public sealed record DeleteMovementCommand(
     Guid Id)
-    : ICommand;
+    : ICommand<Result>;

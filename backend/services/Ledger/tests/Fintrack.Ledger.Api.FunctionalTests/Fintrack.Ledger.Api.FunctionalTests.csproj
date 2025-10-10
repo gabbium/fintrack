@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.TestHelpers\CleanArch.TestHelpers.csproj" />
     <ProjectReference Include="..\..\src\Fintrack.Ledger.Api\Fintrack.Ledger.Api.csproj" />
   </ItemGroup>
 

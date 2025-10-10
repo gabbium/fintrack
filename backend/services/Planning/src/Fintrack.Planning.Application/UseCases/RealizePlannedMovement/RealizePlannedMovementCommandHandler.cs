@@ -5,7 +5,7 @@ namespace Fintrack.Planning.Application.UseCases.RealizePlannedMovement;
 internal sealed class RealizePlannedMovementCommandHandler(
     IPlannedMovementRepository plannedMovementRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<RealizePlannedMovementCommand>
+    : ICommandHandler<RealizePlannedMovementCommand, Result>
 {
     public async Task<Result> HandleAsync(
         RealizePlannedMovementCommand command,

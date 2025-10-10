@@ -1,6 +1,5 @@
 ﻿using Fintrack.Ledger.Api.FunctionalTests.Steps;
 using Fintrack.Ledger.Api.FunctionalTests.TestHelpers;
-using Fintrack.Ledger.Api.FunctionalTests.TestHelpers.Assertions;
 using Fintrack.Ledger.Api.FunctionalTests.TestHelpers.Builders;
 using Fintrack.Ledger.Application.Models;
 using Fintrack.Ledger.Domain.MovementAggregate;

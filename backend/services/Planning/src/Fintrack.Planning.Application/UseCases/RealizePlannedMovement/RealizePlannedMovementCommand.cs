@@ -2,5 +2,5 @@
 
 public sealed record RealizePlannedMovementCommand(
     Guid Id)
-    : ICommand;
+    : ICommand<Result>;
 

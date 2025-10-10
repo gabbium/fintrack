@@ -23,6 +23,8 @@ public static class DependencyInjection
 
         builder.Services.AddTransient<IIdentityService, IdentityService>();
 
+        builder.Services.AddMinimalApisFromAssembly(Assembly.GetExecutingAssembly());
+
         return builder;
     }
 
@@ -30,7 +32,7 @@ public static class DependencyInjection
     {
         app.MapGroup("/api/v{version:apiVersion}")
             .WithApiVersionSet(app.NewApiVersionSet().ReportApiVersions().Build())
-            .MapApis(Assembly.GetExecutingAssembly());
+            .MapMinimalApis();
 
         app.MapOpenApiAndScalar();
 

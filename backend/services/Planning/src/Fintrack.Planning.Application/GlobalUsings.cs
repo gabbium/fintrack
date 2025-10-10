@@ -1,6 +1,10 @@
 ﻿global using System.ComponentModel;
 global using System.Reflection;
 global using System.Text.RegularExpressions;
-global using CleanArch;
+global using CleanArch.Mediator;
+global using CleanArch.Mediator.Behaviors;
+global using CleanArch.Mediator.Primitives;
+global using CleanArch.Persistence.Primitives;
+global using CleanArch.Results;
 global using FluentValidation;
 global using Microsoft.Extensions.Hosting;

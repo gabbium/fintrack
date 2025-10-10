@@ -41,11 +41,11 @@ public static class Extensions
 
     public static WebApplication MapDefaultEndpoints(this WebApplication app)
     {
-        app.UseExceptionHandler();
-
         app.MapDefaultSerilog();
 
         app.MapDefaultHealthChecks();
+
+        app.UseExceptionHandler();
 
         return app;
     }

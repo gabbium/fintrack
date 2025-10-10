@@ -5,7 +5,7 @@ namespace Fintrack.Planning.Application.UseCases.DeletePlannedMovement;
 internal sealed class DeletePlannedMovementCommandHandler(
     IPlannedMovementRepository plannedMovementRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<DeletePlannedMovementCommand>
+    : ICommandHandler<DeletePlannedMovementCommand, Result>
 {
     public async Task<Result> HandleAsync(
         DeletePlannedMovementCommand command,

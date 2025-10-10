@@ -1,6 +1,4 @@
-﻿using Fintrack.Planning.Api.FunctionalTests.TestHelpers.Infrastructure.Authentication;
-
-namespace Fintrack.Planning.Api.FunctionalTests.TestHelpers.Infrastructure;
+﻿namespace Fintrack.Planning.Api.FunctionalTests.TestHelpers.Infrastructure;
 
 public class CustomWebApplicationFactory(string connectionString) : WebApplicationFactory<Program>
 {
@@ -11,20 +9,7 @@ public class CustomWebApplicationFactory(string connectionString) : WebApplicati
 
         builder.ConfigureServices(services =>
         {
-            services.AddSingleton<IAutoAuthorizeAccessor, AutoAuthorizeAccessor>();
-            services.AddSingleton<IStartupFilter>(new AutoAuthorizeStartupFilter());
+            services.AddAutoAuthorize();
         });
-    }
-
-    private class AutoAuthorizeStartupFilter : IStartupFilter
-    {
-        public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next)
-        {
-            return builder =>
-            {
-                builder.UseMiddleware<AutoAuthorizeMiddleware>();
-                next(builder);
-            };
-        }
     }
 }

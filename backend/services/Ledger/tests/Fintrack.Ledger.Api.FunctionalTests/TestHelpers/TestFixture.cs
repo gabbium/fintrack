@@ -1,5 +1,4 @@
 ﻿using Fintrack.Ledger.Api.FunctionalTests.TestHelpers.Infrastructure;
-using Fintrack.Ledger.Api.FunctionalTests.TestHelpers.Infrastructure.Authentication;
 using Fintrack.Ledger.Api.FunctionalTests.TestHelpers.Infrastructure.Containers;
 
 namespace Fintrack.Ledger.Api.FunctionalTests.TestHelpers;
@@ -21,7 +20,7 @@ public class TestFixture : IAsyncLifetime
     {
         using var scope = Factory.Services.CreateScope();
         var autoAuthorizeAccessor = scope.ServiceProvider.GetRequiredService<IAutoAuthorizeAccessor>();
-        autoAuthorizeAccessor.User = null;
+        autoAuthorizeAccessor.Impersonate(null);
 
         await Database.ResetAsync();
     }

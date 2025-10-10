@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\aspire\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.MinimalApis\CleanArch.MinimalApis.csproj" />
+    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.Results.AspNetCore\CleanArch.Results.AspNetCore.csproj" />
     <ProjectReference Include="..\Fintrack.Planning.Infrastructure\Fintrack.Planning.Infrastructure.csproj" />
   </ItemGroup>
 

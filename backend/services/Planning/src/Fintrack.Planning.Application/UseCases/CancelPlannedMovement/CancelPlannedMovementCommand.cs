@@ -2,5 +2,5 @@
 
 public sealed record CancelPlannedMovementCommand(
     Guid Id)
-    : ICommand;
+    : ICommand<Result>;
 
