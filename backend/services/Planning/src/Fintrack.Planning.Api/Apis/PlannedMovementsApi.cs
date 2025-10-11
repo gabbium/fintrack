@@ -12,9 +12,9 @@ namespace Fintrack.Planning.Api.Apis;
 
 public sealed class PlannedMovementsApi : IMinimalApi
 {
-    public void Map(IEndpointRouteBuilder builder)
+    public void Map(IEndpointRouteBuilder app)
     {
-        var v1 = builder.MapGroup("planned-movements")
+        var v1 = app.MapGroup("planned-movements")
             .WithTags("Planned Movements")
             .RequireAuthorization()
             .HasApiVersion(1, 0);

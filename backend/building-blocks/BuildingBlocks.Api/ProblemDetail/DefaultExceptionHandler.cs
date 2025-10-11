@@ -38,7 +38,7 @@ public sealed class DefaultExceptionHandler : IExceptionHandler
         return true;
     }
 
-    private async Task HandleValidationException(HttpContext httpContext, Exception ex)
+    private static async Task HandleValidationException(HttpContext httpContext, Exception ex)
     {
         var exception = (ValidationException)ex;
 

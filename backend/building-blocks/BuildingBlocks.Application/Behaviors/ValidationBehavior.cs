@@ -9,7 +9,7 @@ public sealed class ValidationBehavior<TRequest, TResponse>(
     public async Task<TResponse> HandleAsync(
         TRequest request,
         Func<Task<TResponse>> next,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken = default)
     {
         if (_validators.Length != 0)
         {

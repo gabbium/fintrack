@@ -31,8 +31,6 @@ internal sealed class ListPlannedMovementsQueryService(PlanningDbContext dbConte
             queryable = queryable.Where(pm => pm.DueOn <= query.MaxDueOn.Value);
         }
 
-        var totalItems = await queryable.CountAsync(cancellationToken);
-
         var normalizedOrder = query.Order?.Trim().ToLowerInvariant();
 
         queryable = normalizedOrder switch

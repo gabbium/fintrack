@@ -10,9 +10,9 @@ namespace Fintrack.Ledger.Api.Apis;
 
 public sealed class MovementsApi : IMinimalApi
 {
-    public void Map(IEndpointRouteBuilder builder)
+    public void Map(IEndpointRouteBuilder app)
     {
-        var v1 = builder.MapGroup("movements")
+        var v1 = app.MapGroup("movements")
             .WithTags("Movements")
             .RequireAuthorization()
             .HasApiVersion(1, 0);
