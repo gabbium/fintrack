@@ -1,15 +1,15 @@
-name: Publish & Deploy
+name: Publish
 
 on:
   workflow_dispatch:
 
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
   id-token: write
-
-concurrency:
-  group: publish-deploy-${{ github.ref }}
-  cancel-in-progress: false
 
 jobs:
   guard:
@@ -17,15 +17,16 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.extract.outputs.version }}
+
     steps:
-      - name: ✅ Validate ref type
+      - name: Validate ref type
         run: |
           echo "ref=${{ github.ref }}  ref_type=${{ github.ref_type }}  ref_name=${{ github.ref_name }}"
           if [ "${{ github.ref_type }}" != "tag" ]; then
             echo "::error::This workflow must be run from a TAG (vX.Y.Z). Re-run and pick a tag in 'Use workflow from'."
             exit 1
           fi
-      - name: 🏷️ Extract version from tag
+      - name: Extract version from tag
         id: extract
         run: |
           raw="${{ github.ref_name }}"      # e.g., v1.2.3
@@ -38,27 +39,27 @@ jobs:
           echo "Resolved version: $ver"
 
   publish_images:
-    name: Build & Push Docker Images
+    name: Build & Push images
     needs: guard
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📦 Checkout at selected ref
+      - name: Checkout at selected ref
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.ref }}
 
-      - name: 🔧 Setup | Buildx
+      - name: Setup Buildx
         uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435
 
-      - name: 🔑 Login | Docker Hub
+      - name: Login Docker Hub
         uses: docker/login-action@5e57cd118135c172c3672efd75eb46360885c0ef
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: 🐳 Build & Push (ledger-api)
+      - name: Build & Push (ledger-api)
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83
         with:
           context: backend
@@ -68,7 +69,7 @@ jobs:
           provenance: false
           sbom: false
 
-      - name: 🐳 Build & Push (ledger-migrationservice)
+      - name: Build & Push (ledger-migrationservice)
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83
         with:
           context: backend
@@ -78,7 +79,7 @@ jobs:
           provenance: false
           sbom: false
 
-      - name: 🐳 Build & Push (planning-api)
+      - name: Build & Push (planning-api)
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83
         with:
           context: backend
@@ -88,7 +89,7 @@ jobs:
           provenance: false
           sbom: false
 
-      - name: 🐳 Build & Push (planning-migrationservice)
+      - name: Build & Push (planning-migrationservice)
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83
         with:
           context: backend
@@ -103,30 +104,28 @@ jobs:
     needs: [guard, publish_images]
     runs-on: ubuntu-latest
     environment: prod
-
     env:
       TF_VAR_image_version: ${{ needs.guard.outputs.version }}
       TF_VAR_authentication_oidc_jwt_authority: ${{ vars.AUTHENTICATION_OIDC_JWT_AUTHORITY }}
       TF_VAR_ledger_db_connection_string: ${{ secrets.LEDGER_DB_CONNECTION_STRING }}
       TF_VAR_planning_db_connection_string: ${{ secrets.PLANNING_DB_CONNECTION_STRING }}
-
     defaults:
       run:
         working-directory: infra/terraform
 
     steps:
-      - name: 📦 Checkout at selected ref
+      - name: Checkout at selected ref
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.ref }}
 
-      - name: ⚙️ Setup | Terraform 1.9.x
+      - name: Setup Terraform
         uses: hashicorp/setup-terraform@b9cd54a3c349d3f38e8881555d616ced269862dd
         with:
           terraform_version: 1.9.5
 
-      - name: 🧰 Init
+      - name: Init
         env:
           ARM_USE_OIDC: true
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -139,7 +138,7 @@ jobs:
             -backend-config="container_name=tfstate" \
             -backend-config="key=fintrack/prod.tfstate"
 
-      - name: 📋 Plan
+      - name: Plan
         env:
           ARM_USE_OIDC: true
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
@@ -147,7 +146,7 @@ jobs:
           ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         run: terraform plan -input=false -lock=false
 
-      - name: 🚀 Apply
+      - name: Apply
         env:
           ARM_USE_OIDC: true
           ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
