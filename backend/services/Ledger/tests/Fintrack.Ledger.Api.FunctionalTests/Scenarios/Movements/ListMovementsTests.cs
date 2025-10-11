@@ -46,20 +46,40 @@ public class ListMovementsTests : TestsBase
         bodyPage3.Items.ShouldBeEmpty();
     }
 
-    [Fact]
-    public async Task UserCanListMovementsOrderedByOccurredDate()
+    [Theory]
+    [InlineData("occurredon asc", SortDirection.Ascending)]
+    [InlineData("occurredon desc", SortDirection.Descending)]
+    public async Task UserCanListMovementsOrderedByOccurredDate(string orderBy, SortDirection sortDirection)
     {
         _auth.LoginAsUser();
         await _movement.EnsureMovementExists(new CreateMovementRequestBuilder().Build());
         await _movement.EnsureMovementExists(new CreateMovementRequestBuilder().Build());
         await _movement.EnsureMovementExists(new CreateMovementRequestBuilder().Build());
 
-        var request = new ListMovementsRequestBuilder().WithOrder("occurredon asc").Build();
+        var request = new ListMovementsRequestBuilder().WithOrder(orderBy).Build();
         var response = await _movement.ListMovements(request);
 
         var body = await response.ShouldBeOkWithBody<PaginatedList<MovementDto>>();
         body.Items.ShouldNotBeEmpty();
-        body.Items.Select(movement => movement.OccurredOn).ShouldBeInOrder(SortDirection.Ascending);
+        body.Items.Select(movement => movement.OccurredOn).ShouldBeInOrder(sortDirection);
+    }
+
+    [Theory]
+    [InlineData("amount asc", SortDirection.Ascending)]
+    [InlineData("amount desc", SortDirection.Descending)]
+    public async Task UserCanListMovementsOrderedByAmount(string orderBy, SortDirection sortDirection)
+    {
+        _auth.LoginAsUser();
+        await _movement.EnsureMovementExists(new CreateMovementRequestBuilder().Build());
+        await _movement.EnsureMovementExists(new CreateMovementRequestBuilder().Build());
+        await _movement.EnsureMovementExists(new CreateMovementRequestBuilder().Build());
+
+        var request = new ListMovementsRequestBuilder().WithOrder(orderBy).Build();
+        var response = await _movement.ListMovements(request);
+
+        var body = await response.ShouldBeOkWithBody<PaginatedList<MovementDto>>();
+        body.Items.ShouldNotBeEmpty();
+        body.Items.Select(movement => movement.Amount).ShouldBeInOrder(sortDirection);
     }
 
     [Fact]

@@ -46,20 +46,40 @@ public class ListPlannedMovementsTests : TestsBase
         bodyPage3.Items.ShouldBeEmpty();
     }
 
-    [Fact]
-    public async Task UserCanListPlannedMovementsOrderedByDueDate()
+    [Theory]
+    [InlineData("dueon asc", SortDirection.Ascending)]
+    [InlineData("dueon desc", SortDirection.Descending)]
+    public async Task UserCanListPlannedMovementsOrderedByDueDate(string orderBy, SortDirection sortDirection)
     {
         _auth.LoginAsUser();
         await _plannedMovement.EnsureActivePlannedMovementExists(new CreatePlannedMovementRequestBuilder().Build());
         await _plannedMovement.EnsureActivePlannedMovementExists(new CreatePlannedMovementRequestBuilder().Build());
         await _plannedMovement.EnsureActivePlannedMovementExists(new CreatePlannedMovementRequestBuilder().Build());
 
-        var request = new ListPlannedMovementsRequestBuilder().WithOrder("dueon asc").Build();
+        var request = new ListPlannedMovementsRequestBuilder().WithOrder(orderBy).Build();
         var response = await _plannedMovement.ListPlannedMovements(request);
 
         var body = await response.ShouldBeOkWithBody<PaginatedList<PlannedMovementDto>>();
         body.Items.ShouldNotBeEmpty();
-        body.Items.Select(plannedMovement => plannedMovement.DueOn).ShouldBeInOrder(SortDirection.Ascending);
+        body.Items.Select(plannedMovement => plannedMovement.DueOn).ShouldBeInOrder(sortDirection);
+    }
+
+    [Theory]
+    [InlineData("amount asc", SortDirection.Ascending)]
+    [InlineData("amount desc", SortDirection.Descending)]
+    public async Task UserCanListPlannedMovementsOrderedByAmount(string orderBy, SortDirection sortDirection)
+    {
+        _auth.LoginAsUser();
+        await _plannedMovement.EnsureActivePlannedMovementExists(new CreatePlannedMovementRequestBuilder().Build());
+        await _plannedMovement.EnsureActivePlannedMovementExists(new CreatePlannedMovementRequestBuilder().Build());
+        await _plannedMovement.EnsureActivePlannedMovementExists(new CreatePlannedMovementRequestBuilder().Build());
+
+        var request = new ListPlannedMovementsRequestBuilder().WithOrder(orderBy).Build();
+        var response = await _plannedMovement.ListPlannedMovements(request);
+
+        var body = await response.ShouldBeOkWithBody<PaginatedList<PlannedMovementDto>>();
+        body.Items.ShouldNotBeEmpty();
+        body.Items.Select(plannedMovement => plannedMovement.Amount).ShouldBeInOrder(sortDirection);
     }
 
     [Fact]
