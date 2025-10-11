@@ -6,7 +6,7 @@ namespace Fintrack.Ledger.Application.UseCases.UpdateMovement;
 internal sealed class UpdateMovementCommandHandler(
     IMovementRepository movementRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<UpdateMovementCommand, MovementDto>
+    : ICommandHandler<UpdateMovementCommand, Result<MovementDto>>
 {
     public async Task<Result<MovementDto>> HandleAsync(
         UpdateMovementCommand command,

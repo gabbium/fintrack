@@ -5,7 +5,7 @@ namespace Fintrack.Ledger.Application.UseCases.GetMovementById;
 
 internal sealed class GetMovementByIdQueryHandler(
     IMovementRepository movementRepository)
-    : IQueryHandler<GetMovementByIdQuery, MovementDto>
+    : IQueryHandler<GetMovementByIdQuery, Result<MovementDto>>
 {
     public async Task<Result<MovementDto>> HandleAsync(
         GetMovementByIdQuery query,

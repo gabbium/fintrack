@@ -1,2 +1,1 @@
-﻿global using System.Diagnostics;
-global using Microsoft.EntityFrameworkCore;
+﻿global using Gabbium.Persistence.EFCore;

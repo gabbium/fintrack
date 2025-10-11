@@ -1,32 +1,22 @@
-﻿namespace Fintrack.Ledger.Application;
+﻿using BuildingBlocks.Application.Behaviors;
+
+namespace Fintrack.Ledger.Application;
 
 public static class DependencyInjection
 {
-    public static IHostApplicationBuilder AddApplicationServices(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddApplicationServices(
+        this IHostApplicationBuilder builder)
     {
-        var assembly = Assembly.GetExecutingAssembly();
+        builder.Services.AddMediator(config =>
+        {
+            config.FromAssembly(Assembly.GetExecutingAssembly());
+            config.AddBehavior(typeof(LoggingBehavior<,>));
+            config.AddBehavior(typeof(ValidationBehavior<,>));
+        });
 
-        builder.Services.Scan(source => source.FromAssemblies(assembly)
-            .AddClasses(filter => filter.AssignableTo(typeof(ICommandHandler<>)), publicOnly: false)
-                .AsImplementedInterfaces().WithScopedLifetime()
-            .AddClasses(filter => filter.AssignableTo(typeof(ICommandHandler<,>)), publicOnly: false)
-                .AsImplementedInterfaces().WithScopedLifetime()
-            .AddClasses(filter => filter.AssignableTo(typeof(IQueryHandler<,>)), publicOnly: false)
-                .AsImplementedInterfaces().WithScopedLifetime()
-            .AddClasses(filter => filter.AssignableTo(typeof(IDomainEventHandler<>)), publicOnly: false)
-                .AsImplementedInterfaces().WithScopedLifetime());
-
-        builder.Services.TryDecorate(typeof(ICommandHandler<>), typeof(ValidationBehavior.CommandHandler<>));
-        builder.Services.TryDecorate(typeof(ICommandHandler<,>), typeof(ValidationBehavior.CommandHandler<,>));
-        builder.Services.TryDecorate(typeof(IQueryHandler<,>), typeof(ValidationBehavior.QueryHandler<,>));
-
-        builder.Services.TryDecorate(typeof(ICommandHandler<>), typeof(LoggingBehavior.CommandHandler<>));
-        builder.Services.TryDecorate(typeof(ICommandHandler<,>), typeof(LoggingBehavior.CommandHandler<,>));
-        builder.Services.TryDecorate(typeof(IQueryHandler<,>), typeof(LoggingBehavior.QueryHandler<,>));
-
-        builder.Services.AddValidatorsFromAssembly(assembly, includeInternalTypes: true);
-
-        builder.Services.AddScoped<IMediator, Mediator>();
+        builder.Services.AddValidatorsFromAssembly(
+            Assembly.GetExecutingAssembly(),
+            includeInternalTypes: true);
 
         return builder;
     }

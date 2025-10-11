@@ -1,7 +1,9 @@
 ﻿global using System.ComponentModel;
 global using System.Reflection;
 global using System.Text.RegularExpressions;
-global using CleanArch;
 global using FluentValidation;
-global using Microsoft.Extensions.DependencyInjection;
+global using Gabbium.Mediator;
+global using Gabbium.Mediator.Primitives;
+global using Gabbium.Persistence.Primitives;
+global using Gabbium.Results;
 global using Microsoft.Extensions.Hosting;

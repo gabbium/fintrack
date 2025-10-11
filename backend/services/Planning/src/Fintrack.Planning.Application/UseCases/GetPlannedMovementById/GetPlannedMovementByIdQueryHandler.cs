@@ -5,7 +5,7 @@ namespace Fintrack.Planning.Application.UseCases.GetPlannedMovementById;
 
 internal sealed class GetPlannedMovementByIdQueryHandler(
     IPlannedMovementRepository plannedMovementRepository)
-    : IQueryHandler<GetPlannedMovementByIdQuery, PlannedMovementDto>
+    : IQueryHandler<GetPlannedMovementByIdQuery, Result<PlannedMovementDto>>
 {
     public async Task<Result<PlannedMovementDto>> HandleAsync(
         GetPlannedMovementByIdQuery query,

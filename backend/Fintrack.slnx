@@ -3,6 +3,12 @@
     <Project Path="aspire/Fintrack.AppHost/Fintrack.AppHost.csproj" />
     <Project Path="aspire/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj" />
   </Folder>
+  <Folder Name="/BuildingBlocks/">
+    <Project Path="building-blocks/BuildingBlocks.Api/BuildingBlocks.Api.csproj" Id="48503b80-fc99-4d44-a94f-9ab14c4a5360" />
+    <Project Path="building-blocks/BuildingBlocks.Application/BuildingBlocks.Application.csproj" Id="5808a87b-7033-4dac-a0e9-48036713f4d6" />
+    <Project Path="building-blocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj" Id="060f3605-a142-4d1b-adb7-a27d7eec2cd0" />
+    <Project Path="building-blocks/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj" Id="0fa0533d-a224-4194-bb44-766ff1bb2c54" />
+  </Folder>
   <Folder Name="/Services/" />
   <Folder Name="/Services/Ledger/" />
   <Folder Name="/Services/Ledger/src/">
@@ -16,7 +22,6 @@
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Api.FunctionalTests/Fintrack.Ledger.Api.FunctionalTests.csproj" />
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Application.UnitTests/Fintrack.Ledger.Application.UnitTests.csproj" />
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Domain.UnitTests/Fintrack.Ledger.Domain.UnitTests.csproj" />
-    <Project Path="services/Ledger/tests/Fintrack.Ledger.MigrationService.IntegrationTests/Fintrack.Ledger.MigrationService.IntegrationTests.csproj" />
   </Folder>
   <Folder Name="/Services/Planning/" />
   <Folder Name="/Services/Planning/src/">
@@ -30,6 +35,5 @@
     <Project Path="services/Planning/tests/Fintrack.Planning.Api.FunctionalTests/Fintrack.Planning.Api.FunctionalTests.csproj" />
     <Project Path="services/Planning/tests/Fintrack.Planning.Application.UnitTests/Fintrack.Planning.Application.UnitTests.csproj" />
     <Project Path="services/Planning/tests/Fintrack.Planning.Domain.UnitTests/Fintrack.Planning.Domain.UnitTests.csproj" />
-    <Project Path="services/Planning/tests/Fintrack.Planning.MigrationService.IntegrationTests/Fintrack.Planning.MigrationService.IntegrationTests.csproj" />
   </Folder>
 </Solution>

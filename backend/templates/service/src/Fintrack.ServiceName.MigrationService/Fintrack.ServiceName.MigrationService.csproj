@@ -1,8 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\aspire\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\Fintrack.ServiceName.Infrastructure\Fintrack.ServiceName.Infrastructure.csproj" />
-  </ItemGroup>
-
-</Project>

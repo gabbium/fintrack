@@ -4,7 +4,7 @@ namespace Fintrack.Planning.Application.UseCases.ListPlannedMovements;
 
 internal sealed class ListPlannedMovementsQueryHandler(
     IListPlannedMovementsQueryService listPlannedMovementsQueryService)
-    : IQueryHandler<ListPlannedMovementsQuery, PaginatedList<PlannedMovementDto>>
+    : IQueryHandler<ListPlannedMovementsQuery, Result<PaginatedList<PlannedMovementDto>>>
 {
     public async Task<Result<PaginatedList<PlannedMovementDto>>> HandleAsync(
         ListPlannedMovementsQuery query,

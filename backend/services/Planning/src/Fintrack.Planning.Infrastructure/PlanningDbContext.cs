@@ -1,4 +1,4 @@
-﻿using Fintrack.Planning.Application.Interfaces;
+﻿using BuildingBlocks.Application.Identity;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;
 
 namespace Fintrack.Planning.Infrastructure;
@@ -19,7 +19,7 @@ public sealed class PlanningDbContext(
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         modelBuilder.Entity<PlannedMovement>()
-            .HasQueryFilter(plannedMovement => plannedMovement.UserId == _userId);
+            .HasQueryFilter(pm => pm.UserId == _userId);
     }
 }
 

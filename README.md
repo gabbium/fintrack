@@ -33,23 +33,18 @@ Main components:
 
 Local development is handled entirely through **.NET Aspire**: running the solution automatically starts Keycloak, PostgreSQL, the API, the migration service, and opens the Aspire dashboard — no manual setup required.
 
-You can also scaffold new services or use cases via Fintrack templates:
-
-- `dotnet new fintrack-service`
-- `dotnet new fintrack-usecase`
-
 ---
 
 ## 🚀 Workflows
 
 Fintrack uses **GitHub Actions** for continuous integration and delivery:
 
-| Workflow                 | Purpose                                                                      |
-| ------------------------ | ---------------------------------------------------------------------------- |
-| **Backend — Validate**   | Validates code formatting, runs SonarCloud analysis, and Docker build checks |
-| **Terraform — Validate** | Checks Terraform syntax, formatting, and dry-run plan                        |
-| **Release & Versioning** | Generates semantic version tags and GitHub releases                          |
-| **Publish & Deploy**     | Builds Docker images and applies Terraform to update Azure containers        |
+| Workflow               | Purpose                                                                      |
+| ---------------------- | ---------------------------------------------------------------------------- |
+| **Backend Validate**   | Validates code formatting, runs SonarCloud analysis, and Docker build checks |
+| **Terraform Validate** | Checks Terraform syntax, formatting, and dry-run plan                        |
+| **Release**            | Generates semantic version tags and GitHub releases                          |
+| **Publish**            | Builds Docker images and applies Terraform to update Azure containers        |
 
 ---
 

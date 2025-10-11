@@ -1,16 +1,20 @@
-name: Backend — Validate
+name: Backend Validate
 
 on:
   workflow_dispatch:
   pull_request:
     paths:
-      - "backend/**"
-      - ".github/workflows/backend-validate.yml"
+      - backend/**
+      - .github/workflows/backend-validate.yml
   push:
-    branches: ["main"]
+    branches: [main]
     paths:
-      - "backend/**"
-      - ".github/workflows/backend-validate.yml"
+      - backend/**
+      - .github/workflows/backend-validate.yml
+
+concurrency:
+  group: backend-validate-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   format-check:
@@ -21,21 +25,21 @@ jobs:
         working-directory: backend
 
     steps:
-      - name: 📦 Checkout | Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: ⚙️ Setup | .NET 9.0 SDK
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
 
-      - name: 🧾 Verify | .editorconfig Compliance
+      - name: Verify .editorconfig compliance
         run: dotnet format --verify-no-changes --verbosity minimal
 
   sonar-analysis:
-    name: "SonarCloud Analyze"
+    name: SonarCloud Analysis
     runs-on: ubuntu-latest
     needs: format-check
     defaults:
@@ -47,28 +51,28 @@ jobs:
       pull-requests: write
 
     steps:
-      - name: 📦 Checkout | Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: ☕ Setup | Java 21
+      - name: Setup Java
         uses: actions/setup-java@v4
         with:
           java-version: 21
           distribution: zulu
 
-      - name: ⚙️ Setup | .NET 9.0 SDK
+      - name: Setup .NET SDK
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 9.0.x
 
-      - name: 📦 Install | SonarScanner for .NET
+      - name: Install SonarScanner for .NET
         run: |
           dotnet tool install --global dotnet-sonarscanner
           echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
-      - name: 📊 Run | SonarCloud Analysis
+      - name: Run SonarCloud analysis
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
@@ -86,7 +90,7 @@ jobs:
           dotnet sonarscanner end /d:sonar.token="$SONAR_TOKEN"
 
   docker-validate:
-    name: "Docker Build check (no push)"
+    name: Docker Build check
     runs-on: ubuntu-latest
     needs: format-check
     strategy:
@@ -106,18 +110,18 @@ jobs:
             context: backend
 
     steps:
-      - name: 📦 Checkout | Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: 🧰 Set up Docker Buildx
+      - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@e468171a9de216ec08956ac3ada2f0791b6bd435
 
-      - name: 🐳 Validate ${{ matrix.name }}
+      - name: Validate ${{ matrix.name }}
         uses: docker/build-push-action@263435318d21b8e681c14492fe198d362a7d2c83
         env:
-          DOCKER_BUILD_SUMMARY: "false"
+          DOCKER_BUILD_SUMMARY: false
         with:
           context: ${{ matrix.context }}
           file: ${{ matrix.file }}

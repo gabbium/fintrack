@@ -6,8 +6,8 @@ var builder = Host.CreateApplicationBuilder(args);
 
 builder.AddServiceDefaults();
 
-builder.AddInfrastructureServices()
-    .AddWorkerServices();
+builder.AddInfrastructureServices();
+builder.AddWorkerServices();
 
 var host = builder.Build();
 

@@ -5,7 +5,7 @@ namespace Fintrack.Ledger.Application.UseCases.DeleteMovement;
 internal sealed class DeleteMovementCommandHandler(
     IMovementRepository movementRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<DeleteMovementCommand>
+    : ICommandHandler<DeleteMovementCommand, Result>
 {
     public async Task<Result> HandleAsync(
         DeleteMovementCommand command,

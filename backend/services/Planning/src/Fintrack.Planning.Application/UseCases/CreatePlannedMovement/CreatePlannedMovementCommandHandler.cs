@@ -1,4 +1,4 @@
-using Fintrack.Planning.Application.Interfaces;
+using BuildingBlocks.Application.Identity;
 using Fintrack.Planning.Application.Models;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;
 
@@ -8,7 +8,7 @@ internal sealed class CreatePlannedMovementCommandHandler(
     IIdentityService identityService,
     IPlannedMovementRepository plannedMovementRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<CreatePlannedMovementCommand, PlannedMovementDto>
+    : ICommandHandler<CreatePlannedMovementCommand, Result<PlannedMovementDto>>
 {
     public async Task<Result<PlannedMovementDto>> HandleAsync(
         CreatePlannedMovementCommand command,

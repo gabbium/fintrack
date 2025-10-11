@@ -13,7 +13,7 @@ builder.AddApiServices();
 
 var app = builder.Build();
 
-app.MapDefaultEndpoints();
+app.MapServiceDefaultEndpoints();
 
 app.UseApi();
 

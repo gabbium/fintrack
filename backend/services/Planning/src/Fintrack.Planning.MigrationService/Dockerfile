@@ -11,6 +11,10 @@ WORKDIR /src
 
 COPY Directory.Build.props ./
 COPY Directory.Packages.props ./
+COPY building-blocks/BuildingBlocks.Api/BuildingBlocks.Api.csproj building-blocks/BuildingBlocks.Api/
+COPY building-blocks/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj building-blocks/BuildingBlocks.Infrastructure/
+COPY building-blocks/BuildingBlocks.Application/BuildingBlocks.Application.csproj building-blocks/BuildingBlocks.Application/
+COPY building-blocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj building-blocks/BuildingBlocks.Domain/
 COPY services/Planning/src/Fintrack.Planning.MigrationService/Fintrack.Planning.MigrationService.csproj services/Planning/src/Fintrack.Planning.MigrationService/
 COPY services/Planning/src/Fintrack.Planning.Infrastructure/Fintrack.Planning.Infrastructure.csproj services/Planning/src/Fintrack.Planning.Infrastructure/
 COPY services/Planning/src/Fintrack.Planning.Application/Fintrack.Planning.Application.csproj services/Planning/src/Fintrack.Planning.Application/
@@ -19,6 +23,10 @@ COPY aspire/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj aspire/Fint
 
 RUN dotnet restore services/Planning/src/Fintrack.Planning.MigrationService/Fintrack.Planning.MigrationService.csproj
 
+COPY building-blocks/BuildingBlocks.Api/ building-blocks/BuildingBlocks.Api/
+COPY building-blocks/BuildingBlocks.Infrastructure/ building-blocks/BuildingBlocks.Infrastructure/
+COPY building-blocks/BuildingBlocks.Application/ building-blocks/BuildingBlocks.Application/
+COPY building-blocks/BuildingBlocks.Domain/ building-blocks/BuildingBlocks.Domain/
 COPY services/Planning/src/Fintrack.Planning.MigrationService/ services/Planning/src/Fintrack.Planning.MigrationService/
 COPY services/Planning/src/Fintrack.Planning.Infrastructure/ services/Planning/src/Fintrack.Planning.Infrastructure/
 COPY services/Planning/src/Fintrack.Planning.Application/ services/Planning/src/Fintrack.Planning.Application/

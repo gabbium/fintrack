@@ -1,17 +1,17 @@
-name: Release & Versioning
+name: Release
 
 on:
   workflow_dispatch:
   push:
-    branches: ["main"]
+    branches: [main]
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
   pull-requests: write
-
-concurrency:
-  group: release-${{ github.ref }}
-  cancel-in-progress: false
 
 jobs:
   release:
@@ -19,26 +19,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: 📦 Checkout | Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: ⚙️ Setup | Node.js
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 9.0.x
+
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 23.x
 
-      - name: 🏷️ Run semantic-release
-        id: semrel
-        uses: cycjimmy/semantic-release-action@9cc899c47e6841430bbaedb43de1560a568dfd16
+      - name: Install semantic-release & plugins
+        run: |
+          npm install --save-dev \
+            semantic-release \
+            conventional-changelog-conventionalcommits \
+            @semantic-release/commit-analyzer \
+            @semantic-release/release-notes-generator \
+            @semantic-release/changelog \
+            @semantic-release/git \
+            @semantic-release/github
+
+      - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          extra_plugins: |
-            @semantic-release/commit-analyzer
-            @semantic-release/release-notes-generator
-            @semantic-release/changelog
-            @semantic-release/git
-            @semantic-release/github
-            conventional-changelog-conventionalcommits
+        run: npx semantic-release

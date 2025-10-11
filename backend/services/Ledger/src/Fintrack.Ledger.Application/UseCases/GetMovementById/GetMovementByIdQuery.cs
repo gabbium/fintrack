@@ -4,4 +4,4 @@ namespace Fintrack.Ledger.Application.UseCases.GetMovementById;
 
 public sealed record GetMovementByIdQuery(
     Guid Id)
-    : IQuery<MovementDto>;
+    : IQuery<Result<MovementDto>>;

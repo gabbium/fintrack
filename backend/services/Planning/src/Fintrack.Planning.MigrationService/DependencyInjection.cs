@@ -1,6 +1,5 @@
-﻿using Fintrack.Planning.Application.Interfaces;
-using Fintrack.Planning.MigrationService.HostedServices;
-using Fintrack.Planning.MigrationService.Services;
+﻿using BuildingBlocks.Application.Identity;
+using Fintrack.Planning.Infrastructure;
 
 namespace Fintrack.Planning.MigrationService;
 
@@ -8,12 +7,9 @@ public static class DependencyInjection
 {
     public static IHostApplicationBuilder AddWorkerServices(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddHostedService<DbMigrationHostedService>();
+        builder.Services.AddMigration<PlanningDbContext>();
 
-        builder.Services.AddOpenTelemetry()
-            .WithTracing(tracing => tracing.AddSource(DbMigrationHostedService.ActivitySourceName));
-
-        builder.Services.AddTransient<IIdentityService, IdentityService>();
+        builder.Services.AddTransient<IIdentityService, EmptyIdentityService>();
 
         return builder;
     }

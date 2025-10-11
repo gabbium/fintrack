@@ -1,7 +1,8 @@
 ﻿namespace Fintrack.Ledger.Domain.MovementAggregate;
 
-public sealed class Movement : BaseEntity, IAggregateRoot
+public sealed class Movement : HasDomainEventsBase, IAggregateRoot
 {
+    public Guid Id { get; private set; }
     public Guid UserId { get; private set; }
     public MovementKind Kind { get; private set; }
     public decimal Amount { get; private set; }
@@ -25,6 +26,7 @@ public sealed class Movement : BaseEntity, IAggregateRoot
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be greater than zero.");
         }
 
+        Id = Guid.NewGuid();
         UserId = userId;
         Kind = kind;
         Amount = amount;

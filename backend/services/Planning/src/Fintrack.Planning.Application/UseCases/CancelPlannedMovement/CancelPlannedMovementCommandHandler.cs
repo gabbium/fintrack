@@ -5,7 +5,7 @@ namespace Fintrack.Planning.Application.UseCases.CancelPlannedMovement;
 internal sealed class CancelPlannedMovementCommandHandler(
     IPlannedMovementRepository plannedMovementRepository,
     IUnitOfWork unitOfWork)
-    : ICommandHandler<CancelPlannedMovementCommand>
+    : ICommandHandler<CancelPlannedMovementCommand, Result>
 {
     public async Task<Result> HandleAsync(
         CancelPlannedMovementCommand command,

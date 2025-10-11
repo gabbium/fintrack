@@ -13,53 +13,49 @@ internal sealed class ListPlannedMovementsQueryService(PlanningDbContext dbConte
 
         if (query.Kind is { Count: > 0 })
         {
-            queryable = queryable.Where(plannedMovement => query.Kind.Contains(plannedMovement.Kind));
+            queryable = queryable.Where(pm => query.Kind.Contains(pm.Kind));
         }
 
         if (query.Status is { Count: > 0 })
         {
-            queryable = queryable.Where(plannedMovement => query.Status.Contains(plannedMovement.Status));
+            queryable = queryable.Where(pm => query.Status.Contains(pm.Status));
         }
 
         if (query.MinDueOn is not null)
         {
-            queryable = queryable.Where(plannedMovement => plannedMovement.DueOn >= query.MinDueOn.Value);
+            queryable = queryable.Where(pm => pm.DueOn >= query.MinDueOn.Value);
         }
 
         if (query.MaxDueOn is not null)
         {
-            queryable = queryable.Where(plannedMovement => plannedMovement.DueOn <= query.MaxDueOn.Value);
+            queryable = queryable.Where(pm => pm.DueOn <= query.MaxDueOn.Value);
         }
-
-        var totalItems = await queryable.CountAsync(cancellationToken);
 
         var normalizedOrder = query.Order?.Trim().ToLowerInvariant();
 
         queryable = normalizedOrder switch
         {
             "dueon desc" => queryable
-                .OrderByDescending(plannedMovement => plannedMovement.DueOn)
-                .ThenBy(plannedMovement => plannedMovement.Id),
+                .OrderByDescending(pm => pm.DueOn)
+                .ThenBy(pm => pm.Id),
             "dueon asc" => queryable
-                .OrderBy(plannedMovement => plannedMovement.DueOn)
-                .ThenBy(plannedMovement => plannedMovement.Id),
+                .OrderBy(pm => pm.DueOn)
+                .ThenBy(pm => pm.Id),
             "amount desc" => queryable
-                .OrderByDescending(plannedMovement => plannedMovement.Amount)
-                .ThenBy(plannedMovement => plannedMovement.Id),
+                .OrderByDescending(pm => pm.Amount)
+                .ThenBy(pm => pm.Id),
             "amount asc" => queryable
-                .OrderBy(plannedMovement => plannedMovement.Amount)
-                .ThenBy(plannedMovement => plannedMovement.Id),
+                .OrderBy(pm => pm.Amount)
+                .ThenBy(pm => pm.Id),
             _ => queryable
-                .OrderByDescending(plannedMovement => plannedMovement.DueOn)
-                .ThenBy(plannedMovement => plannedMovement.Id),
+                .OrderByDescending(pm => pm.DueOn)
+                .ThenBy(pm => pm.Id),
         };
 
-        var plannedMovements = await queryable
-            .Skip((query.PageNumber - 1) * query.PageSize)
-            .Take(query.PageSize)
-            .Select(plannedMovement => PlannedMovementDto.FromDomain(plannedMovement))
-            .ToListAsync(cancellationToken);
-
-        return new PaginatedList<PlannedMovementDto>(plannedMovements, totalItems, query.PageNumber, query.PageSize);
+        return await queryable.ToPaginatedListAsync(
+            query.PageNumber,
+            query.PageSize,
+            pm => PlannedMovementDto.FromDomain(pm),
+            cancellationToken);
     }
 }
