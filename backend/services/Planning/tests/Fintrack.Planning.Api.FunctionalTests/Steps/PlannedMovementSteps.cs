@@ -1,11 +1,12 @@
-﻿using Fintrack.Planning.Api.FunctionalTests.TestHelpers;
+﻿using BuildingBlocks.Api.FunctionalTests.Assertions;
+using Fintrack.Planning.Api.FunctionalTests.TestHelpers;
 using Fintrack.Planning.Api.FunctionalTests.TestHelpers.Builders;
 using Fintrack.Planning.Api.Models;
 using Fintrack.Planning.Application.Models;
 
 namespace Fintrack.Planning.Api.FunctionalTests.Steps;
 
-public class PlannedMovementSteps(TestFixture fx)
+public class PlannedMovementSteps(FunctionalTestsFixture fx)
 {
     private readonly HttpClient _httpClient = fx.Factory.CreateDefaultClient();
 
@@ -14,12 +15,7 @@ public class PlannedMovementSteps(TestFixture fx)
         request ??= new CreatePlannedMovementRequestBuilder().Build();
 
         var response = await _httpClient.PostAsJsonAsync("/api/v1/planned-movements", request);
-        response.EnsureSuccessStatusCode();
-
-        var body = await response.Content.ReadFromJsonAsync<PlannedMovementDto>(TestConstants.Json);
-        body.ShouldNotBeNull();
-
-        return body;
+        return await response.ShouldBeCreatedWithBody<PlannedMovementDto>();
     }
 
     public async Task<PlannedMovementDto> Given_ExistingRealizedPlannedMovement(CreatePlannedMovementRequest? request = null)
@@ -27,7 +23,7 @@ public class PlannedMovementSteps(TestFixture fx)
         var body = await Given_ExistingPlannedMovement(request);
 
         var response = await _httpClient.PostAsync("/api/v1/planned-movements/" + body.Id + "/realize", null);
-        response.EnsureSuccessStatusCode();
+        response.ShouldBeNoContent();
 
         return body;
     }
@@ -37,7 +33,7 @@ public class PlannedMovementSteps(TestFixture fx)
         var body = await Given_ExistingPlannedMovement(request);
 
         var response = await _httpClient.PostAsync("/api/v1/planned-movements/" + body.Id + "/cancel", null);
-        response.EnsureSuccessStatusCode();
+        response.ShouldBeNoContent();
 
         return body;
     }

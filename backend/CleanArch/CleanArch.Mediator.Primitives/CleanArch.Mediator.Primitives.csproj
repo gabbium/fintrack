@@ -1,7 +1,0 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <ItemGroup>
-    <ProjectReference Include="..\CleanArch.Results\CleanArch.Results.csproj" />
-  </ItemGroup>
-
-</Project>

@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Application.Interfaces;
+﻿using BuildingBlocks.Application.Identity;
 using Fintrack.Ledger.Domain.MovementAggregate;
 
 namespace Fintrack.Ledger.Infrastructure;

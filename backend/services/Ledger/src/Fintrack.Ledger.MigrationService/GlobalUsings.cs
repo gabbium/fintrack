@@ -1,1 +1,1 @@
-﻿global using CleanArch.Persistence.EFCore;
+﻿global using Gabbium.Persistence.EFCore;

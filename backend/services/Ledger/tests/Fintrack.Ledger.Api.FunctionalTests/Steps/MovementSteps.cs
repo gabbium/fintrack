@@ -1,11 +1,12 @@
-﻿using Fintrack.Ledger.Api.FunctionalTests.TestHelpers;
+﻿using BuildingBlocks.Api.FunctionalTests.Assertions;
+using Fintrack.Ledger.Api.FunctionalTests.TestHelpers;
 using Fintrack.Ledger.Api.FunctionalTests.TestHelpers.Builders;
 using Fintrack.Ledger.Api.Models;
 using Fintrack.Ledger.Application.Models;
 
 namespace Fintrack.Ledger.Api.FunctionalTests.Steps;
 
-public class MovementSteps(TestFixture fx)
+public class MovementSteps(FunctionalTestsFixture fx)
 {
     private readonly HttpClient _httpClient = fx.Factory.CreateDefaultClient();
 
@@ -14,12 +15,7 @@ public class MovementSteps(TestFixture fx)
         request ??= new CreateMovementRequestBuilder().Build();
 
         var response = await _httpClient.PostAsJsonAsync("/api/v1/movements", request);
-        response.EnsureSuccessStatusCode();
-
-        var body = await response.Content.ReadFromJsonAsync<MovementDto>(TestConstants.Json);
-        body.ShouldNotBeNull();
-
-        return body;
+        return await response.ShouldBeCreatedWithBody<MovementDto>();
     }
 
     public async Task<HttpResponseMessage> When_AttemptToList(ListMovementsRequest request)

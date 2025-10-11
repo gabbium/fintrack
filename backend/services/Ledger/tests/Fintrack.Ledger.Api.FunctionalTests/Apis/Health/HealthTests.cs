@@ -1,8 +1,9 @@
-﻿using Fintrack.Ledger.Api.FunctionalTests.TestHelpers;
+﻿using BuildingBlocks.Api.FunctionalTests.Assertions;
+using Fintrack.Ledger.Api.FunctionalTests.TestHelpers;
 
 namespace Fintrack.Ledger.Api.FunctionalTests.Apis.Health;
 
-public class HealthTests(TestFixture fx) : TestBase(fx)
+public class HealthTests(FunctionalTestsFixture fx) : FunctionalTestsBase(fx)
 {
     private readonly HttpClient _httpClient = fx.Factory.CreateDefaultClient();
 

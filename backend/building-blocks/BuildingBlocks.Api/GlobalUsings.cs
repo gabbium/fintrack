@@ -1,0 +1,16 @@
+﻿global using System.Security.Claims;
+global using Asp.Versioning;
+global using Asp.Versioning.ApiExplorer;
+global using FluentValidation;
+global using Microsoft.AspNetCore.Authorization;
+global using Microsoft.AspNetCore.Builder;
+global using Microsoft.AspNetCore.Diagnostics;
+global using Microsoft.AspNetCore.Http;
+global using Microsoft.AspNetCore.OpenApi;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Hosting;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;
+global using Microsoft.OpenApi.Models;
+global using Scalar.AspNetCore;

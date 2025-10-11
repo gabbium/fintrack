@@ -1,9 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.Mediator.LoggingBehavior\CleanArch.Mediator.Behaviors.csproj" />
-    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.Mediator\CleanArch.Mediator.csproj" />
-    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.Results\CleanArch.Results.csproj" />
+    <ProjectReference Include="..\..\..\..\building-blocks\BuildingBlocks.Application\BuildingBlocks.Application.csproj" />
     <ProjectReference Include="..\Fintrack.Planning.Domain\Fintrack.Planning.Domain.csproj" />
   </ItemGroup>
 
@@ -11,11 +9,6 @@
     <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
       <_Parameter1>Fintrack.Planning.Application.UnitTests</_Parameter1>
     </AssemblyAttribute>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
-    <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" />
   </ItemGroup>
   
 </Project>

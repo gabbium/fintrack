@@ -1,4 +1,4 @@
-using Fintrack.Planning.Application.Interfaces;
+using BuildingBlocks.Application.Identity;
 using Fintrack.Planning.Application.Models;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;
 

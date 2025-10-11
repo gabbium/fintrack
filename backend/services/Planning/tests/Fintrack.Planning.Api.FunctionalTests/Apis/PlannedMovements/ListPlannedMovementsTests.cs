@@ -1,4 +1,5 @@
-﻿using Fintrack.Planning.Api.FunctionalTests.Steps;
+﻿using BuildingBlocks.Api.FunctionalTests.Assertions;
+using Fintrack.Planning.Api.FunctionalTests.Steps;
 using Fintrack.Planning.Api.FunctionalTests.TestHelpers;
 using Fintrack.Planning.Api.FunctionalTests.TestHelpers.Builders;
 using Fintrack.Planning.Application.Models;
@@ -6,7 +7,7 @@ using Fintrack.Planning.Domain.PlannedMovementAggregate;
 
 namespace Fintrack.Planning.Api.FunctionalTests.Apis.PlannedMovements;
 
-public class ListPlannedMovementsTests(TestFixture fx) : TestBase(fx)
+public class ListPlannedMovementsTests(FunctionalTestsFixture fx) : FunctionalTestsBase(fx)
 {
     private readonly AuthSteps _auth = new(fx);
     private readonly PlannedMovementSteps _plannedMovement = new(fx);

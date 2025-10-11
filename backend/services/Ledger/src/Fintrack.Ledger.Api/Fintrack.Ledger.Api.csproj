@@ -1,16 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\..\..\aspire\Fintrack.ServiceDefaults\Fintrack.ServiceDefaults.csproj" />
-    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.MinimalApis\CleanArch.MinimalApis.csproj" />
-    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.Results.AspNetCore\CleanArch.Results.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\..\..\building-blocks\BuildingBlocks.Api\BuildingBlocks.Api.csproj" />
     <ProjectReference Include="..\Fintrack.Ledger.Infrastructure\Fintrack.Ledger.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -1,2 +1,2 @@
-﻿global using CleanArch.Mediator.Primitives;
-global using CleanArch.Persistence.Primitives;
+﻿global using Gabbium.Mediator.Primitives;
+global using Gabbium.Persistence.Primitives;

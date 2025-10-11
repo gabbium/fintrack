@@ -1,8 +1,9 @@
-﻿using Fintrack.Planning.Api.FunctionalTests.TestHelpers;
+﻿using BuildingBlocks.Api.FunctionalTests.AutoAuthorize;
+using Fintrack.Planning.Api.FunctionalTests.TestHelpers;
 
 namespace Fintrack.Planning.Api.FunctionalTests.Steps;
 
-public class AuthSteps(TestFixture fx)
+public class AuthSteps(FunctionalTestsFixture fx)
 {
     public void Given_LoggedInUser()
     {

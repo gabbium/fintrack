@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.Persistence.EFCore\CleanArch.Persistence.EFCore.csproj" />
+    <ProjectReference Include="..\..\..\..\building-blocks\BuildingBlocks.Infrastructure\BuildingBlocks.Infrastructure.csproj" />
     <ProjectReference Include="..\Fintrack.Planning.Application\Fintrack.Planning.Application.csproj" />
   </ItemGroup>
   

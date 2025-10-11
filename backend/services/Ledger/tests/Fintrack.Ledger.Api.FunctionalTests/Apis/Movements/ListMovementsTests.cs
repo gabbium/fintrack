@@ -1,4 +1,5 @@
-﻿using Fintrack.Ledger.Api.FunctionalTests.Steps;
+﻿using BuildingBlocks.Api.FunctionalTests.Assertions;
+using Fintrack.Ledger.Api.FunctionalTests.Steps;
 using Fintrack.Ledger.Api.FunctionalTests.TestHelpers;
 using Fintrack.Ledger.Api.FunctionalTests.TestHelpers.Builders;
 using Fintrack.Ledger.Application.Models;
@@ -6,7 +7,7 @@ using Fintrack.Ledger.Domain.MovementAggregate;
 
 namespace Fintrack.Ledger.Api.FunctionalTests.Apis.Movements;
 
-public class ListMovementsTests(TestFixture fx) : TestBase(fx)
+public class ListMovementsTests(FunctionalTestsFixture fx) : FunctionalTestsBase(fx)
 {
     private readonly AuthSteps _auth = new(fx);
     private readonly MovementSteps _movement = new(fx);

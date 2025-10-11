@@ -1,9 +1,10 @@
-﻿using Fintrack.Ledger.Api.FunctionalTests.Steps;
+﻿using BuildingBlocks.Api.FunctionalTests.Assertions;
+using Fintrack.Ledger.Api.FunctionalTests.Steps;
 using Fintrack.Ledger.Api.FunctionalTests.TestHelpers;
 
 namespace Fintrack.Ledger.Api.FunctionalTests.Apis.Movements;
 
-public class DeleteMovementTests(TestFixture fx) : TestBase(fx)
+public class DeleteMovementTests(FunctionalTestsFixture fx) : FunctionalTestsBase(fx)
 {
     private readonly AuthSteps _auth = new(fx);
     private readonly MovementSteps _movement = new(fx);

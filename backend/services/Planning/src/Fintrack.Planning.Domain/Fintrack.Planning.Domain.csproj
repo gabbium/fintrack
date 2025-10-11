@@ -1,8 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.Mediator.Primitives\CleanArch.Mediator.Primitives.csproj" />
-    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.Persistence.Primitives\CleanArch.Persistence.Primitives.csproj" />
+    <ProjectReference Include="..\..\..\..\building-blocks\BuildingBlocks.Domain\BuildingBlocks.Domain.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,4 +1,4 @@
-﻿using Fintrack.Planning.Application.Interfaces;
+﻿using BuildingBlocks.Application.Identity;
 using Fintrack.Planning.Application.UnitTests.TestHelpers.Builders;
 using Fintrack.Planning.Application.UseCases.CreatePlannedMovement;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;

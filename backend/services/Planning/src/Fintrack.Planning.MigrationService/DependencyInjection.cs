@@ -1,6 +1,5 @@
-﻿using Fintrack.Planning.Application.Interfaces;
+﻿using BuildingBlocks.Application.Identity;
 using Fintrack.Planning.Infrastructure;
-using Fintrack.Planning.MigrationService.Services;
 
 namespace Fintrack.Planning.MigrationService;
 
@@ -10,7 +9,7 @@ public static class DependencyInjection
     {
         builder.Services.AddMigration<PlanningDbContext>();
 
-        builder.Services.AddTransient<IIdentityService, IdentityService>();
+        builder.Services.AddTransient<IIdentityService, EmptyIdentityService>();
 
         return builder;
     }

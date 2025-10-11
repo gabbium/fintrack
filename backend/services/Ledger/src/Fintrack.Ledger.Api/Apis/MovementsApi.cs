@@ -70,7 +70,8 @@ public sealed class MovementsApi : IMinimalApi
 
         var result = await mediator.SendAsync(query, cancellationToken);
 
-        return result.ToMinimalApiResult(() => Results.Ok(result.Value));
+        return result.ToMinimalApiResult(
+            () => Results.Ok(result.Value));
     }
 
     public static async Task<IResult> GetMovementById(
@@ -98,10 +99,11 @@ public sealed class MovementsApi : IMinimalApi
 
         var result = await mediator.SendAsync(command, cancellationToken);
 
-        return result.ToMinimalApiResult(() => Results.CreatedAtRoute(
-            routeName: nameof(GetMovementById),
-            routeValues: new { id = result.Value!.Id },
-            value: result.Value));
+        return result.ToMinimalApiResult(
+            () => Results.CreatedAtRoute(
+                routeName: nameof(GetMovementById),
+                routeValues: new { id = result.Value!.Id },
+                value: result.Value));
     }
 
     public static async Task<IResult> UpdateMovement(
@@ -119,7 +121,8 @@ public sealed class MovementsApi : IMinimalApi
 
         var result = await mediator.SendAsync(command, cancellationToken);
 
-        return result.ToMinimalApiResult(() => Results.Ok(result.Value));
+        return result.ToMinimalApiResult(
+            () => Results.Ok(result.Value));
     }
 
     public static async Task<IResult> DeleteMovement(

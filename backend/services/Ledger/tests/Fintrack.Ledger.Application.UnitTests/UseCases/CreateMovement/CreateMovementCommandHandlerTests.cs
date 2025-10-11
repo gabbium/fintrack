@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Application.Interfaces;
+﻿using BuildingBlocks.Application.Identity;
 using Fintrack.Ledger.Application.UnitTests.TestHelpers.Builders;
 using Fintrack.Ledger.Application.UseCases.CreateMovement;
 using Fintrack.Ledger.Domain.MovementAggregate;

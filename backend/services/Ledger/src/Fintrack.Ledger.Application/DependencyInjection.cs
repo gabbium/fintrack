@@ -1,8 +1,11 @@
-﻿namespace Fintrack.Ledger.Application;
+﻿using BuildingBlocks.Application.Behaviors;
+
+namespace Fintrack.Ledger.Application;
 
 public static class DependencyInjection
 {
-    public static IHostApplicationBuilder AddApplicationServices(this IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder AddApplicationServices(
+        this IHostApplicationBuilder builder)
     {
         builder.Services.AddMediator(config =>
         {
@@ -11,7 +14,9 @@ public static class DependencyInjection
             config.AddBehavior(typeof(ValidationBehavior<,>));
         });
 
-        builder.Services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), includeInternalTypes: true);
+        builder.Services.AddValidatorsFromAssembly(
+            Assembly.GetExecutingAssembly(),
+            includeInternalTypes: true);
 
         return builder;
     }

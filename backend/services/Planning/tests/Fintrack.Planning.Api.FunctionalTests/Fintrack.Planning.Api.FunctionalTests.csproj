@@ -26,7 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\cleanarch\CleanArch.TestHelpers\CleanArch.TestHelpers.csproj" />
+    <ProjectReference Include="..\..\..\..\building-blocks\BuildingBlocks.Api.FunctionalTests\BuildingBlocks.Api.FunctionalTests.csproj" />
     <ProjectReference Include="..\..\src\Fintrack.Planning.Api\Fintrack.Planning.Api.csproj" />
   </ItemGroup>
 

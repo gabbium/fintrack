@@ -1,6 +1,5 @@
-﻿using Fintrack.Ledger.Application.Interfaces;
+﻿using BuildingBlocks.Application.Identity;
 using Fintrack.Ledger.Infrastructure;
-using Fintrack.Ledger.MigrationService.Services;
 
 namespace Fintrack.Ledger.MigrationService;
 
@@ -10,7 +9,7 @@ public static class DependencyInjection
     {
         builder.Services.AddMigration<LedgerDbContext>();
 
-        builder.Services.AddTransient<IIdentityService, IdentityService>();
+        builder.Services.AddTransient<IIdentityService, EmptyIdentityService>();
 
         return builder;
     }

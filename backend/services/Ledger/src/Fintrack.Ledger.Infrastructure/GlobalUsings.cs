@@ -1,6 +1,6 @@
 ﻿global using System.Reflection;
-global using CleanArch.Persistence.EFCore;
-global using CleanArch.Persistence.Primitives;
+global using Gabbium.Persistence.EFCore;
+global using Gabbium.Persistence.Primitives;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.EntityFrameworkCore.Infrastructure;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;

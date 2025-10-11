@@ -1,9 +1,10 @@
-﻿using Fintrack.Planning.Api.FunctionalTests.Steps;
+﻿using BuildingBlocks.Api.FunctionalTests.Assertions;
+using Fintrack.Planning.Api.FunctionalTests.Steps;
 using Fintrack.Planning.Api.FunctionalTests.TestHelpers;
 
 namespace Fintrack.Planning.Api.FunctionalTests.Apis.PlannedMovements;
 
-public class CancelPlannedMovementTests(TestFixture fx) : TestBase(fx)
+public class CancelPlannedMovementTests(FunctionalTestsFixture fx) : FunctionalTestsBase(fx)
 {
     private readonly AuthSteps _auth = new(fx);
     private readonly PlannedMovementSteps _plannedMovement = new(fx);
