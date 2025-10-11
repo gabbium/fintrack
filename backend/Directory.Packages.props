@@ -15,6 +15,7 @@
     <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
     <PackageVersion Include="Gabbium.CleanArch" Version="2.1.0" />
     <PackageVersion Include="Gabbium.CleanArch.AspNetCore" Version="2.0.0" />
+    <PackageVersion Include="Gabbium.HttpClientTestExtensions" Version="1.0.1" />
     <PackageVersion Include="Gabbium.Mediator" Version="1.1.1" />
     <PackageVersion Include="Gabbium.Mediator.Primitives" Version="1.1.1" />
     <PackageVersion Include="Gabbium.MinimalApi" Version="1.0.0" />

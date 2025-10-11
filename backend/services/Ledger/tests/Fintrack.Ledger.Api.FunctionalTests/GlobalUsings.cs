@@ -1,11 +1,16 @@
 ﻿global using System.Net.Http.Json;
 global using System.Security.Claims;
+global using System.Text.Encodings.Web;
+global using Gabbium.HttpClientTestExtensions;
 global using Gabbium.Persistence.Primitives;
+global using Microsoft.AspNetCore.Authentication;
 global using Microsoft.AspNetCore.Hosting;
 global using Microsoft.AspNetCore.Http;
 global using Microsoft.AspNetCore.Mvc.Testing;
 global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.Logging;
+global using Microsoft.Extensions.Options;
 global using Npgsql;
 global using Respawn;
 global using Shouldly;

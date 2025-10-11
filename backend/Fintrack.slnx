@@ -4,7 +4,6 @@
     <Project Path="aspire/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj" />
   </Folder>
   <Folder Name="/BuildingBlocks/">
-    <Project Path="building-blocks/BuildingBlocks.Api.FunctionalTests/BuildingBlocks.Api.FunctionalTests.csproj" Id="fcc83634-db98-4817-8a32-f642556cce56" />
     <Project Path="building-blocks/BuildingBlocks.Api/BuildingBlocks.Api.csproj" Id="48503b80-fc99-4d44-a94f-9ab14c4a5360" />
     <Project Path="building-blocks/BuildingBlocks.Application/BuildingBlocks.Application.csproj" Id="5808a87b-7033-4dac-a0e9-48036713f4d6" />
     <Project Path="building-blocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj" Id="060f3605-a142-4d1b-adb7-a27d7eec2cd0" />

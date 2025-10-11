@@ -13,6 +13,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Gabbium.HttpClientTestExtensions" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" />
     <PackageReference Include="Respawn" />
@@ -26,7 +27,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\building-blocks\BuildingBlocks.Api.FunctionalTests\BuildingBlocks.Api.FunctionalTests.csproj" />
     <ProjectReference Include="..\..\src\Fintrack.Planning.Api\Fintrack.Planning.Api.csproj" />
   </ItemGroup>
 
