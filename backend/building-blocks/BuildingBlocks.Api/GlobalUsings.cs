@@ -1,7 +1,10 @@
-﻿global using System.Security.Claims;
+﻿global using System.Reflection;
+global using System.Security.Claims;
+global using System.Text.Json.Serialization;
 global using Asp.Versioning;
 global using Asp.Versioning.ApiExplorer;
 global using FluentValidation;
+global using Gabbium.MinimalApi;
 global using Microsoft.AspNetCore.Authorization;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Diagnostics;

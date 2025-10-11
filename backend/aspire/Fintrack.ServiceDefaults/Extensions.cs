@@ -25,7 +25,7 @@ public static class Extensions
         return builder;
     }
 
-    public static WebApplication MapDefaultEndpoints(this WebApplication app)
+    public static WebApplication MapServiceDefaultEndpoints(this WebApplication app)
     {
         app.MapDefaultSerilog();
 
