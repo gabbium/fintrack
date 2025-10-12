@@ -1,6 +1,6 @@
-﻿using Fintrack.Planning.Application.UseCases.DeletePlannedMovement;
+﻿using Fintrack.Planning.Application.Commands.DeletePlannedMovement;
 
-namespace Fintrack.Planning.Application.UnitTests.TestHelpers.Builders;
+namespace Fintrack.Planning.Application.UnitTests.TestSupport.Builders;
 
 public class DeletePlannedMovementCommandBuilder
 {

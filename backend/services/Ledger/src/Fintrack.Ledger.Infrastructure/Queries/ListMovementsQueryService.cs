@@ -1,5 +1,5 @@
 ﻿using Fintrack.Ledger.Application.Models;
-using Fintrack.Ledger.Application.UseCases.ListMovements;
+using Fintrack.Ledger.Application.Queries.ListMovements;
 
 namespace Fintrack.Ledger.Infrastructure.Queries;
 

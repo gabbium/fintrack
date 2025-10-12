@@ -1,6 +1,6 @@
-﻿using Fintrack.Planning.Application.UseCases.RealizePlannedMovement;
+﻿using Fintrack.Planning.Application.Commands.RealizePlannedMovement;
 
-namespace Fintrack.Planning.Application.UnitTests.TestHelpers.Builders;
+namespace Fintrack.Planning.Application.UnitTests.TestSupport.Builders;
 
 public class RealizePlannedMovementCommandBuilder
 {

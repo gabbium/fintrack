@@ -1,5 +1,5 @@
 ﻿using Fintrack.Planning.Application.Models;
-using Fintrack.Planning.Application.UseCases.ListPlannedMovements;
+using Fintrack.Planning.Application.Queries.ListPlannedMovements;
 
 namespace Fintrack.Planning.Infrastructure.Queries;
 

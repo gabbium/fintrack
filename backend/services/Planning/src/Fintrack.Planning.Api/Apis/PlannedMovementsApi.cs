@@ -1,12 +1,12 @@
 ﻿using Fintrack.Planning.Api.Models;
+using Fintrack.Planning.Application.Commands.CancelPlannedMovement;
+using Fintrack.Planning.Application.Commands.CreatePlannedMovement;
+using Fintrack.Planning.Application.Commands.DeletePlannedMovement;
+using Fintrack.Planning.Application.Commands.RealizePlannedMovement;
+using Fintrack.Planning.Application.Commands.UpdatePlannedMovement;
 using Fintrack.Planning.Application.Models;
-using Fintrack.Planning.Application.UseCases.CancelPlannedMovement;
-using Fintrack.Planning.Application.UseCases.CreatePlannedMovement;
-using Fintrack.Planning.Application.UseCases.DeletePlannedMovement;
-using Fintrack.Planning.Application.UseCases.GetPlannedMovementById;
-using Fintrack.Planning.Application.UseCases.ListPlannedMovements;
-using Fintrack.Planning.Application.UseCases.RealizePlannedMovement;
-using Fintrack.Planning.Application.UseCases.UpdatePlannedMovement;
+using Fintrack.Planning.Application.Queries.GetPlannedMovementById;
+using Fintrack.Planning.Application.Queries.ListPlannedMovements;
 
 namespace Fintrack.Planning.Api.Apis;
 

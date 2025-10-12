@@ -1,7 +1,7 @@
-﻿using Fintrack.Planning.Application.UseCases.CreatePlannedMovement;
+﻿using Fintrack.Planning.Application.Commands.CreatePlannedMovement;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;
 
-namespace Fintrack.Planning.Application.UnitTests.TestHelpers.Builders;
+namespace Fintrack.Planning.Application.UnitTests.TestSupport.Builders;
 
 public class CreatePlannedMovementCommandBuilder
 {

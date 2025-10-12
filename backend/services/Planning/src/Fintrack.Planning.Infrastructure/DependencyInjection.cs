@@ -1,4 +1,4 @@
-﻿using Fintrack.Planning.Application.UseCases.ListPlannedMovements;
+﻿using Fintrack.Planning.Application.Queries.ListPlannedMovements;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;
 using Fintrack.Planning.Infrastructure.Queries;
 using Fintrack.Planning.Infrastructure.Repositories;

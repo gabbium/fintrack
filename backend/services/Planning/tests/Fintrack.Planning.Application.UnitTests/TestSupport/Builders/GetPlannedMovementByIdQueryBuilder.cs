@@ -1,6 +1,6 @@
-﻿using Fintrack.Planning.Application.UseCases.GetPlannedMovementById;
+﻿using Fintrack.Planning.Application.Queries.GetPlannedMovementById;
 
-namespace Fintrack.Planning.Application.UnitTests.TestHelpers.Builders;
+namespace Fintrack.Planning.Application.UnitTests.TestSupport.Builders;
 
 public class GetPlannedMovementByIdQueryBuilder
 {
