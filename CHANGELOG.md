@@ -1,3 +1,9 @@
+## [1.9.0](https://github.com/gabbium/fintrack/compare/v1.8.0...v1.9.0) (2025-10-12)
+
+### Features
+
+* first domain event ([#16](https://github.com/gabbium/fintrack/issues/16)) ([f9b6188](https://github.com/gabbium/fintrack/commit/f9b61881e22bcbc9c6d210e34e652aed30e655c3))
+
 ## [1.8.0](https://github.com/gabbium/fintrack/compare/v1.7.8...v1.8.0) (2025-10-09)
 
 ### Features
