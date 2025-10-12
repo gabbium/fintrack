@@ -1,5 +1,6 @@
-﻿using Fintrack.Planning.Application.UseCases.ListPlannedMovements;
+﻿using Fintrack.Planning.Application.Queries.ListPlannedMovements;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;
+using Fintrack.Planning.Infrastructure.Interceptors;
 using Fintrack.Planning.Infrastructure.Queries;
 using Fintrack.Planning.Infrastructure.Repositories;
 
@@ -9,8 +10,11 @@ public static class DependencyInjection
 {
     public static IHostApplicationBuilder AddInfrastructureServices(this IHostApplicationBuilder builder)
     {
-        builder.Services.AddDbContext<PlanningDbContext>(options =>
+        builder.Services.AddScoped<ISaveChangesInterceptor, EventDispatchInterceptor>();
+
+        builder.Services.AddDbContext<PlanningDbContext>((sp, options) =>
         {
+            options.AddInterceptors(sp.GetServices<ISaveChangesInterceptor>());
             options.UseNpgsql(builder.Configuration.GetConnectionString("PlanningDb"));
         });
 

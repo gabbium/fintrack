@@ -1,7 +1,7 @@
-﻿using Fintrack.Planning.Application.UseCases.ListPlannedMovements;
+﻿using Fintrack.Planning.Application.Queries.ListPlannedMovements;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;
 
-namespace Fintrack.Planning.Application.UnitTests.TestHelpers.Builders;
+namespace Fintrack.Planning.Application.UnitTests.TestSupport.Builders;
 
 public class ListPlannedMovementsQueryBuilder
 {

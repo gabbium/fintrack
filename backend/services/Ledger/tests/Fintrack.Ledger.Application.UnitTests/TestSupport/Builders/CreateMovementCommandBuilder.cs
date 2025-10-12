@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Application.UseCases.CreateMovement;
+﻿using Fintrack.Ledger.Application.Commands.CreateMovement;
 using Fintrack.Ledger.Domain.MovementAggregate;
 
 namespace Fintrack.Ledger.Application.UnitTests.TestSupport.Builders;

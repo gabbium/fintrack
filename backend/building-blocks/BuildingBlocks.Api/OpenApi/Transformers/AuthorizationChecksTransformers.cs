@@ -14,9 +14,7 @@ internal sealed class AuthorizationChecksTransformers : IOpenApiOperationTransfo
         var metadata = context.Description.ActionDescriptor.EndpointMetadata;
 
         if (!metadata.OfType<IAuthorizeData>().Any())
-        {
             return Task.CompletedTask;
-        }
 
         operation.Responses.TryAdd("401", new OpenApiResponse { Description = "Unauthorized" });
         operation.Responses.TryAdd("403", new OpenApiResponse { Description = "Forbidden" });

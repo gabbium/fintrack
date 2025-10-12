@@ -1,4 +1,6 @@
-﻿namespace Fintrack.Planning.Domain.PlannedMovementAggregate;
+﻿using Fintrack.Planning.Domain.PlannedMovementAggregate.Events;
+
+namespace Fintrack.Planning.Domain.PlannedMovementAggregate;
 
 public sealed class PlannedMovement : HasDomainEventsBase, IAggregateRoot
 {
@@ -10,6 +12,10 @@ public sealed class PlannedMovement : HasDomainEventsBase, IAggregateRoot
     public DateTimeOffset DueOn { get; private set; }
     public PlannedMovementStatus Status { get; private set; }
 
+    private PlannedMovement()
+    {
+    }
+
     public PlannedMovement(
         Guid userId,
         PlannedMovementKind kind,
@@ -19,14 +25,10 @@ public sealed class PlannedMovement : HasDomainEventsBase, IAggregateRoot
         PlannedMovementStatus status)
     {
         if (userId == Guid.Empty)
-        {
             throw new ArgumentException("User id cannot be empty.", nameof(userId));
-        }
 
         if (amount <= 0)
-        {
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be greater than zero.");
-        }
 
         Id = Guid.NewGuid();
         UserId = userId;
@@ -45,9 +47,7 @@ public sealed class PlannedMovement : HasDomainEventsBase, IAggregateRoot
     public void ChangeAmount(decimal newAmount)
     {
         if (newAmount <= 0)
-        {
             throw new ArgumentOutOfRangeException(nameof(newAmount), "Amount must be greater than zero.");
-        }
 
         Amount = newAmount;
     }
@@ -65,9 +65,7 @@ public sealed class PlannedMovement : HasDomainEventsBase, IAggregateRoot
     public void Cancel()
     {
         if (Status != PlannedMovementStatus.Active)
-        {
             throw new InvalidOperationException("Planned movement must be active to be canceled.");
-        }
 
         Status = PlannedMovementStatus.Canceled;
     }
@@ -75,10 +73,10 @@ public sealed class PlannedMovement : HasDomainEventsBase, IAggregateRoot
     public void Realize()
     {
         if (Status != PlannedMovementStatus.Active)
-        {
             throw new InvalidOperationException("Planned movement must be active to be realized.");
-        }
 
         Status = PlannedMovementStatus.Realized;
+
+        RegisterDomainEvent(PlannedMovementRealizedDomainEvent.FromAggregate(this));
     }
 }

@@ -11,13 +11,18 @@ public sealed class LoggingBehavior<TRequest, TResponse>(
     {
         var requestName = typeof(TRequest).Name;
 
-        logger.LogInformation("Handling {RequestName} {@Request}", requestName, request);
+        logger.LogInformation("Handling {RequestName} {@Request}",
+            requestName,
+            request);
 
         var sw = Stopwatch.StartNew();
 
         var response = await next();
 
-        logger.LogInformation("Handled {RequestName} with {@Response} in {Ms} ms", requestName, response, sw.ElapsedMilliseconds);
+        logger.LogInformation("Handled {RequestName} with {@Response} in {Ms} ms",
+            requestName,
+            response,
+            sw.ElapsedMilliseconds);
 
         sw.Stop();
 

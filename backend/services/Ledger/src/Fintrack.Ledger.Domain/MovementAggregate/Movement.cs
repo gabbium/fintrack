@@ -9,6 +9,10 @@ public sealed class Movement : HasDomainEventsBase, IAggregateRoot
     public string? Description { get; private set; }
     public DateTimeOffset OccurredOn { get; private set; }
 
+    private Movement()
+    {
+    }
+
     public Movement(
         Guid userId,
         MovementKind kind,
@@ -17,14 +21,10 @@ public sealed class Movement : HasDomainEventsBase, IAggregateRoot
         DateTimeOffset occurredOn)
     {
         if (userId == Guid.Empty)
-        {
             throw new ArgumentException("User id cannot be empty.", nameof(userId));
-        }
 
         if (amount <= 0)
-        {
             throw new ArgumentOutOfRangeException(nameof(amount), "Amount must be greater than zero.");
-        }
 
         Id = Guid.NewGuid();
         UserId = userId;
@@ -42,9 +42,7 @@ public sealed class Movement : HasDomainEventsBase, IAggregateRoot
     public void ChangeAmount(decimal newAmount)
     {
         if (newAmount <= 0)
-        {
             throw new ArgumentOutOfRangeException(nameof(newAmount), "Amount must be greater than zero.");
-        }
 
         Amount = newAmount;
     }

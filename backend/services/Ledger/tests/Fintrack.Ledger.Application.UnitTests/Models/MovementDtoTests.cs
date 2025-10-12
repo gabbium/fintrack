@@ -6,13 +6,13 @@ namespace Fintrack.Ledger.Application.UnitTests.Models;
 public class MovementDtoTests
 {
     [Fact]
-    public void FromDomain_MapsAllPropertiesCorrectly()
+    public void FromAggregate_MapsAllPropertiesCorrectly()
     {
         // Arrange
         var movement = new MovementBuilder().Build();
 
         // Act
-        var model = MovementDto.FromDomain(movement);
+        var model = MovementDto.FromAggregate(movement);
 
         // Assert
         model.Id.ShouldBe(movement.Id);

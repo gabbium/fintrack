@@ -19,7 +19,7 @@ public sealed record MovementDto
     [Description("Date and time when the movement occurred.")]
     public DateTimeOffset OccurredOn { get; init; }
 
-    public static MovementDto FromDomain(Movement movement)
+    public static MovementDto FromAggregate(Movement movement)
     {
         return new()
         {

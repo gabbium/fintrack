@@ -7,3 +7,4 @@ global using Gabbium.Mediator.Primitives;
 global using Gabbium.Persistence.Primitives;
 global using Gabbium.Results;
 global using Microsoft.Extensions.Hosting;
+global using Microsoft.Extensions.Logging;

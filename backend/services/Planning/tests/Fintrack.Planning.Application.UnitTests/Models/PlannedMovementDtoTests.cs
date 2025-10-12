@@ -1,18 +1,18 @@
 ﻿using Fintrack.Planning.Application.Models;
-using Fintrack.Planning.Application.UnitTests.TestHelpers.Builders;
+using Fintrack.Planning.Application.UnitTests.TestSupport.Builders;
 
 namespace Fintrack.Planning.Application.UnitTests.Models;
 
 public class PlannedMovementDtoTests
 {
     [Fact]
-    public void FromDomain_MapsAllPropertiesCorrectly()
+    public void FromAggregate_MapsAllPropertiesCorrectly()
     {
         // Arrange
         var plannedMovement = new PlannedMovementBuilder().Build();
 
         // Act
-        var model = PlannedMovementDto.FromDomain(plannedMovement);
+        var model = PlannedMovementDto.FromAggregate(plannedMovement);
 
         // Assert
         model.Id.ShouldBe(plannedMovement.Id);

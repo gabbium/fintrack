@@ -1,6 +1,6 @@
-﻿using Fintrack.Planning.Application.UseCases.CancelPlannedMovement;
+﻿using Fintrack.Planning.Application.Commands.CancelPlannedMovement;
 
-namespace Fintrack.Planning.Application.UnitTests.TestHelpers.Builders;
+namespace Fintrack.Planning.Application.UnitTests.TestSupport.Builders;
 
 public class CancelPlannedMovementCommandBuilder
 {

@@ -16,9 +16,7 @@ internal sealed class OpenApiVersioningDocumentTransformer(
             .SingleOrDefault(description => description.GroupName == context.DocumentName);
 
         if (apiDescription is null)
-        {
             return Task.CompletedTask;
-        }
 
         document.Info.Version = apiDescription.ApiVersion.ToString();
         document.Info.Title = _openApiOptions.Title;

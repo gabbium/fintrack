@@ -10,5 +10,9 @@
       <_Parameter1>Fintrack.Ledger.Application.UnitTests</_Parameter1>
     </AssemblyAttribute>
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="UseCases\" />
+  </ItemGroup>
   
 </Project>

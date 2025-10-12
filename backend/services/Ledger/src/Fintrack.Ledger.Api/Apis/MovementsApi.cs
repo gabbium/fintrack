@@ -1,10 +1,10 @@
 ﻿using Fintrack.Ledger.Api.Models;
+using Fintrack.Ledger.Application.Commands.CreateMovement;
+using Fintrack.Ledger.Application.Commands.DeleteMovement;
+using Fintrack.Ledger.Application.Commands.UpdateMovement;
 using Fintrack.Ledger.Application.Models;
-using Fintrack.Ledger.Application.UseCases.CreateMovement;
-using Fintrack.Ledger.Application.UseCases.DeleteMovement;
-using Fintrack.Ledger.Application.UseCases.GetMovementById;
-using Fintrack.Ledger.Application.UseCases.ListMovements;
-using Fintrack.Ledger.Application.UseCases.UpdateMovement;
+using Fintrack.Ledger.Application.Queries.GetMovementById;
+using Fintrack.Ledger.Application.Queries.ListMovements;
 
 namespace Fintrack.Ledger.Api.Apis;
 

@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Application.UseCases.GetMovementById;
+﻿using Fintrack.Ledger.Application.Queries.GetMovementById;
 
 namespace Fintrack.Ledger.Application.UnitTests.TestSupport.Builders;
 

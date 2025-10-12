@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Application.UseCases.ListMovements;
+﻿using Fintrack.Ledger.Application.Queries.ListMovements;
 using Fintrack.Ledger.Domain.MovementAggregate;
 using Fintrack.Ledger.Infrastructure.Queries;
 using Fintrack.Ledger.Infrastructure.Repositories;

@@ -1,4 +1,4 @@
-﻿using Fintrack.Ledger.Application.UseCases.DeleteMovement;
+﻿using Fintrack.Ledger.Application.Commands.DeleteMovement;
 
 namespace Fintrack.Ledger.Application.UnitTests.TestSupport.Builders;
 
