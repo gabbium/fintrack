@@ -25,6 +25,6 @@ internal sealed class CreateMovementCommandHandler(
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return MovementDto.FromDomain(movement);
+        return MovementDto.FromAggregate(movement);
     }
 }

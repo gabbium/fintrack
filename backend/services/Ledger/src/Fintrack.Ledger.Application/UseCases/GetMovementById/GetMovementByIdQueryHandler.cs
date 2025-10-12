@@ -18,6 +18,6 @@ internal sealed class GetMovementByIdQueryHandler(
             return Error.NotFound("Movement was not found.");
         }
 
-        return MovementDto.FromDomain(movement);
+        return MovementDto.FromAggregate(movement);
     }
 }
