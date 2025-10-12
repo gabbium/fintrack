@@ -27,7 +27,5 @@ internal sealed class PlannedMovementConfiguration : IEntityTypeConfiguration<Pl
         builder.Property(plannedMovement => plannedMovement.Status)
             .HasConversion<string>()
             .HasMaxLength(30);
-
-        builder.Ignore(plannedMovement => plannedMovement.DomainEvents);
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace Fintrack.Planning.Domain.PlannedMovementAggregate;
+﻿using Fintrack.Planning.Domain.PlannedMovementAggregate.Events;
+
+namespace Fintrack.Planning.Domain.PlannedMovementAggregate;
 
 public sealed class PlannedMovement : HasDomainEventsBase, IAggregateRoot
 {
@@ -74,5 +76,7 @@ public sealed class PlannedMovement : HasDomainEventsBase, IAggregateRoot
             throw new InvalidOperationException("Planned movement must be active to be realized.");
 
         Status = PlannedMovementStatus.Realized;
+
+        RegisterDomainEvent(PlannedMovementRealizedDomainEvent.FromAggregate(this));
     }
 }

@@ -1,7 +1,9 @@
 ﻿global using System.Reflection;
+global using Gabbium.Mediator.Primitives;
 global using Gabbium.Persistence.EFCore;
 global using Gabbium.Persistence.Primitives;
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.EntityFrameworkCore.Diagnostics;
 global using Microsoft.EntityFrameworkCore.Infrastructure;
 global using Microsoft.EntityFrameworkCore.Metadata.Builders;
 global using Microsoft.EntityFrameworkCore.Migrations;
