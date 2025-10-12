@@ -18,6 +18,6 @@ internal sealed class GetPlannedMovementByIdQueryHandler(
             return Error.NotFound("Planned movement was not found.");
         }
 
-        return PlannedMovementDto.FromDomain(movement);
+        return PlannedMovementDto.FromAggregate(movement);
     }
 }

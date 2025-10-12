@@ -19,7 +19,7 @@ public sealed class PlanningDbContext(
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
 
         modelBuilder.Entity<PlannedMovement>()
-            .HasQueryFilter(pm => pm.UserId == _userId);
+            .HasQueryFilter(plannedMovement => plannedMovement.UserId == _userId);
     }
 }
 

@@ -26,6 +26,6 @@ internal sealed class CreatePlannedMovementCommandHandler(
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return PlannedMovementDto.FromDomain(movement);
+        return PlannedMovementDto.FromAggregate(movement);
     }
 }

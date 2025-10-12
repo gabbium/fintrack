@@ -33,6 +33,6 @@ internal sealed class UpdatePlannedMovementCommandHandler(
 
         await unitOfWork.SaveChangesAsync(cancellationToken);
 
-        return PlannedMovementDto.FromDomain(plannedMovement);
+        return PlannedMovementDto.FromAggregate(plannedMovement);
     }
 }

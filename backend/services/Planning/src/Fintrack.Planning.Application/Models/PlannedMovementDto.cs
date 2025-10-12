@@ -22,7 +22,7 @@ public sealed record PlannedMovementDto
     [Description("Current status of the planned movement (Active, Canceled, Realized, Overdue).")]
     public PlannedMovementStatus Status { get; init; }
 
-    public static PlannedMovementDto FromDomain(PlannedMovement plannedMovement)
+    public static PlannedMovementDto FromAggregate(PlannedMovement plannedMovement)
     {
         return new()
         {
