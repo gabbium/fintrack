@@ -1,3 +1,9 @@
+## [1.9.1](https://github.com/gabbium/fintrack/compare/v1.9.0...v1.9.1) (2025-11-09)
+
+### Bug Fixes
+
+* missing dependency ([0ef7b86](https://github.com/gabbium/fintrack/commit/0ef7b86e95b80cce87bb50b62e6d354fee2fa96a))
+
 ## [1.9.0](https://github.com/gabbium/fintrack/compare/v1.8.0...v1.9.0) (2025-10-12)
 
 ### Features
