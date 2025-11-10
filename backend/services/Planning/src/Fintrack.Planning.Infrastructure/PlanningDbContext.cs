@@ -1,5 +1,7 @@
 ﻿using BuildingBlocks.Application.Identity;
+using BuildingBlocks.Infrastructure.EventBus;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;
+using Fintrack.Planning.Infrastructure.Configurations;
 
 namespace Fintrack.Planning.Infrastructure;
 
@@ -15,8 +17,9 @@ public sealed class PlanningDbContext(
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("planning");
+        modelBuilder.UseIntegrationEventLogs();
 
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.ApplyConfiguration(new PlannedMovementConfiguration());
 
         modelBuilder.Entity<PlannedMovement>()
             .HasQueryFilter(plannedMovement => plannedMovement.UserId == _userId);

@@ -1,5 +1,6 @@
 ﻿using BuildingBlocks.Application.Identity;
 using Fintrack.Ledger.Domain.MovementAggregate;
+using Fintrack.Ledger.Infrastructure.Configurations;
 
 namespace Fintrack.Ledger.Infrastructure;
 
@@ -15,8 +16,7 @@ public sealed class LedgerDbContext(
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.HasDefaultSchema("ledger");
-
-        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+        modelBuilder.ApplyConfiguration(new MovementConfiguration());
 
         modelBuilder.Entity<Movement>()
             .HasQueryFilter(movement => movement.UserId == _userId);

@@ -1,4 +1,6 @@
-﻿using Fintrack.Planning.Application.Queries.ListPlannedMovements;
+﻿using BuildingBlocks.Application.EventBus;
+using BuildingBlocks.Infrastructure.EventBus;
+using Fintrack.Planning.Application.Queries.ListPlannedMovements;
 using Fintrack.Planning.Domain.PlannedMovementAggregate;
 using Fintrack.Planning.Infrastructure.Interceptors;
 using Fintrack.Planning.Infrastructure.Queries;
@@ -21,6 +23,8 @@ public static class DependencyInjection
         builder.EnrichNpgsqlDbContext<PlanningDbContext>();
 
         builder.Services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<PlanningDbContext>());
+
+        builder.Services.AddTransient<IIntegrationEventLogService, IntegrationEventLogService<PlanningDbContext>>();
 
         builder.Services.AddScoped<IPlannedMovementRepository, PlannedMovementRepository>();
         builder.Services.AddScoped<IListPlannedMovementsQueryService, ListPlannedMovementsQueryService>();

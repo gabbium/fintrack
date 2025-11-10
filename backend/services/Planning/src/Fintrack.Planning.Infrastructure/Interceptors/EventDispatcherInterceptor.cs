@@ -4,15 +4,15 @@ internal sealed class EventDispatchInterceptor(
     IDomainEventDispatcher domainEventDispatcher)
     : SaveChangesInterceptor
 {
-    public override async ValueTask<int> SavedChangesAsync(
-        SaveChangesCompletedEventData eventData,
-        int result,
+    public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
         CancellationToken cancellationToken = default)
     {
         var context = eventData.Context;
 
         if (context is not PlanningDbContext planningContext)
-            return await base.SavedChangesAsync(eventData, result, cancellationToken).ConfigureAwait(false);
+            return await base.SavingChangesAsync(eventData, result, cancellationToken);
 
         var entitiesWithEvents = planningContext.ChangeTracker
             .Entries<HasDomainEventsBase>()
@@ -22,6 +22,6 @@ internal sealed class EventDispatchInterceptor(
 
         await domainEventDispatcher.DispatchAndClearEvents(entitiesWithEvents, cancellationToken);
 
-        return await base.SavedChangesAsync(eventData, result, cancellationToken);
+        return await base.SavingChangesAsync(eventData, result, cancellationToken);
     }
 }

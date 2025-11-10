@@ -1,19 +1,18 @@
-﻿using Fintrack.Planning.Domain.PlannedMovementAggregate.Events;
+﻿using Fintrack.Planning.Application.IntegrationEvents;
+using Fintrack.Planning.Application.IntegrationEvents.Events;
+using Fintrack.Planning.Domain.PlannedMovementAggregate.Events;
 
 namespace Fintrack.Planning.Application.DomainEventHandlers;
 
 internal sealed class PlannedMovementRealizedDomainEventHandler(
-    ILogger<PlannedMovementRealizedDomainEventHandler> logger)
+    IPlanningIntegrationEventService planningIntegrationEventService)
     : IDomainEventHandler<PlannedMovementRealizedDomainEvent>
 {
-    public Task HandleAsync(
+    public async Task HandleAsync(
         PlannedMovementRealizedDomainEvent domainEvent,
         CancellationToken cancellationToken = default)
     {
-        logger.LogInformation(
-            "Planned movement with ID {PlannedMovementId} was realized.",
-            domainEvent.PlannedMovementId);
-
-        return Task.CompletedTask;
+        var integrationEvent = PlannedMovementRealizedIntegrationEvent.FromDomainEvent(domainEvent);
+        await planningIntegrationEventService.AddAndSaveEventAsync(integrationEvent);
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Fintrack.Planning.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Fintrack.Planning.Infrastructure.Migrations
 {
     [DbContext(typeof(PlanningDbContext))]
-    partial class PlanningDbContextModelSnapshot : ModelSnapshot
+    [Migration("20251110203905_CreateIntegrationEventLogs")]
+    partial class CreateIntegrationEventLogs
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -43,7 +46,7 @@ namespace Fintrack.Planning.Infrastructure.Migrations
 
                     b.HasKey("EventId");
 
-                    b.ToTable("IntegrationEventLogs", "planning");
+                    b.ToTable("IntegrationEventLog", "planning");
                 });
 
             modelBuilder.Entity("Fintrack.Planning.Domain.PlannedMovementAggregate.PlannedMovement", b =>
