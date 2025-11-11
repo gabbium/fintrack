@@ -24,16 +24,29 @@
     <Project Path="services/Ledger/tests/Fintrack.Ledger.Domain.UnitTests/Fintrack.Ledger.Domain.UnitTests.csproj" />
   </Folder>
   <Folder Name="/Services/Planning/" />
-  <Folder Name="/Services/Planning/src/">
-    <Project Path="services/Planning/src/Fintrack.Planning.Api/Fintrack.Planning.Api.csproj" />
+  <Folder Name="/Services/Planning/src/" />
+  <Folder Name="/Services/Planning/src/Application/">
     <Project Path="services/Planning/src/Fintrack.Planning.Application/Fintrack.Planning.Application.csproj" />
-    <Project Path="services/Planning/src/Fintrack.Planning.Domain/Fintrack.Planning.Domain.csproj" />
-    <Project Path="services/Planning/src/Fintrack.Planning.Infrastructure/Fintrack.Planning.Infrastructure.csproj" />
-    <Project Path="services/Planning/src/Fintrack.Planning.MigrationService/Fintrack.Planning.MigrationService.csproj" />
   </Folder>
-  <Folder Name="/Services/Planning/tests/">
-    <Project Path="services/Planning/tests/Fintrack.Planning.Api.FunctionalTests/Fintrack.Planning.Api.FunctionalTests.csproj" />
+  <Folder Name="/Services/Planning/src/Domain/">
+    <Project Path="services/Planning/src/Fintrack.Planning.Domain/Fintrack.Planning.Domain.csproj" />
+  </Folder>
+  <Folder Name="/Services/Planning/src/Infrastructure/">
+    <Project Path="services/Planning/src/Fintrack.Planning.Infrastructure/Fintrack.Planning.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/Services/Planning/src/Presentation/">
+    <Project Path="services/Planning/src/Fintrack.Planning.Api/Fintrack.Planning.Api.csproj" />
+    <Project Path="services/Planning/src/Fintrack.Planning.MigrationService/Fintrack.Planning.MigrationService.csproj" />
+    <Project Path="services/Planning/src/Fintrack.Planning.Publisher/Fintrack.Planning.Publisher.csproj" />
+  </Folder>
+  <Folder Name="/Services/Planning/tests/" />
+  <Folder Name="/Services/Planning/tests/Application/">
     <Project Path="services/Planning/tests/Fintrack.Planning.Application.UnitTests/Fintrack.Planning.Application.UnitTests.csproj" />
+  </Folder>
+  <Folder Name="/Services/Planning/tests/Domain/">
     <Project Path="services/Planning/tests/Fintrack.Planning.Domain.UnitTests/Fintrack.Planning.Domain.UnitTests.csproj" />
+  </Folder>
+  <Folder Name="/Services/Planning/tests/Presentation/">
+    <Project Path="services/Planning/tests/Fintrack.Planning.Api.FunctionalTests/Fintrack.Planning.Api.FunctionalTests.csproj" />
   </Folder>
 </Solution>

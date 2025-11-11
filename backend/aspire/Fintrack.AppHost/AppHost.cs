@@ -1,4 +1,4 @@
-﻿var builder = DistributedApplication.CreateBuilder(args);
+var builder = DistributedApplication.CreateBuilder(args);
 
 var keycloak = builder.AddKeycloak("keycloak", 8080)
     .WithDataVolume()
@@ -37,6 +37,9 @@ builder.AddProject<Projects.Fintrack_Planning_Api>("planning-api")
         var keycloakUrl = keycloak.GetEndpoint("http").Url;
         ctx.EnvironmentVariables["Authentication__OidcJwt__Authority"] = $"{keycloakUrl}/realms/fintrack";
     });
+
+builder.AddProject<Projects.Fintrack_Planning_Publisher>("planning-publisher")
+    .WithReference(planningDb).WaitFor(planningDb);
 
 var app = builder.Build();
 

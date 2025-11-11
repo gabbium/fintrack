@@ -1,11 +1,12 @@
-﻿using Fintrack.Planning.Application.IntegrationEvents;
+﻿using BuildingBlocks.Application.EventBus;
 using Fintrack.Planning.Application.IntegrationEvents.Events;
 using Fintrack.Planning.Domain.PlannedMovementAggregate.Events;
 
 namespace Fintrack.Planning.Application.DomainEventHandlers;
 
 internal sealed class PlannedMovementRealizedDomainEventHandler(
-    IPlanningIntegrationEventService planningIntegrationEventService)
+    IIntegrationEventLogService eventLogService,
+    ILogger<PlannedMovementRealizedDomainEventHandler> logger)
     : IDomainEventHandler<PlannedMovementRealizedDomainEvent>
 {
     public async Task HandleAsync(
@@ -13,6 +14,7 @@ internal sealed class PlannedMovementRealizedDomainEventHandler(
         CancellationToken cancellationToken = default)
     {
         var integrationEvent = PlannedMovementRealizedIntegrationEvent.FromDomainEvent(domainEvent);
-        await planningIntegrationEventService.AddAndSaveEventAsync(integrationEvent);
+        logger.LogInformation("Enqueuing integration event {IntegrationEventId} to repository ({@IntegrationEvent})", integrationEvent.Id, integrationEvent);
+        await eventLogService.AddEventAsync(integrationEvent);
     }
 }

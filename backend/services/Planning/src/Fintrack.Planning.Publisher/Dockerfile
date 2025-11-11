@@ -1,0 +1,51 @@
+FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS base
+ARG APP_UID=64123
+ARG APP_GID=64123
+RUN groupadd --gid ${APP_GID} nonroot \
+    && useradd --uid ${APP_UID} --gid ${APP_GID} --create-home --shell /usr/sbin/nologin nonroot
+WORKDIR /app
+
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
+ARG BUILD_CONFIGURATION=Release
+WORKDIR /src
+
+COPY Directory.Build.props ./
+COPY Directory.Packages.props ./
+COPY building-blocks/BuildingBlocks.Api/BuildingBlocks.Api.csproj building-blocks/BuildingBlocks.Api/
+COPY building-blocks/BuildingBlocks.Infrastructure/BuildingBlocks.Infrastructure.csproj building-blocks/BuildingBlocks.Infrastructure/
+COPY building-blocks/BuildingBlocks.Application/BuildingBlocks.Application.csproj building-blocks/BuildingBlocks.Application/
+COPY building-blocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj building-blocks/BuildingBlocks.Domain/
+COPY services/Planning/src/Fintrack.Planning.Publisher/Fintrack.Planning.Publisher.csproj services/Planning/src/Fintrack.Planning.Publisher/
+COPY services/Planning/src/Fintrack.Planning.Infrastructure/Fintrack.Planning.Infrastructure.csproj services/Planning/src/Fintrack.Planning.Infrastructure/
+COPY services/Planning/src/Fintrack.Planning.Application/Fintrack.Planning.Application.csproj services/Planning/src/Fintrack.Planning.Application/
+COPY services/Planning/src/Fintrack.Planning.Domain/Fintrack.Planning.Domain.csproj services/Planning/src/Fintrack.Planning.Domain/
+COPY aspire/Fintrack.ServiceDefaults/Fintrack.ServiceDefaults.csproj aspire/Fintrack.ServiceDefaults/
+
+RUN dotnet restore services/Planning/src/Fintrack.Planning.Publisher/Fintrack.Planning.Publisher.csproj
+
+COPY building-blocks/BuildingBlocks.Api/ building-blocks/BuildingBlocks.Api/
+COPY building-blocks/BuildingBlocks.Infrastructure/ building-blocks/BuildingBlocks.Infrastructure/
+COPY building-blocks/BuildingBlocks.Application/ building-blocks/BuildingBlocks.Application/
+COPY building-blocks/BuildingBlocks.Domain/ building-blocks/BuildingBlocks.Domain/
+COPY services/Planning/src/Fintrack.Planning.Publisher/ services/Planning/src/Fintrack.Planning.Publisher/
+COPY services/Planning/src/Fintrack.Planning.Infrastructure/ services/Planning/src/Fintrack.Planning.Infrastructure/
+COPY services/Planning/src/Fintrack.Planning.Application/ services/Planning/src/Fintrack.Planning.Application/
+COPY services/Planning/src/Fintrack.Planning.Domain/ services/Planning/src/Fintrack.Planning.Domain/
+COPY aspire/Fintrack.ServiceDefaults/ aspire/Fintrack.ServiceDefaults/
+
+WORKDIR /src/services/Planning/src/Fintrack.Planning.Publisher
+RUN dotnet build Fintrack.Planning.Publisher.csproj -c "$BUILD_CONFIGURATION" --no-restore -o /app/build
+
+FROM build AS publish
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish Fintrack.Planning.Publisher.csproj \
+    -c "$BUILD_CONFIGURATION" \
+    --no-restore \
+    -o /app/publish \
+    /p:UseAppHost=false
+
+FROM base AS final
+WORKDIR /app
+COPY --chown=root:root --chmod=555 --from=publish /app/publish ./
+USER nonroot
+ENTRYPOINT ["dotnet", "Fintrack.Planning.Publisher.dll"]

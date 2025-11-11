@@ -1,4 +1,4 @@
-﻿namespace BuildingBlocks.Infrastructure.EventBus;
+﻿namespace BuildingBlocks.Application.EventBus;
 
 public enum EventStateEnum
 {

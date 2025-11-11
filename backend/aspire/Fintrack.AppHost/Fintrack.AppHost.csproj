@@ -18,6 +18,7 @@
     <ProjectReference Include="..\..\services\Ledger\src\Fintrack.Ledger.MigrationService\Fintrack.Ledger.MigrationService.csproj" />
     <ProjectReference Include="..\..\services\Planning\src\Fintrack.Planning.Api\Fintrack.Planning.Api.csproj" />
     <ProjectReference Include="..\..\services\Planning\src\Fintrack.Planning.MigrationService\Fintrack.Planning.MigrationService.csproj" />
+    <ProjectReference Include="..\..\services\Planning\src\Fintrack.Planning.Publisher\Fintrack.Planning.Publisher.csproj" />
   </ItemGroup>
 
 </Project>
